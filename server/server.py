@@ -15,7 +15,8 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from fastai.vision.all import *
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 CORS(app, resources=r'/api/*', headers='Content-Type')
 
