@@ -6,10 +6,9 @@ from collections import Counter
 from PIL import Image
 import base64
 from io import BytesIO
-import requests
-
-# Importing deps for image prediction
 from fastai.vision.all import *
+import fastai
+# print(fastai.__version__)
 
 
 app = Flask(__name__, static_folder='./build', static_url_path='/')
