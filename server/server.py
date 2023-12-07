@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import os
 import logging
@@ -11,7 +11,14 @@ import fastai
 # print(fastai.__version__)
 
 
-app = Flask(__name__, static_folder='./build', static_url_path='/')
+# app = Flask(__name__, static_folder='./build', static_url_path='/')
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../dream-home-client/build',
+    template_folder='../dream-home-client/build'
+)
+
 # app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 CORS(app, resources=r'/api/*', headers='Content-Type')
@@ -65,5 +72,11 @@ def upload():
     return jsonify({"message": prediction[0]})
 
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+
+
 if __name__ == '__main__':
-    app.run(host='localhost', port=9874, debug=True)
+    app.run(debug=True)
+    # app.run(host='localhost', port=9874, debug=True)
