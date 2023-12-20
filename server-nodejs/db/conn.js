@@ -128,4 +128,11 @@ module.exports = {
     let result = await coll.deleteOne(query);
     return result;
   },
+
+  addCol: async function () {
+    const _db = client.db("homestay");
+    const coll = _db.collection("interiorDesign");
+    let result = await coll.updateMany({}, { $set: { image_url: null } });
+    return result;
+  },
 };

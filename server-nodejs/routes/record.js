@@ -36,4 +36,10 @@ recordRoutes.route("/explore/delete").delete((req, res) => {
   res.send(_db).status(200);
 });
 
+recordRoutes.route("/explore/add-col").post((req, res) => {
+  // Delete documents
+  const _db = dbo.addCol();
+  res.send(_db).status(200);
+});
+
 module.exports = recordRoutes;
