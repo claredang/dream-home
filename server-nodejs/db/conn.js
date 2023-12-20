@@ -108,7 +108,6 @@ module.exports = {
     const coll = _db.collection("interiorDesign");
     const docs = [
       {
-        _id: 12,
         title: "test",
         interior_style: "test",
         location: "test",

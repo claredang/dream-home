@@ -6,7 +6,7 @@ const { Storage } = require("@google-cloud/storage");
 const { format } = require("util");
 const Multer = require("multer");
 const path = require("path");
-
+// const dbo = require("../db/conn");
 const keyFilePath = path.join(
   __dirname,
   "rugged-practice-408522-67e564e19b83.json"
@@ -79,14 +79,26 @@ app.get("/get-files-list", async (req, res) => {
   res.status(200).json({ files });
 });
 
+function changePropertyName(obj, oldName, newName) {
+  if (obj.hasOwnProperty(oldName)) {
+    Object.defineProperty(
+      obj,
+      newName,
+      Object.getOwnPropertyDescriptor(obj, oldName)
+    );
+    delete obj[oldName];
+  }
+}
+
 app.post("/upload", multer.array("file"), async (req, res) => {
   const files = req.files;
 
   if (!files || files.length === 0) {
     return res.status(400).send("No files were uploaded.");
   }
-  console.log(files);
+  // console.log(files);
   const uploadPromises = [];
+  const image_url = [];
 
   files.forEach((file) => {
     const blob = bucket.file(file.originalname);
@@ -100,7 +112,9 @@ app.post("/upload", multer.array("file"), async (req, res) => {
         const publicUrl = format(
           `https://storage.googleapis.com/${bucket.name}/${blob.name}`
         );
+        // console.log("public: ", publicUrl);
         resolve({ filename: file.originalname, publicUrl });
+        image_url.push(publicUrl);
       });
 
       blobStream.end(file.buffer);
@@ -109,7 +123,21 @@ app.post("/upload", multer.array("file"), async (req, res) => {
     uploadPromises.push(uploadPromise);
   });
 
-  console.log("public url: ", publicUrl);
+  Promise.all(uploadPromises)
+    .then((results) => {
+      console.log("public urls: ", image_url);
+      // You can also log the results if needed
+      // console.log("upload results: ", results);
+      req.body.files = image_url;
+
+      console.log("req: ", req.body);
+      const _db = dbo.createNewEntry(req);
+      // console.log("body: ", req.body);
+      res.send(_db).status(204);
+    })
+    .catch((error) => {
+      console.error("Error uploading files:", error);
+    });
 });
 
 app.listen(port, () => {
