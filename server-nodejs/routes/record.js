@@ -11,28 +11,29 @@ const dbo = require("../db/conn");
 // This section will help you get a list of all the records.
 recordRoutes.route("/explore").get(async function (req, res) {
   const cursor = dbo.getDb(); // call getDb function from the imported module
-  // You might want to convert the cursor results to an array or handle it as needed
-  var results = await cursor.toArray();
-  results = results[0]["description"];
-  console.log("type of results: ", results[0]["description"]);
-  //   res.send(results).status(200);
+  var results = await cursor;
   res.json(results).status(200);
-  //   res.send(results).status(200);
+});
+
+recordRoutes.route("/airbnb").get(async function (req, res) {
+  const cursor = dbo.getAirbnbDb(); // call getDb function from the imported module
+  // You might want to convert the cursor results to an array or handle it as needed
+  var results = await cursor;
+  res.json(results).status(200);
 });
 
 // This section will help you create a new record.
-recordRoutes.route("/listings/recordSwipe").post(function (req, res) {
+recordRoutes.route("/explore/new").post(function (req, res) {
   // Insert swipe informations
-});
-
-// This section will help you update a record by id.
-recordRoutes.route("/listings/updateLike").post(function (req, res) {
-  // Update likes
+  const _db = dbo.postDb();
+  res.send(_db).status(204);
 });
 
 // This section will help you delete a record
-recordRoutes.route("/listings/delete").delete((req, res) => {
+recordRoutes.route("/explore/delete").delete((req, res) => {
   // Delete documents
+  const _db = dbo.deleteDb();
+  res.send(_db).status(200);
 });
 
 module.exports = recordRoutes;

@@ -82,12 +82,50 @@ module.exports = {
     );
   },
 
-  getDb: function () {
+  getAirbnbDb: function () {
     const _db = client.db("sample_airbnb");
     const coll = _db.collection("listingsAndReviews");
     // find code goes here
-    const cursor = coll.find({ name: "Ribeira Charming Duplex" });
+    // const cursor = coll.find({ name: "Ribeira Charming Duplex" });
+    const cursor = coll.find({}).limit(5).toArray();
     return cursor;
     // return _db;
+  },
+
+  getDb: function () {
+    const _db = client.db("homestay");
+    const coll = _db.collection("interiorDesign");
+    // find code goes here
+    // const cursor = coll.find({ name: "Ribeira Charming Duplex" });
+    const cursor = coll.find({}).limit(5).toArray();
+    return cursor;
+    // return _db;
+  },
+
+  postDb: function () {
+    const _db = client.db("homestay");
+    const coll = _db.collection("interiorDesign");
+    const docs = [
+      {
+        _id: 12,
+        title: "test",
+        interior_style: "test",
+        location: "test",
+        rating: "test",
+        price: "test",
+      },
+      // {name: "Wild2", officialName: "81P/Wild", orbitalPeriod: 6.41, radius: 1.5534, mass: 2.3e13},
+      // {name: "Comet Hyakutake", officialName: "C/1996 B2", orbitalPeriod: 17000, radius: 0.77671, mass: 8.8e12}
+    ];
+    const cursor = coll.insertMany(docs);
+    return cursor;
+  },
+
+  deleteDb: async function () {
+    const _db = client.db("homestay");
+    const coll = _db.collection("interiorDesign");
+    const query = { _id: 12 };
+    let result = await coll.deleteOne(query);
+    return result;
   },
 };
