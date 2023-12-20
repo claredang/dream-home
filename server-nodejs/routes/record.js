@@ -23,11 +23,27 @@ recordRoutes.route("/airbnb").get(async function (req, res) {
 });
 
 // This section will help you create a new record.
-recordRoutes.route("/explore/new").post(function (req, res) {
+// recordRoutes.route("/explore/new").post(async function (req, res) {
+//   // Insert swipe informations
+//   const _db = dbo.postDb();
+//   res.send(_db).status(204);
+// });
+
+recordRoutes.route("/explore/new").post(async function (req, res) {
   // Insert swipe informations
-  const _db = dbo.postDb();
+  const _db = dbo.createNewEntry(req);
+  console.log("body: ", req.body);
   res.send(_db).status(204);
 });
+
+// // Add a new document to the collection
+// router.post("/", async (req, res) => {
+//     let collection = await db.collection("posts");
+//     let newDocument = req.body;
+//     newDocument.date = new Date();
+//     let result = await collection.insertOne(newDocument);
+//     res.send(result).status(204);
+//   });
 
 // This section will help you delete a record
 recordRoutes.route("/explore/delete").delete((req, res) => {
@@ -40,6 +56,20 @@ recordRoutes.route("/explore/add-col").post((req, res) => {
   // Delete documents
   const _db = dbo.addCol();
   res.send(_db).status(200);
+});
+
+recordRoutes.route("/explore/del-col").post((req, res) => {
+  // Delete documents
+  const _db = dbo.delCol();
+  res.send(_db).status(200);
+});
+
+recordRoutes.route("/explore/test").post((req, res) => {
+  //   console.log("req: ", req);
+  // Delete documents
+  //   const _db = dbo.addCol();
+  const cursor = dbo.getDb();
+  res.json(cursor).status(200);
 });
 
 module.exports = recordRoutes;

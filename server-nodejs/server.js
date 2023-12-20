@@ -22,7 +22,7 @@ const dbo = require("./db/conn");
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+    fileSize: 10 * 1024 * 1024, // no larger than 5mb, you can change as needed.
   },
 });
 
@@ -56,12 +56,12 @@ app.post(
       res.status(200).json({ publicUrl });
     });
     blobStream.end(req.file.buffer);
-    console.log(req.file);
+    // console.log(req.file);
   }
 );
 
 app.get("/get-url", (req, res) => {
-  const file = bucket.file("dream-home.jpg");
+  const file = bucket.file("indochine_11.jpg");
   const config = {
     action: "read", // giving read permission here
     expires: "03-17-2025", // specifying the expiry date
@@ -77,6 +77,39 @@ app.get("/get-files-list", async (req, res) => {
   };
   const [files] = await bucket.getFiles(options);
   res.status(200).json({ files });
+});
+
+app.post("/upload", multer.array("file"), async (req, res) => {
+  const files = req.files;
+
+  if (!files || files.length === 0) {
+    return res.status(400).send("No files were uploaded.");
+  }
+  console.log(files);
+  const uploadPromises = [];
+
+  files.forEach((file) => {
+    const blob = bucket.file(file.originalname);
+    const blobStream = blob.createWriteStream();
+    const uploadPromise = new Promise((resolve, reject) => {
+      blobStream.on("error", (err) => {
+        reject(err);
+      });
+
+      blobStream.on("finish", () => {
+        const publicUrl = format(
+          `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+        );
+        resolve({ filename: file.originalname, publicUrl });
+      });
+
+      blobStream.end(file.buffer);
+    });
+
+    uploadPromises.push(uploadPromise);
+  });
+
+  console.log("public url: ", publicUrl);
 });
 
 app.listen(port, () => {
