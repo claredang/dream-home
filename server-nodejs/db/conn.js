@@ -132,8 +132,9 @@ module.exports = {
   deleteDb: async function () {
     const _db = client.db("homestay");
     const coll = _db.collection("interiorDesign");
-    const query = { _id: 12 };
-    let result = await coll.deleteOne(query);
+    // const query = { _id: 12 };
+    // let result = await coll.deleteOne(query);
+    let result = await coll.deleteMany({});
     return result;
   },
 

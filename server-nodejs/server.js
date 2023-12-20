@@ -128,7 +128,7 @@ app.post("/upload", multer.array("file"), async (req, res) => {
       console.log("public urls: ", image_url);
       // You can also log the results if needed
       // console.log("upload results: ", results);
-      req.body.files = image_url;
+      req.body.image_url = image_url;
 
       console.log("req: ", req.body);
       const _db = dbo.createNewEntry(req);
