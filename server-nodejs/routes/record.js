@@ -16,7 +16,6 @@ recordRoutes.route("/explore").get(async function (req, res) {
 // POST: Create one
 recordRoutes.route("/explore/new").post(async function (req, res) {
   const _db = dbo.createNewEntry(req);
-  console.log("body: ", req.body);
   res.send(_db).status(204);
 });
 
