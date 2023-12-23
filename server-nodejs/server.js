@@ -6,13 +6,12 @@ const { Storage } = require("@google-cloud/storage");
 const { format } = require("util");
 const Multer = require("multer");
 const path = require("path");
-// const dbo = require("../db/conn");
 const keyFilePath = path.join(
   __dirname,
   "rugged-practice-408522-67e564e19b83.json"
 );
 const port = process.env.PORT || 8000;
-console.log(process.env.ATLAS_URI);
+
 app.use(cors());
 app.use(express.json());
 app.use(require("./routes/record"));
@@ -30,9 +29,8 @@ const cloudStorage = new Storage({
   keyFilename: keyFilePath,
   projectId: process.env.PROJECT_ID,
 });
-// const bucketName = "YOUR_BUCKET_NAME";
+
 const bucketName = process.env.BUCKET_NAME;
-console.log("bucket_name: ", bucketName);
 const bucket = cloudStorage.bucket(bucketName);
 
 app.post(
@@ -79,24 +77,12 @@ app.get("/get-files-list", async (req, res) => {
   res.status(200).json({ files });
 });
 
-function changePropertyName(obj, oldName, newName) {
-  if (obj.hasOwnProperty(oldName)) {
-    Object.defineProperty(
-      obj,
-      newName,
-      Object.getOwnPropertyDescriptor(obj, oldName)
-    );
-    delete obj[oldName];
-  }
-}
-
 app.post("/upload", multer.array("file"), async (req, res) => {
   const files = req.files;
 
   if (!files || files.length === 0) {
     return res.status(400).send("No files were uploaded.");
   }
-  // console.log(files);
   const uploadPromises = [];
   const image_url = [];
 
@@ -125,14 +111,8 @@ app.post("/upload", multer.array("file"), async (req, res) => {
 
   Promise.all(uploadPromises)
     .then((results) => {
-      console.log("public urls: ", image_url);
-      // You can also log the results if needed
-      // console.log("upload results: ", results);
       req.body.image_url = image_url;
-
-      console.log("req: ", req.body);
       const _db = dbo.createNewEntry(req);
-      // console.log("body: ", req.body);
       res.send(_db).status(204);
     })
     .catch((error) => {
@@ -145,6 +125,5 @@ app.listen(port, () => {
   dbo.connectToServer(function (err, db) {
     if (err) console.error(err);
   });
-  // console.log("bucket_name: ", bucket);
   console.log(`Server is running on port: ${port}`);
 });
