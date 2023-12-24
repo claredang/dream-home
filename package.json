@@ -1,0 +1,16 @@
+{
+    "name": "dream-home",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "install-server": "cd server-nodejs && npm install",
+      "start-server": "cd server-nodejs && node server.js",
+      "install-client": "cd dream-home-client && npm install",
+      "build-client": "cd dream-home-client && npm run build",
+      "start-client": "cd dream-home-client && npm run start"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
