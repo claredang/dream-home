@@ -7,7 +7,6 @@ from PIL import Image
 import base64
 from io import BytesIO
 from fastai.vision.all import *
-import fastai
 
 
 app = Flask(__name__)
@@ -47,7 +46,6 @@ def quiz_result():
 @app.route('/api/upload', methods=['POST'])
 def upload():
     file = request.files['file']
-    print("file here", file)
     file.save('uploads/' + file.filename)
 
     # Load the image to predict
@@ -65,4 +63,3 @@ def upload():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    # app.run(host='localhost', port=9874, debug=True)
