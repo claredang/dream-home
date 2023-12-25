@@ -13,10 +13,20 @@ recordRoutes.route("/explore").get(async function (req, res) {
   res.json(results).status(200);
 });
 
+// GET: Query
+recordRoutes.route("/api/query").post(async function (req, res) {
+  const { location } = req.body;
+  console.log("inside here", location);
+  const cursor = dbo.queryDb(location);
+  var results = await cursor;
+  res.json(results).status(200);
+});
+
 // POST: Create one
 recordRoutes.route("/explore/new").post(async function (req, res) {
-  const _db = dbo.createNewEntry(req);
-  res.send(_db).status(204);
+  const result = dbo.queryDb(req);
+  if (result) res.send("Not found").status(404);
+  res.send(result).status(204);
 });
 
 // POST: Add col
