@@ -31,6 +31,15 @@ module.exports = {
     return cursor;
   },
 
+  queryDb: async function (req) {
+    console.log("inside here");
+    const _db = client.db("homestay");
+    const coll = _db.collection("interiorDesign");
+    let query = { location: req };
+    const cursor = coll.findOne(query);
+    return cursor;
+  },
+
   postDb: function () {
     const _db = client.db("homestay");
     const coll = _db.collection("interiorDesign");
