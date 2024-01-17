@@ -1,7 +1,9 @@
+"use client";
 import { NAV_LINKS } from "@/constants";
 import Link from "next/link";
 import Button from "./Button";
 import Image from "next/image";
+import { useState } from "react";
 
 const Navbar = () => {
   return (
@@ -17,6 +19,8 @@ const Navbar = () => {
             {link.label}
           </Link>
         ))}
+        <Link href="/explore">Explore test</Link>
+        <Link href="/quiz-test">Quiz test</Link>
       </ul>
     </nav>
   );

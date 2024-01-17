@@ -43,17 +43,32 @@ const Quiz = ({ question, onSelectAnswer }) => {
 
 // components/Result.js
 const Result = ({ result }) => {
+  console.log("!!! result: ", result, typeof result, Array.isArray(result));
   return (
-    <div className="sm:p-16 py-16 px-9 flex flex-wrap justify-center gap-10">
-      <div className="max-w-md p-3 ">
-        <QuizResultCard cardInfo={result} />
+    <div className="sm:p-16 py-16 px-9 flex flex-wrap gap-10 justify-between">
+      <div className="flex-col max-w-[300px] p-3 gap-7">
+        <p className="p-2">Your Main style </p>
+        <p className="p-2">Your Main style description </p>
+        <p className="p-2">Your substyle</p>
+        <div className="flex gap-10">
+          {result.map((item, index) => (
+            <div>
+              <QuizResultCard key={index} cardInfo={item} />
+              {/* <QuizResultCard key={index} cardInfo={item} /> */}
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="max-w-[700px] rounded relative w-full ">
-        <div className="flex flex-wrap gap-3 lg:justify-end sm:justify-center">
+      <div className="max-w-[600px] rounded relative w-full">
+        <div className="flex flex-wrap gap-3 sm:justify-center">
+          {/* {result.map((result, index) => ( */}
+
           <div className="w-1/2 relative h-[37vh]">
             <Image
-              src="https://storage.googleapis.com/dream-home-org/coastal_1.jpg"
+              src={`https://storage.googleapis.com/dream-home-org/${
+                Object.keys(result)[0]
+              }_1.jpg`}
               alt="Image 1"
               fill
               className="rounded-sm w-full h-full"
@@ -67,6 +82,7 @@ const Result = ({ result }) => {
               className="rounded-sm w-full h-full"
             />
           </div>
+
           <div className="w-1/3 relative h-[37vh]">
             <Image
               src="https://storage.googleapis.com/dream-home-org/coastal_2.jpg"
@@ -91,7 +107,7 @@ const Result = ({ result }) => {
               className="rounded-sm w-full h-full"
             />
           </div>
-          {/* Add more image divs as needed */}
+          {/* ))} */}
         </div>
       </div>
     </div>
@@ -106,7 +122,6 @@ export default function Home() {
     result: null,
   });
   const startQuiz = async () => {
-    console.log("inside here");
     const response = await fetch("http://localhost:8080/quiz/start", {
       method: "POST",
     });
@@ -148,16 +163,18 @@ export default function Home() {
       </div>
       {!quizData.sessionId && (
         <div>
-          <div className="flexCenter max-container relative w-full">
-            <Image
-              // src="/boat.png"
-              src="/home-cover-1.jpg"
-              alt="boat"
-              width={1440}
-              height={580}
-              className="w-full object-cover object-center 2xl:rounded-5xl"
-            />
-
+          <div className="flexCenter max-container relative w-full lg:pb-12">
+            <div className="hide-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]">
+              <Image
+                // src="/boat.png"
+                src="/home-cover-1.jpg"
+                alt="boat"
+                width={1440}
+                height={580}
+                // className="w-full object-cover object-center 2xl:rounded-5xl"
+                className="h-full w-full min-w-[1100px] bg-home-cover-1 bg-cover bg-no-repeat"
+              />
+            </div>
             <div className="flex absolute flex-col bg-white py-8 pl-5 pr-7 gap-5 rounded-3xl border shadow-md items-center">
               <p className="flex-wrap bold-40 lg:bold-60 lg:max-w-[400px] text-center">
                 Find your interior design style

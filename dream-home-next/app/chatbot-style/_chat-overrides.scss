@@ -13,7 +13,8 @@ $message-content-bg-color: #f5f5f5;
 
 // User input
 $message-content-outgoing-color: white;
-$message-content-outgoing-bg-color: #7c7b77;
+// $message-content-outgoing-bg-color: #7c7b77;
+$message-content-outgoing-bg-color: #77a1d3;
 
 // Message input
 $message-input-content-editor-wrapper-bg-color: #f5f5f5;
@@ -26,30 +27,5 @@ $message-list-bg-color: white;
 $conversation-header-bg-color: #7c7b77;
 
 // User input button
-$button-send-color: #7c7b77;
-$button-attachment-color: #7c7b77;
-
-.btn-grad {
-  background-image: linear-gradient(
-    to right,
-    #77a1d3 0%,
-    #79cbca 51%,
-    #77a1d3 100%
-  );
-  margin: 10px;
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-  display: block;
-}
-
-.btn-grad:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
+$button-send-color: #77a1d3;
+$button-attachment-color: #77a1d3;

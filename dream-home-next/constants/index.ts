@@ -15,11 +15,6 @@ export const NAV_LINKS = [
     key: "explore",
     label: "Explore",
   },
-  {
-    href: "/explore",
-    key: "explore_test",
-    label: "Explore Test",
-  },
 ];
 
 // CAMP SECTION
@@ -69,21 +64,21 @@ export const SERVICE_LINKS = [
     description:
       "Whether you're a fan of modern, rustic, or industrial designs, Dream Home helps you identify your unique home style. Find the perfect house or homestay that reflects your taste.",
     button: "Quiz Your Style",
-    href: "https://dream-home-com.onrender.com/#/home",
+    href: "/quiz-test",
   },
   {
     title: "Matching Rent & Homestay to Your Style",
     description:
       "Explore the world of modern architecture with our selection of stylish and contemporary homes. Discover the perfect blend of functionality and elegance that suits your modern lifestyle.",
     button: "Explore Rent/Homestay",
-    href: "https://dream-home-com.onrender.com/#/explore",
+    href: "/explore",
   },
   {
     title: "Explore all over place interior design",
     description:
       "Escape to the charm of rustic living with our hand-picked rustic houses and homestays. Embrace the cozy and inviting atmosphere that comes with beautifully crafted wooden interiors and natural surroundings.",
     button: "Explore Interior Style",
-    href: "https://dream-home-com.onrender.com/#/explore",
+    href: "/homestay",
   },
 ];
 

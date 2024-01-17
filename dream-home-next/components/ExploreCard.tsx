@@ -46,42 +46,22 @@ function ExploreCard({ explore, index }: Prop) {
           className="rounded-xl"
         />
       </div>
-      <div className="py-4 flex flex-col gap-3">
+      <div className="py-2 flex flex-col gap-1">
         <div className="flex justify-between items-center gap-1">
-          <h2 className="font-bold text-white text-xl line-clamp-1 w-full">
-            {explore.location}
-          </h2>
-          <div className="py-1 px-2 bg-[#161921] rounded-sm">
-            <p className="text-white text-sm font-bold capitalize">
-              {explore.location}
-            </p>
-          </div>
+          <h2 className="text-black w-full min-h-[30px]">{explore.title}</h2>
+          <Image
+            src="./star.svg"
+            alt="star"
+            width={18}
+            height={18}
+            className="object-contain"
+          />
+          <p className="text-basefont-bold">{explore.rating}</p>
         </div>
-        <div className="flex gap-4 items-center">
-          <div className="flex flex-row gap-2 items-center">
-            <Image
-              src="./episodes.svg"
-              alt="episodes"
-              width={20}
-              height={20}
-              className="object-contain"
-            />
-            <p className="text-base text-white font-bold">
-              {explore.rating || explore.rating}
-            </p>
-          </div>
-          <div className="flex flex-row gap-2 items-center">
-            <Image
-              src="./star.svg"
-              alt="star"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <p className="text-base font-bold text-[#FFAD49]">
-              {explore.rating}
-            </p>
-          </div>
+        <div className="text-gray-50">
+          <p>{explore.interior_style}</p>
+          <p>{explore.price}</p>
+          <p>{explore.location}</p>
         </div>
       </div>
     </MotionDiv>

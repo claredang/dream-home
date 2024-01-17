@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 
-import { fetchAnime } from "../app/action";
+import { fetchExploreImage } from "../app/action";
 
 let page = 2;
 
@@ -23,7 +23,7 @@ function LoadMore() {
       const delay = 500;
 
       const timeoutId = setTimeout(() => {
-        fetchAnime(page).then((res) => {
+        fetchExploreImage(page).then((res) => {
           setData([...data, ...res]);
           page++;
         });

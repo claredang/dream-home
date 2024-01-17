@@ -167,6 +167,14 @@ body {
   .get-app {
     @apply max-container relative flex w-full  flex-col justify-between gap-32 overflow-hidden bg-green-90 bg-pattern bg-cover bg-center bg-no-repeat px-6 py-12 text-white sm:flex-row sm:gap-12 sm:py-24 lg:px-20 xl:max-h-[598px] 2xl:rounded-5xl;
   }
+
+  /* Chatbot */
+  .chatbot-button {
+    @apply fixed bottom-[20px] right-[20px] bg-white shadow-md rounded-full z-40 transition-all duration-300 ease-in-out;
+  }
+  .chat-open-container {
+    @apply fixed bottom-[45px] right-[5px] z-50;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -11,39 +11,23 @@ import {
 import "../app/chatbot-style/main.scss";
 import Image from "next/image";
 
-// const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-const API_KEY = "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";
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+console.log("API_Key: ", API_KEY);
+// const API_KEY = "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";
 
 const ChatButton = ({ onClick }) => {
   return (
     <button
-      style={{
-        borderRadius: "50%",
-        overflow: "hidden",
-        border: "none",
-        // backgroundColor: "#3498db",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "10px",
-        borderColor: "#3498db",
-      }}
+      className="rounded-full overflow-hidden border-none cursor-pointer flex items-center justify-center p-[10px]"
       onClick={onClick}
     >
-      <Image
-        src="/camp.svg"
-        alt="camp"
-        width={40}
-        height={40}
-        className="roundImage"
-      />
+      <Image src="/camp.svg" alt="camp" width={40} height={40} />
       <Image
         src="/comment-dots.svg"
         alt="camp"
         width={30}
         height={30}
-        style={{ position: "fixed", bottom: "8px", right: "10px" }}
+        className="fixed bottom-[8px] right-[10px]"
       />
     </button>
   );
@@ -51,15 +35,7 @@ const ChatButton = ({ onClick }) => {
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button
-      style={{
-        position: "absolute",
-        // top: "10px",
-        right: "10px",
-        zIndex: 999,
-      }}
-      onClick={onClick}
-    >
+    <button className="absolute right-[10px] z-999" onClick={onClick}>
       <Image src="close-button.svg" alt="boat" width={16} height={14} />
     </button>
   );
@@ -300,29 +276,11 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
 
   return (
     <div className={`chatbot-button  ${isChatOpen ? "chat-open" : ""}`}>
+      {!isChatOpen && <ChatButton onClick={handleToggleChat} />}
       {isChatOpen && (
-        <div
-          style={{
-            position: "relative",
-            height: "500px",
-            width: "300px",
-            borderRadius: "8px",
-          }}
-          className="bg-slate-100 "
-        >
-          {/* <ConversationHeader>
-            <Avatar src={boat} name="Eliot" />
-            <ConversationHeader.Content>
-              <span
-                className="flexStart text-white rounded-2xl"
-                style={{ backgroundColor: "#7c7b77" }}
-              >
-                Dream Home
-              </span>
-            </ConversationHeader.Content>
-          </ConversationHeader> */}
+        <div className="chat-open-container relative h-[500px] w-[300px] rounded-lg">
           <div
-            className="flex justif-between rounded-t-xl p-2"
+            className="flex justify-between rounded-t-xl p-2"
             style={{
               backgroundImage:
                 "linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%)",
@@ -360,7 +318,6 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
           </MainContainer>
         </div>
       )}
-      <ChatButton onClick={handleToggleChat} />
       {children}
     </div>
   );

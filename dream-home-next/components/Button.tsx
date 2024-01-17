@@ -30,20 +30,20 @@ const Button = ({
     <Link href={link || "#"}>
       <div
         onClick={handleClick}
-        className={`flexCenter gap-2 rounded-full border ${variant} ${
-          !full && "w-auto"
+        className={`flexCenter gap-2 p-3 rounded-full border ${variant} ${
+          !full && "min-w-auto"
         }`}
         role="button"
       >
         {icon && <Image src={icon} alt={title} width={24} height={24} />}
-        <label className="whitespace-nowrap cursor-pointer">{title}</label>
+        <label className="whitespace-nowrap  cursor-pointer">{title}</label>
       </div>
     </Link>
   ) : (
     <button
       onClick={handleClick}
-      className={`flexCenter gap-2 rounded-full border ${variant} ${
-        !full && "w-auto"
+      className={`flexCenter gap-2 p-3 rounded-full border ${variant} ${
+        !full && "min-w-auto"
       }`}
       type={type}
     >
