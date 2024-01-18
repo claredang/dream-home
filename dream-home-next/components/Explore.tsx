@@ -1,13 +1,16 @@
 "use client";
 import { EXPLORE_LINKS } from "@/constants";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 
-const Explore = () => {
-  const [visibility, setVisibility] = useState({});
+interface Visibility {
+  [key: string]: boolean;
+}
 
-  const handleToggle = (columnsTitle: any) => {
+const Explore = () => {
+  const [visibility, setVisibility] = useState<Visibility>({});
+
+  const handleToggle = (columnsTitle: string) => {
     setVisibility((prevVisibility: any) => ({
       ...prevVisibility,
       [columnsTitle]: !prevVisibility[columnsTitle],
@@ -16,13 +19,15 @@ const Explore = () => {
   return (
     <section>
       <div className="flexCenter flex-col">
-        <div className="padding-container max-container w-full pb-10">
+        <div className="padding-container max-container w-full lg:pb-10">
           <Image src="/camp.svg" alt="camp" width={50} height={50} />
           <p className="regular-18 -mt-1 mb-3 text-gray-30">
             Discover your perfect home style
           </p>
-          <div className="flex gap-5 lg:gap-10">
-            <h2 className="flex lg:w-1/2 bold-40 lg:bold-64">Services</h2>
+          <div className="flex flex-col sm:flex-row gap-5 lg:gap-10">
+            <h2 className="flex lg:w-1/2 xs:w-full bold-40 lg:bold-64">
+              Services
+            </h2>
             <div className="flex flex-col lg:w-1/2 regular-16 text-gray-30">
               {EXPLORE_LINKS.map((columns, index) => (
                 <div key={index}>
@@ -53,20 +58,6 @@ const Explore = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-type FooterColumnProps = {
-  title: string;
-  children: React.ReactNode;
-};
-
-const FooterColumn = ({ title, children }: FooterColumnProps) => {
-  return (
-    <div className="flex flex-col gap-5">
-      <h4 className="bold-18 whitespace-nowrap">{title}</h4>
-      {children}
-    </div>
   );
 };
 
