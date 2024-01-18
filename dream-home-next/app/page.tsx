@@ -1,8 +1,8 @@
 "use client";
-import Intro from "@/components/Intro";
-import Service from "@/components/Service";
-import Showcase from "@/components/Showcase";
-import Explore from "@/components/Explore";
+import Intro from "@/app/containers/Intro";
+import Service from "@/app/containers/Service";
+import Showcase from "@/app/containers/Showcase";
+import Explore from "@/app/containers/Explore";
 
 export default function Home() {
   return (

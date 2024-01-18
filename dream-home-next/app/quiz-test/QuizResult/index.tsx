@@ -1,5 +1,5 @@
 import QuizResultCard from "./QuizResultCard";
-import PinterestLayout from "@/components/PinterestLayout";
+import PinterestLayout from "@/app/_components/PinterestLayout";
 
 interface ResultItem {
   [key: string]: string;

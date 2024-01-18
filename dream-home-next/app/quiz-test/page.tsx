@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Button from "@/components/Button";
+import Button from "@/app/_components/Button";
 import QuizCard from "./QuizCard";
 import QuizResult from "./QuizResult";
 

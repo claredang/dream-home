@@ -1,5 +1,5 @@
 "use server";
-import ExploreCard, { ExploreProp } from "@/components/ExploreCard";
+import ExploreCard, { ExploreProp } from "@/app/explore/ExploreCard";
 
 const MAX_LIMIT = 8;
 
