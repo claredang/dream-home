@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/app/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import Chatbot from "@/app/containers/Chatbot";
-import dynamic from "next/dynamic";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
