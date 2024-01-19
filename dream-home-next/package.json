@@ -15,7 +15,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-intersection-observer": "^9.5.3"
+    "react-intersection-observer": "^9.5.3",
+    "sass": "^1.70.0"
   },
   "devDependencies": {
     "@types/node": "^20",
