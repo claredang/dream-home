@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/_components/Navbar";
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Navbar />
         <main className="relative overflow-hidden">
           {children}
+          <Analytics />
           <Chatbot />
         </main>
         <Footer />
