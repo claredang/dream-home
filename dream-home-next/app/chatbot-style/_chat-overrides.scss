@@ -1,0 +1,31 @@
+/* The path depends on the current location of the scss file */
+// @import "../../../node_modules/@chatscope/chat-ui-kit-styles/themes/default/variables";
+@import "../../node_modules/@chatscope/chat-ui-kit-styles/themes/default/variables";
+// Here you can override variables from the imported file above. Check its source for a list of available variables
+
+// Outer main container
+$main-container-border: solid 1px #f5f5f5; // Your new value
+
+// Chatbot message
+$message-content-color: black;
+// $message-content-bg-color: white;
+$message-content-bg-color: #f5f5f5;
+
+// User input
+$message-content-outgoing-color: white;
+// $message-content-outgoing-bg-color: #7c7b77;
+$message-content-outgoing-bg-color: #77a1d3;
+
+// Message input
+$message-input-content-editor-wrapper-bg-color: #f5f5f5;
+$message-input-content-editor-bg-color: #f5f5f5;
+
+// Container inner background
+// $message-list-bg-color: #f3f0eb;
+$message-list-bg-color: white;
+
+$conversation-header-bg-color: #7c7b77;
+
+// User input button
+$button-send-color: #77a1d3;
+$button-attachment-color: #77a1d3;

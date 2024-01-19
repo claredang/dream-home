@@ -22,9 +22,9 @@ module.exports = {
     );
   },
 
-  getDb: function () {
+  getQuizTestDb: function () {
     const _db = client.db("homestay");
-    const coll = _db.collection("interiorDesign");
+    const coll = _db.collection("quiz-test");
     // const cursor = coll.find({ name: "Ribeira Charming Duplex" });
     // const cursor = coll.find({}).limit(2).toArray();
     const cursor = coll.find({}).toArray();
