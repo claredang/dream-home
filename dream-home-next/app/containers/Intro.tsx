@@ -18,13 +18,6 @@ const Intro = () => {
             where you can discover the perfect home style that suits your taste
             and preferences 🏡✨
           </p>
-          <Image
-            src="/quote.svg"
-            alt="camp-2"
-            width={186}
-            height={219}
-            className="camp-quote"
-          />
         </div>
       </div>
     </section>

@@ -20,20 +20,3 @@ const text = {
 };
 
 export default text;
-export const NAV_LINKS = [
-  {
-    href: "/",
-    key: "about_us",
-    label: "About Us",
-  },
-  {
-    href: "https://dream-home-com.onrender.com/#/home",
-    key: "quiz",
-    label: "Quiz",
-  },
-  {
-    href: "https://dream-home-com.onrender.com/#/explore",
-    key: "explore",
-    label: "Explore",
-  },
-];

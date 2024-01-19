@@ -36,11 +36,10 @@ function Card({ size, src }: CardProps) {
         ...styles[size],
       }}
     >
-      <Image
-        src={src}
-        className="rounded-sm w-full h-full object-cover"
-        alt=""
-      />
+      <img src={src} className="rounded-sm w-full h-full object-cover" alt="" />
+      {/* <div className="rounded-sm w-full h-full object-cover">
+        <Image src={src} alt="hey" fill />
+      </div> */}
     </div>
   );
 }

@@ -13,9 +13,12 @@ export default function QuizTest() {
   });
 
   const startQuiz = async () => {
-    const response = await fetch("http://localhost:8080/quiz/start", {
-      method: "POST",
-    });
+    const response = await fetch(
+      "https://dream-home-server.onrender.com/quiz/start",
+      {
+        method: "POST",
+      }
+    );
     const data = await response.json();
     setQuizData({
       sessionId: data.sessionId,
@@ -25,14 +28,17 @@ export default function QuizTest() {
   };
 
   const selectAnswer = async (questionId: any, answerType: string) => {
-    const response = await fetch("http://localhost:8080/quiz/answer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        sessionId: quizData.sessionId,
-        answer: answerType,
-      }),
-    });
+    const response = await fetch(
+      "https://dream-home-server.onrender.com/quiz/answer",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: quizData.sessionId,
+          answer: answerType,
+        }),
+      }
+    );
     const data = await response.json();
     setQuizData({ ...quizData, question: data.question, result: data.result });
   };

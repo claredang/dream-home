@@ -1,9 +1,6 @@
 "use client";
 import { NAV_LINKS } from "@/app/constants";
 import Link from "next/link";
-import Button from "./Button";
-import Image from "next/image";
-import { useState } from "react";
 
 const Navbar = () => {
   return (

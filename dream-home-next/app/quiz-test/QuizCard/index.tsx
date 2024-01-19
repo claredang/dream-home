@@ -1,15 +1,29 @@
 import Image from "next/image";
 
-const QuizCard = ({ question, onSelectAnswer }) => {
+interface Option {
+  type: string;
+  image: string;
+  text: string;
+}
+
+interface Question {
+  id: number;
+  question: string;
+  options: Option[];
+}
+
+interface QuizCardProps {
+  question: Question | null;
+  onSelectAnswer: (id: number, answerType: string) => void;
+}
+
+const QuizCard = ({ question, onSelectAnswer }: QuizCardProps) => {
   if (!question) {
-    return null; // Return early if question is null
+    return null;
   }
   const { id, question: questionText, options } = question;
 
-  console.log("options: ", options);
-
-  const handleSelectAnswer = (answerType) => {
-    console.log("answer: ", answerType);
+  const handleSelectAnswer = (answerType: string) => {
     onSelectAnswer(id, answerType);
   };
 
@@ -19,7 +33,7 @@ const QuizCard = ({ question, onSelectAnswer }) => {
       <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-1 gap-5">
         {options.map((option, index) => (
           <button
-            key={index} // Add a key prop to the button
+            key={index}
             onClick={() => handleSelectAnswer(option.type)}
             className="flex flex-col"
           >
