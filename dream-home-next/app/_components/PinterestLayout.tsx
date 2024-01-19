@@ -1,7 +1,12 @@
 import React from "react";
 import Image from "next/image";
 
-function Card({ size, src }) {
+interface CardProps {
+  size: "small" | "medium" | "large";
+  src: string;
+}
+
+function Card({ size, src }: CardProps) {
   const styles = {
     card: {
       margin: "10px 10px",
@@ -31,12 +36,24 @@ function Card({ size, src }) {
         ...styles[size],
       }}
     >
-      <img src={src} className="rounded-sm w-full h-full object-cover" alt="" />
+      <Image
+        src={src}
+        className="rounded-sm w-full h-full object-cover"
+        alt=""
+      />
     </div>
   );
 }
 
-function PinterestLayout({ isLoop = false, images }) {
+interface PinterestLayoutProps {
+  isLoop?: boolean;
+  images?: string[];
+}
+
+function PinterestLayout({
+  isLoop = false,
+  images = [],
+}: PinterestLayoutProps) {
   return (
     <div style={styles.pin_container}>
       {isLoop ? (
