@@ -13,18 +13,11 @@ import Image from "next/image";
 import ChatbotButton from "../../_components/ChatbotButton";
 import { systemMessage, processUserMessage } from "./systemMessage";
 
-// const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-const API_KEY = "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";
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 interface Message {
-  message: string; // Assuming 'message' is always a string, adjust if needed
+  message: string;
   sender: string;
-}
-
-interface sendMessageProps {
-  // Add any additional props if needed
-  model: string;
-  style?: React.CSSProperties;
 }
 
 export default function Chatbot({ children }: { children?: React.ReactNode }) {
