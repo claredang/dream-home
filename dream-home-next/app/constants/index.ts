@@ -78,7 +78,7 @@ export const SERVICE_LINKS = [
     description:
       "Escape to the charm of rustic living with our hand-picked rustic houses and homestays. Embrace the cozy and inviting atmosphere that comes with beautifully crafted wooden interiors and natural surroundings.",
     button: "Explore Interior Style",
-    href: "/homestay",
+    href: "/explore",
   },
 ];
 

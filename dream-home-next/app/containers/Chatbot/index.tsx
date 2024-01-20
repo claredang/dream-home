@@ -149,8 +149,6 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
 
     return response.json();
   }
-  console.log(process.env.NEXT_PUBLIC_SERVER);
-  console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY);
 
   return (
     <div className={`chatbot-button  ${isChatOpen ? "chat-open" : ""}`}>

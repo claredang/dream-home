@@ -14,7 +14,10 @@ export default function QuizTest() {
 
   const startQuiz = async () => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/quiz/start`
+      `${process.env.NEXT_PUBLIC_SERVER}/quiz/start`,
+      {
+        method: "POST",
+      }
     );
 
     const data = await response.json();
