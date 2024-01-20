@@ -60,8 +60,8 @@ function ExploreCard({ explore, index }: Prop) {
         </div>
         <div className="text-gray-50">
           <p>{explore.interior_style}</p>
-          <p>{explore.price}</p>
           <p>{explore.location}</p>
+          <p className="text-black">{explore.price}</p>
         </div>
       </div>
     </MotionDiv>
