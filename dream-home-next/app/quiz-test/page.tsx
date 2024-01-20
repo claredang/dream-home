@@ -58,7 +58,7 @@ export default function QuizTest() {
       </div>
       {!quizData.sessionId && (
         <div>
-          <div className="flexCenter lg:max-container relative w-full lg:pb-12">
+          <div className="flexCenter lg:max-container relative w-full lg:pb-12 pb-5">
             <div className="hide-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]">
               <Image
                 src="/home-cover-1.jpg"
@@ -68,8 +68,8 @@ export default function QuizTest() {
                 className="h-full w-full min-w-[1100px] bg-home-cover-1 bg-cover bg-no-repeat"
               />
             </div>
-            <div className="flex absolute flex-col bg-white lg:py-8 py-5 pl-5 pr-7 gap-5 rounded-3xl border shadow-md items-center ">
-              <p className="flex-wrap xs:bold-20 md:bold-32 lg:bold-60 lg:max-w-[400px] text-center">
+            <div className="flex absolute flex-col bg-white lg:py-8 py-5 pl-5 pr-7 gap-5 rounded-3xl border shadow-md items-center text-center ">
+              <p className="flex-wrap xs:bold-20 md:bold-32 lg:bold-60 lg:max-w-[400px]">
                 Find your interior design style
               </p>
               <p>
