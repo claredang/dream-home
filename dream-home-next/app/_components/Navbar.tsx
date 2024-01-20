@@ -16,8 +16,6 @@ const Navbar = () => {
             {link.label.toUpperCase()}
           </Link>
         ))}
-        <Link href="/explore">Explore test</Link>
-        <Link href="/quiz-test">Quiz test</Link>
       </ul>
     </nav>
   );

@@ -6,12 +6,12 @@ export const NAV_LINKS = [
     label: "About Us",
   },
   {
-    href: "https://dream-home-com.onrender.com/#/home",
+    href: "/quiz-test",
     key: "quiz",
     label: "Quiz",
   },
   {
-    href: "https://dream-home-com.onrender.com/#/explore",
+    href: "/explore",
     key: "explore",
     label: "Explore",
   },
@@ -78,7 +78,7 @@ export const SERVICE_LINKS = [
     description:
       "Escape to the charm of rustic living with our hand-picked rustic houses and homestays. Embrace the cozy and inviting atmosphere that comes with beautifully crafted wooden interiors and natural surroundings.",
     button: "Explore Interior Style",
-    href: "/homestay",
+    href: "/explore",
   },
 ];
 
