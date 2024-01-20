@@ -39,12 +39,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   className="block py-2 text-gray-50 font-semibold transition-all hover:font-bold"
                 >
-                  {/* <a
-                    className="block py-2 text-white font-semibold transition-all hover:font-bold"
-                    onClick={() => setIsOpen(false)}
-                  > */}
                   {link.label.toUpperCase()}
-                  {/* </a> */}
                 </Link>
               </li>
             ))}
@@ -52,7 +47,7 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Regular navigation for larger screens */}
+      {/* For larger screens */}
       <ul className="hidden h-full gap-12 lg:flex">
         {NAV_LINKS.map((link) => (
           <Link
