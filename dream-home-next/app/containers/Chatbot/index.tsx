@@ -13,7 +13,7 @@ import Image from "next/image";
 import ChatbotButton from "../../_components/ChatbotButton";
 import { systemMessage, processUserMessage } from "./systemMessage";
 
-const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
 interface Message {
   message: string;
@@ -149,6 +149,8 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
 
     return response.json();
   }
+  console.log(process.env.NEXT_PUBLIC_SERVER);
+  console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY);
 
   return (
     <div className={`chatbot-button  ${isChatOpen ? "chat-open" : ""}`}>

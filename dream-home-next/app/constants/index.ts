@@ -6,12 +6,12 @@ export const NAV_LINKS = [
     label: "About Us",
   },
   {
-    href: "https://dream-home-com.onrender.com/#/home",
+    href: "/quiz-test",
     key: "quiz",
     label: "Quiz",
   },
   {
-    href: "https://dream-home-com.onrender.com/#/explore",
+    href: "/explore",
     key: "explore",
     label: "Explore",
   },

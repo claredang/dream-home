@@ -14,11 +14,9 @@ export default function QuizTest() {
 
   const startQuiz = async () => {
     const response = await fetch(
-      "https://dream-home-server.onrender.com/quiz/start",
-      {
-        method: "POST",
-      }
+      `${process.env.NEXT_PUBLIC_SERVER}/quiz/start`
     );
+
     const data = await response.json();
     setQuizData({
       sessionId: data.sessionId,
@@ -29,7 +27,7 @@ export default function QuizTest() {
 
   const selectAnswer = async (questionId: any, answerType: string) => {
     const response = await fetch(
-      "https://dream-home-server.onrender.com/quiz/answer",
+      `${process.env.NEXT_PUBLIC_SERVER}/quiz/answer`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
