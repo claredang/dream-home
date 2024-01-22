@@ -4,8 +4,7 @@ import ExploreCard, { ExploreProp } from "@/app/explore/ExploreCard";
 const MAX_LIMIT = 8;
 
 export async function fetchExploreImage(page: number) {
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/explore`);
-  const response = await fetch("http://localhost:8080/explore");
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/explore`);
   const data = await response.json();
 
   return data.map((explore: ExploreProp, index: number) => (
@@ -14,7 +13,7 @@ export async function fetchExploreImage(page: number) {
 }
 
 export async function fetchChatbotKey() {
-  const response = await fetch(`http://localhost:8080/chatbot`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/chatbot`);
   const data = await response.json();
   return data.chatbot;
 }
