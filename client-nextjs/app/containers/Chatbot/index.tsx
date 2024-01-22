@@ -51,7 +51,7 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
     };
 
     fetchDataAsync();
-  }, []); // Run the effect only once on component mount
+  }, []);
 
   const handleSendRequest = async (message: string) => {
     const newMessage = {
