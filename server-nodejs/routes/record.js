@@ -46,4 +46,10 @@ recordRoutes.route("/explore/delete").delete((req, res) => {
   res.send(_db).status(200);
 });
 
+// GET Chatbot
+recordRoutes.route("/chatbot").get(async function (req, res) {
+  const CHATBOT_KEY = process.env.OPENAI_KEY.toString();
+  res.send({ chatbot: CHATBOT_KEY }).status(200);
+});
+
 module.exports = recordRoutes;

@@ -11,3 +11,9 @@ export async function fetchExploreImage(page: number) {
     <ExploreCard key={explore.id} explore={explore} index={index} />
   ));
 }
+
+export async function fetchChatbotKey() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/chatbot`);
+  const data = await response.json();
+  return data.chatbot;
+}

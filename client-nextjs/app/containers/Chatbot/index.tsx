@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MainContainer,
   ChatContainer,
@@ -12,8 +12,7 @@ import "../../chatbot-style/main.scss";
 import Image from "next/image";
 import ChatbotButton from "../../_components/ChatbotButton";
 import { systemMessage, processUserMessage } from "./systemMessage";
-
-const API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+import { fetchChatbotKey } from "@/app/action";
 
 interface Message {
   message: string;
@@ -22,6 +21,8 @@ interface Message {
 
 export default function Chatbot({ children }: { children?: React.ReactNode }) {
   const [isChatOpen, setChatOpen] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [API_KEY, setAPI_KEY] = useState<any>(null);
 
   const handleToggleChat = () => {
     setChatOpen(!isChatOpen);
@@ -38,16 +39,26 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
       sender: "ChatGPT",
     },
   ]);
-  const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      try {
+        const data = await fetchChatbotKey();
+        setAPI_KEY(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchDataAsync();
+  }, []);
 
   const handleSendRequest = async (message: string) => {
-    console.log("handle send request: ", typeof message);
     const newMessage = {
       message,
       direction: "outgoing",
       sender: "user",
     };
-    console.log("message", message);
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     setIsTyping(true);
@@ -98,7 +109,6 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
 
         const jsonResponse = await final_response.json();
         final_response = jsonResponse.choices[0]?.message?.content;
-        console.log("final response: ", typeof final_response);
 
         if (typeof final_response === "string") {
           const chatGPTResponse = {
@@ -127,7 +137,6 @@ export default function Chatbot({ children }: { children?: React.ReactNode }) {
       return { role, content: messageObject.message };
     });
 
-    console.log(chatMessages, apiMessages);
     const apiRequestBody = {
       model: "gpt-3.5-turbo-1106",
       messages: [{ role: "system", content: systemMessage }, ...apiMessages],
