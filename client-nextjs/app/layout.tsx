@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/_components/Navbar";
@@ -24,6 +25,7 @@ export default function RootLayout({
         <main className="relative overflow-hidden">
           {children}
           <Analytics />
+          <SpeedInsights />
           <Chatbot />
         </main>
         <Footer />
