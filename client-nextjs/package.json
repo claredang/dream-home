@@ -11,6 +11,7 @@
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^1.10.1",
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
+    "@tanstack/react-query-devtools": "^5.17.21",
     "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.7",
     "framer-motion": "^10.18.0",

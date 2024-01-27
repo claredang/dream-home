@@ -29,6 +29,13 @@ module.exports = {
     return cursor;
   },
 
+  getStyle: function () {
+    const _db = client.db("homestay");
+    const coll = _db.collection("style_gallery");
+    const cursor = coll.find({}).toArray();
+    return cursor;
+  },
+
   queryDb: async function (req) {
     const _db = client.db("homestay");
     const coll = _db.collection("interiorDesign");
@@ -39,16 +46,50 @@ module.exports = {
 
   postDb: function () {
     const _db = client.db("homestay");
-    const coll = _db.collection("interiorDesign");
+    const coll = _db.collection("style_gallery");
     const docs = [
       {
-        title: "test",
-        interior_style: "test",
-        location: "test",
-        rating: "test",
-        price: "test",
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_1.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_2.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_3.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_4.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_5.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_6.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_7.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_8.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_9.jpg",
+        style: "midcentury_modern",
+      },
+      {
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_10.jpg",
+        style: "midcentury_modern",
       },
     ];
+
     const cursor = coll.insertMany(docs);
     return cursor;
   },

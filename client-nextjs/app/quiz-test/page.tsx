@@ -4,6 +4,7 @@ import Image from "next/image";
 import Button from "@/app/_components/Button";
 import QuizCard from "./QuizCard";
 import QuizResult from "./QuizResult";
+import Link from "next/link";
 
 export default function QuizTest() {
   const [quizData, setQuizData] = useState({
@@ -83,6 +84,7 @@ export default function QuizTest() {
                 onClick={startQuiz}
                 full={true}
               />
+              <Link href="/quiz-test/quiz-card">quiz card</Link>
             </div>
           </div>
         </div>

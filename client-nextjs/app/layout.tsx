@@ -7,6 +7,8 @@ import Navbar from "@/app/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import Chatbot from "@/app/containers/Chatbot";
 const inter = Inter({ subsets: ["latin"] });
+import ReactQueryProvider from "../app/_components/ReactQueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "Dream Home",
@@ -23,7 +25,10 @@ export default function RootLayout({
       <body>
         <Navbar />
         <main className="relative overflow-hidden">
-          {children}
+          <ReactQueryProvider>
+            {children}
+            <ReactQueryDevtools />
+          </ReactQueryProvider>
           <Analytics />
           <SpeedInsights />
           <Chatbot />
