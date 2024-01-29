@@ -3,7 +3,9 @@ import StyleGallery from "./StyleGallery";
 import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import QuizResult from "../quiz-test/QuizResult";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
   //   const res = await fetch(
@@ -17,9 +19,9 @@ async function getStyleGallery({ pageParam }: { pageParam: number }) {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  console.log("data: ", data);
+  //   console.log("data: ", data);
   let filtered = await data.results.map((style: {}, index: number) => {
-    console.log("style: ", style);
+    // console.log("style: ", style);
     let paddedIndex =
       pageParam === 0
         ? ("00" + (index + 1)).slice(-3)
@@ -82,9 +84,103 @@ export default function Home() {
     console.log(data);
   };
 
+  // State to track selected image names
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  // Callback function to handle image click
+  const handleImageClick = (_id: string) => {
+    // Check if the _id is already in the array
+    if (selectedIds.includes(_id)) {
+      // Remove the _id from the array
+      setSelectedIds((prevSelected) => prevSelected.filter((id) => id !== _id));
+    } else {
+      // Add the _id to the array
+      setSelectedIds((prevSelected) => [...prevSelected, _id]);
+    }
+  };
+  // Filter out names based on selected _ids
+  const selectedNames = pokemons?.pages
+    ?.flat()
+    .filter((style) => selectedIds.includes(style._id))
+    .map((style) => style.style);
+
+  console.log("selected name: ", selectedNames);
+  const [quizResultData, setQuizResult] = useState({
+    resultfinal: null,
+  });
+  const handleSubmit = async () => {
+    try {
+      // Your server endpoint where you want to send the data
+      const endpoint = "http://localhost:8080/gallery/result";
+
+      // Assuming your server expects a POST request with a JSON payload
+      const response = await axios.post(endpoint, { selectedNames });
+
+      // Handle the server response as needed
+      console.log("Server response:", response.data, response.data.resultfinal);
+      setQuizResult({ resultfinal: response.data.resultfinal });
+    } catch (error) {
+      // Handle errors
+      console.error("Error submitting data:", error);
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="w-full md:w-10/12 m-auto flex mt-5 mb-5 flex-col md:grid md:grid-cols-3 md:grid-row-1 md:items-center gap-4">
+      {quizResultData.resultfinal ? (
+        // Display Quiz Result if not null
+        <div>
+          <QuizResult result={quizResultData.resultfinal} />
+        </div>
+      ) : (
+        // Display the default content if Quiz Result is null
+        <div className="w-full md:w-10/12 m-auto flex mt-5 mb-5 flex-col md:grid md:grid-cols-3 md:grid-row-1 md:items-center gap-4">
+          <div>
+            {/* <p>Selected Names: {selectedIds?.join(", ")}</p> */}
+            <button onClick={handleSubmit}>Submit</button>
+          </div>
+
+          {pokemons?.pages?.map((page) =>
+            page.map(
+              (
+                style: {
+                  imageUrl: string;
+                  name: string;
+                },
+                index: number
+              ) => {
+                if (page.length === index + 1) {
+                  return (
+                    <StyleGallery
+                      _id={style._id}
+                      image={style.url}
+                      name={style.style}
+                      key={index}
+                      innerRef={ref}
+                      onClick={handleImageClick}
+                    />
+                  );
+                } else {
+                  return (
+                    <StyleGallery
+                      _id={style._id}
+                      image={style.url}
+                      name={style.style}
+                      key={index}
+                      onClick={handleImageClick}
+                    />
+                  );
+                }
+              }
+            )
+          )}
+        </div>
+      )}
+      {/* <div className="w-full md:w-10/12 m-auto flex mt-5 mb-5 flex-col md:grid md:grid-cols-3 md:grid-row-1 md:items-center gap-4">
+        <div>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+
         {pokemons?.pages?.map((page) =>
           page.map(
             (
@@ -96,32 +192,30 @@ export default function Home() {
             ) => {
               if (page.length == index + 1) {
                 return (
-                  //   <StyleGallery
-                  //     image={style.imageUrl}
-                  //     name={style.name}
-                  //     key={index}
-                  //     innerRef={ref}
-                  //   />
                   <StyleGallery
+                    _id={style._id}
                     image={style.url}
                     name={style.style}
                     key={index}
                     innerRef={ref}
+                    onClick={handleImageClick}
                   />
                 );
               } else {
                 return (
                   <StyleGallery
+                    _id={style._id}
                     image={style.url}
                     name={style.style}
                     key={index}
+                    onClick={handleImageClick}
                   />
                 );
               }
             }
           )
         )}
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import QuizResultCard from "./QuizResultCard";
 import PinterestLayout from "@/app/_components/PinterestLayout";
+import Link from "next/link";
 
 interface ResultItem {
   [key: string]: string;
@@ -25,9 +26,10 @@ export default function QuizResult({ result }: QuizResultProps) {
             </div>
           ))}
         </div>
-        <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
-          Do Quiz Again
-        </button>
+        {/* <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button"> */}
+        <Link href="/quiz-test">Do Quiz Again!</Link>
+        <Link href="/quiz-test/quiz-card">quiz card</Link>
+        {/* </button> */}
         <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
           Explore
         </button>

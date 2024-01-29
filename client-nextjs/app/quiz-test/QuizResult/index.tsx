@@ -10,6 +10,7 @@ interface QuizResultProps {
 }
 
 export default function QuizResult({ result }: QuizResultProps) {
+  console.log("quiz result: ", result);
   const styles = result.map((item) => Object.keys(item)[0]);
 
   return (
