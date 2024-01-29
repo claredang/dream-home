@@ -6,6 +6,8 @@ import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import QuizResult from "../quiz-test/QuizResult";
+import Masonry from "react-responsive-masonry";
+import "./styles.module.css";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
   //   const res = await fetch(
@@ -125,97 +127,91 @@ export default function Home() {
     }
   };
 
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 4,
+    700: 2,
+    500: 1,
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="p-2">
       {quizResultData.resultfinal ? (
-        // Display Quiz Result if not null
         <div>
           <QuizResult result={quizResultData.resultfinal} />
         </div>
       ) : (
-        // Display the default content if Quiz Result is null
-        <div className="w-full md:w-10/12 m-auto flex mt-5 mb-5 flex-col md:grid md:grid-cols-3 md:grid-row-1 md:items-center gap-4">
-          <div>
-            {/* <p>Selected Names: {selectedIds?.join(", ")}</p> */}
+        <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
+          <div className="lg:w-1/2 md:w-1/3 xs:w-full flex-col items-center justify-between p-6 ml-5">
             <button onClick={handleSubmit}>Submit</button>
           </div>
-
-          {pokemons?.pages?.map((page) =>
-            page.map(
-              (
-                style: {
-                  imageUrl: string;
-                  name: string;
-                },
-                index: number
-              ) => {
-                if (page.length === index + 1) {
-                  return (
-                    <StyleGallery
-                      _id={style._id}
-                      image={style.url}
-                      name={style.style}
-                      key={index}
-                      innerRef={ref}
-                      onClick={handleImageClick}
-                    />
-                  );
-                } else {
-                  return (
-                    <StyleGallery
-                      _id={style._id}
-                      image={style.url}
-                      name={style.style}
-                      key={index}
-                      onClick={handleImageClick}
-                    />
-                  );
-                }
-              }
-            )
-          )}
+          <div className="w-full md:w-2/3 sm:w-1/2 relative">
+            <Masonry columnsCount={3} gutter="10px">
+              {pokemons?.pages?.map((page) =>
+                page.map(
+                  (
+                    style: {
+                      imageUrl: string;
+                      name: string;
+                    },
+                    index: number
+                  ) => {
+                    if (page.length === index + 1) {
+                      return (
+                        <StyleGallery
+                          _id={style._id}
+                          image={style.url}
+                          name={style.style}
+                          key={index}
+                          index={index}
+                          innerRef={ref}
+                          onClick={handleImageClick}
+                        />
+                      );
+                    } else {
+                      return (
+                        <StyleGallery
+                          _id={style._id}
+                          image={style.url}
+                          name={style.style}
+                          key={index}
+                          index={index}
+                          onClick={handleImageClick}
+                        />
+                      );
+                    }
+                  }
+                )
+              )}
+            </Masonry>
+            <div
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                textAlign: "center",
+                padding: "10px",
+              }}
+            >
+              <button
+                className=""
+                style={{
+                  background: "#3498db",
+                  border: "none",
+                  color: "#ffffff",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       )}
-      {/* <div className="w-full md:w-10/12 m-auto flex mt-5 mb-5 flex-col md:grid md:grid-cols-3 md:grid-row-1 md:items-center gap-4">
-        <div>
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
-
-        {pokemons?.pages?.map((page) =>
-          page.map(
-            (
-              style: {
-                imageUrl: string;
-                name: string;
-              },
-              index: number
-            ) => {
-              if (page.length == index + 1) {
-                return (
-                  <StyleGallery
-                    _id={style._id}
-                    image={style.url}
-                    name={style.style}
-                    key={index}
-                    innerRef={ref}
-                    onClick={handleImageClick}
-                  />
-                );
-              } else {
-                return (
-                  <StyleGallery
-                    _id={style._id}
-                    image={style.url}
-                    name={style.style}
-                    key={index}
-                    onClick={handleImageClick}
-                  />
-                );
-              }
-            }
-          )
-        )}
-      </div> */}
     </main>
   );
 }
