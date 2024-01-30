@@ -13,6 +13,22 @@ interface QuizResultProps {
 export default function QuizResult({ result }: QuizResultProps) {
   const styles = result.map((item) => Object.keys(item)[0]);
 
+  const getStyleImage = async (styles: string[]) => {
+    const response = await fetch(
+      // `${process.env.NEXT_PUBLIC_SERVER}/quiz/answer`,
+      `http://localhost:8080/style`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          style: styles,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log("data: ", data);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
       <div className="lg:w-1/2 xs:w-full flex-col items-center justify-between p-6 ml-5">
@@ -23,6 +39,7 @@ export default function QuizResult({ result }: QuizResultProps) {
           {result.map((item, index) => (
             <div key={index} className="gap-2 mb-4 rounded-lg bg-slate-100">
               <QuizResultCard cardInfo={item} />
+              <button onClick={() => getStyleImage(styles)}>test</button>
             </div>
           ))}
         </div>

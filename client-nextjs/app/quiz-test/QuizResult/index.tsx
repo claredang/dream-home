@@ -1,5 +1,7 @@
+"use client";
 import QuizResultCard from "./QuizResultCard";
 import PinterestLayout from "@/app/_components/PinterestLayout";
+import { useEffect, useState } from "react";
 
 interface ResultItem {
   [key: string]: string;
@@ -9,9 +11,45 @@ interface QuizResultProps {
   result: ResultItem[];
 }
 
+interface FetchedDataItem {
+  // Define the structure of the fetched data
+  // Adjust the types based on the actual structure of your fetched data
+  key: string;
+  value: string;
+}
+
 export default function QuizResult({ result }: QuizResultProps) {
   console.log("quiz result: ", result);
   const styles = result.map((item) => Object.keys(item)[0]);
+
+  const [fetchedData, setFetchedData] = useState<string[]>([]);
+
+  const getStyleImage = async (styles: string[]) => {
+    console.log("inside here !!!");
+    const fetchedDataArray: string[] = [];
+    for (const style of styles) {
+      const response = await fetch(
+        `http://localhost:8080/style/${style}`, // Individual style route
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            style: style,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log("data for style ", style, ": ", data);
+      fetchedDataArray.push(data);
+    }
+    setFetchedData(fetchedDataArray);
+    console.log("fetch data: ", fetchedData);
+  };
+
+  useEffect(() => {
+    // Call getStyleImage when the component mounts
+    getStyleImage(styles);
+  }, []);
 
   return (
     <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
@@ -35,7 +73,7 @@ export default function QuizResult({ result }: QuizResultProps) {
       </div>
 
       <div className="w-full sm:w-1/2">
-        <PinterestLayout images={styles} isLoop={true} />
+        <PinterestLayout images={fetchedData} isLoop={true} />
       </div>
     </div>
   );
