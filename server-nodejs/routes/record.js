@@ -26,12 +26,40 @@ recordRoutes.route("/api/query").post(async function (req, res) {
   res.json(results).status(200);
 });
 
+// GET: Query test
+recordRoutes.route("/api/style-test").get(async function (req, res) {
+  const cursor = dbo.getStyle();
+  var data = await cursor;
+  console.log("length: ", data.length);
+
+  const urlSet = new Set();
+  const duplicateUrls = new Set();
+
+  for (const entry of data) {
+    if (urlSet.has(entry.url)) {
+      duplicateUrls.add(entry.url);
+    } else {
+      urlSet.add(entry.url);
+    }
+  }
+
+  if (duplicateUrls.size > 0) {
+    console.log("Duplicate url values found:");
+    duplicateUrls.forEach((duplicateUrl) => {
+      console.log(duplicateUrl);
+    });
+  } else {
+    console.log("No duplicate url values found.");
+  }
+  res.json(data).status(200);
+});
 // GET: Query
 recordRoutes.route("/api/style").get(async function (req, res) {
   const cursor = dbo.getStyle();
   var data = await cursor;
   const limit = parseInt(req.query.limit) || 10; // default to 10 items per page
   const offset = parseInt(req.query.offset) || 0;
+
   // Calculate the start and end index based on offset and limit
   const startIndex = offset;
   const endIndex = startIndex + limit;
@@ -39,7 +67,6 @@ recordRoutes.route("/api/style").get(async function (req, res) {
   // Get the sliced results based on calculated indices
   const results = data.slice(startIndex, endIndex);
 
-  // Create response object
   const response = {
     count: data.length,
     next:
@@ -53,7 +80,6 @@ recordRoutes.route("/api/style").get(async function (req, res) {
     results: results,
   };
 
-  // Send the response
   res.json(response);
 });
 
@@ -92,6 +118,16 @@ recordRoutes.route("/explore/delete").delete((req, res) => {
 recordRoutes.route("/chatbot").get(async function (req, res) {
   const CHATBOT_KEY = process.env.OPENAI_KEY.toString();
   res.send({ chatbot: CHATBOT_KEY }).status(200);
+});
+
+//
+recordRoutes.route("/style/:style").post(async function (req, res) {
+  const style = req.params.style;
+  // console.log("style: ", style);
+  const _db = await dbo.getIndividualStyle(style);
+  const url = _db.map((item) => item.url);
+  console.log("url", url);
+  res.json(url).status(200);
 });
 
 module.exports = recordRoutes;

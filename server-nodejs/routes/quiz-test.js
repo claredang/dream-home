@@ -74,7 +74,7 @@ quizRoutes.route("/gallery/result").post((req, res) => {
   }
 
   // Now, mostFrequentElements contains the most frequent elements
-  console.log("Most frequent elements:", mostPreferredStyles);
+  // console.log("Most frequent elements:", mostPreferredStyles);
   const styleDescriptions = dbo.getStyleDescription();
   const resultDescriptions = mostPreferredStyles.map(
     (style) => styleDescriptions[style]
@@ -83,7 +83,7 @@ quizRoutes.route("/gallery/result").post((req, res) => {
   const resultfinal = mostPreferredStyles.map((style, index) => ({
     [style]: resultDescriptions[index],
   }));
-  console.log("Combined Result:", resultfinal);
+  // console.log("Combined Result:", resultfinal);
   // return result;
   res.json({ resultfinal }).status(200);
 });
