@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "../../../_utilities/sharedFunction";
+import { capitalizeFirstLetter } from "../../../../_utilities/sharedFunction";
 
 interface QuizResultCardProps {
   cardInfo: {

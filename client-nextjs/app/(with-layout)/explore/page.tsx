@@ -1,6 +1,6 @@
-import { fetchExploreImage } from "../action";
+import { fetchExploreImage } from "../../action";
 
-import LoadMore from "../_components/LoadMore";
+import LoadMore from "../../_components/LoadMore";
 
 export default async function Explore() {
   const data = await fetchExploreImage(1);
