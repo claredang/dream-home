@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import QuizResult from "../../(with-layout)/quiz-test/QuizResult";
+import QuizResult from "../../(default-layout)/quiz-test/QuizResult";
 import Masonry from "react-responsive-masonry";
 import "./styles.module.css";
 

@@ -90,7 +90,7 @@ export default function QuizTest() {
                 full={true}
               /> */}
               <Link href="/quiz-test/quiz-card">quiz card</Link>
-              <Link href="/quiz-test/quiz-gallery">quiz card</Link>
+              <Link href="/gallery">quiz card</Link>
             </div>
           </div>
         </div>
