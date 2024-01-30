@@ -108,10 +108,11 @@ export default function Home() {
 
   console.log("selected name: ", selectedNames);
   const [quizResultData, setQuizResult] = useState({
-    resultfinal: null,
+    resultFinal: null,
   });
   const handleSubmit = async () => {
     try {
+      console.log("!!! Inside here");
       // Your server endpoint where you want to send the data
       const endpoint = "http://localhost:8080/gallery/result";
 
@@ -119,26 +120,19 @@ export default function Home() {
       const response = await axios.post(endpoint, { selectedNames });
 
       // Handle the server response as needed
-      console.log("Server response:", response.data, response.data.resultfinal);
-      setQuizResult({ resultfinal: response.data.resultfinal });
+      console.log("Server response:", response.data, response.data.resultFinal);
+      setQuizResult({ resultFinal: response.data.resultFinal });
     } catch (error) {
       // Handle errors
       console.error("Error submitting data:", error);
     }
   };
 
-  const breakpointColumnsObj = {
-    default: 4,
-    1100: 4,
-    700: 2,
-    500: 1,
-  };
-
   return (
     <main className="p-2">
-      {quizResultData.resultfinal ? (
+      {quizResultData.resultFinal ? (
         <div>
-          <QuizResult result={quizResultData.resultfinal} />
+          <QuizResult result={quizResultData.resultFinal} />
         </div>
       ) : (
         <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
