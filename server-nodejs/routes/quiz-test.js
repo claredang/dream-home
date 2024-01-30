@@ -57,7 +57,6 @@ quizRoutes.route("/gallery/result").post((req, res) => {
     frequencyMap[name] = (frequencyMap[name] || 0) + 1;
   });
 
-  // Find the maximum frequency
   let maxFrequency = 0;
   for (const name in frequencyMap) {
     if (frequencyMap[name] > maxFrequency) {
@@ -65,7 +64,6 @@ quizRoutes.route("/gallery/result").post((req, res) => {
     }
   }
 
-  // Find elements with the maximum frequency
   const mostPreferredStyles = [];
   for (const name in frequencyMap) {
     if (frequencyMap[name] === maxFrequency) {
@@ -73,19 +71,15 @@ quizRoutes.route("/gallery/result").post((req, res) => {
     }
   }
 
-  // Now, mostFrequentElements contains the most frequent elements
-  // console.log("Most frequent elements:", mostPreferredStyles);
   const styleDescriptions = dbo.getStyleDescription();
   const resultDescriptions = mostPreferredStyles.map(
     (style) => styleDescriptions[style]
   );
 
-  const resultfinal = mostPreferredStyles.map((style, index) => ({
+  const resultFinal = mostPreferredStyles.map((style, index) => ({
     [style]: resultDescriptions[index],
   }));
-  // console.log("Combined Result:", resultfinal);
-  // return result;
-  res.json({ resultfinal }).status(200);
+  res.json({ resultFinal }).status(200);
 });
 
 // ======================== HELPER FUNCTION ========================
@@ -142,8 +136,6 @@ function calculateResult(sessionId) {
     (style) => styleCount[style] === maxCount
   );
 
-  console.log("Combined Result1 :", mostPreferredStyles);
-
   const styleDescriptions = dbo.getStyleDescription();
   const resultDescriptions = mostPreferredStyles.map(
     (style) => styleDescriptions[style]
@@ -152,7 +144,7 @@ function calculateResult(sessionId) {
   const result = mostPreferredStyles.map((style, index) => ({
     [style]: resultDescriptions[index],
   }));
-  console.log("Combined Result:", result);
+
   return result;
 }
 
