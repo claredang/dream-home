@@ -2,9 +2,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Button from "@/app/_components/Button";
-import QuizCard from "./QuizCard";
+// import QuizCard from "./QuizCard";
+import QuizCard from "./quiz-card/page";
 import QuizResult from "./QuizResult";
 import Link from "next/link";
+import Router, { withRouter } from "next/router";
 
 export default function QuizTest() {
   const [quizData, setQuizData] = useState({
@@ -50,7 +52,7 @@ export default function QuizTest() {
 
   return (
     <div>
-      <div>
+      {/* <div>
         {quizData.result ? (
           <QuizResult result={quizData.result} />
         ) : (
@@ -59,7 +61,7 @@ export default function QuizTest() {
             onSelectAnswer={selectAnswer}
           />
         )}
-      </div>
+      </div> */}
       {!quizData.sessionId && (
         <div>
           <div className="flexCenter lg:max-container relative w-full lg:pb-12 pb-5">
@@ -80,14 +82,15 @@ export default function QuizTest() {
                 Take our interior design style quiz to discover your unique home
                 style.
               </p>
-              <Button
+              {/* <Button
                 type="button"
                 title="Start Quiz"
                 variant="btn_black"
                 onClick={startQuiz}
                 full={true}
-              />
+              /> */}
               <Link href="/quiz-test/quiz-card">quiz card</Link>
+              <Link href="/quiz-test/quiz-gallery">quiz card</Link>
             </div>
           </div>
         </div>

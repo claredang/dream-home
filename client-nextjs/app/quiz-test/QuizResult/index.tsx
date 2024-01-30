@@ -2,6 +2,7 @@
 import QuizResultCard from "./QuizResultCard";
 import PinterestLayout from "@/app/_components/PinterestLayout";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface ResultItem {
   [key: string]: string;
@@ -65,10 +66,10 @@ export default function QuizResult({ result }: QuizResultProps) {
           ))}
         </div>
         <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
-          Do Quiz Again
+          <Link href="/quiz-test">Do Quiz Again</Link>
         </button>
         <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
-          Explore
+          <Link href="/explore">explore</Link>
         </button>
       </div>
 
