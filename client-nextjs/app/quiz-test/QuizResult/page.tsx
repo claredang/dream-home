@@ -35,7 +35,7 @@ export default function QuizResult({ result }: QuizResultProps) {
         </button>
       </div>
 
-      <div className="w-full sm:w-1/2">
+      <div className="w-full sm:w-1/2 md:w-2/3">
         <PinterestLayout images={styles} isLoop={true} />
       </div>
     </div>

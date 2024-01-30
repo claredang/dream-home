@@ -143,7 +143,12 @@ export default function Home() {
       ) : (
         <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
           <div className="lg:w-1/2 md:w-1/3 xs:w-full flex-col items-center justify-between p-6 ml-5">
-            <button onClick={handleSubmit}>Submit</button>
+            <p className="regular-40 mb-4">
+              Select the rooms that make you swoon.
+            </p>
+            <p className="regular-18">
+              Decisions are hard. Pick as many as you want!
+            </p>
           </div>
           <div className="w-full md:w-2/3 sm:w-1/2 relative">
             <Masonry columnsCount={3} gutter="10px">
@@ -184,29 +189,13 @@ export default function Home() {
                 )
               )}
             </Masonry>
-            <div
-              style={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                width: "100%",
-                textAlign: "center",
-                padding: "10px",
-              }}
-            >
+            <div className="bg-gray-100 bg-opacity-75 fixed bottom-0 lg:w-1/2 sm:w-full xs:w-full text-center p-4 ">
               <button
-                className=""
-                style={{
-                  background: "#3498db",
-                  border: "none",
-                  color: "#ffffff",
-                  padding: "10px 20px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
+                className="mt-auto gradient-button text-white p-3 rounded-full"
+                style={{ backgroundColor: "" }}
                 onClick={handleSubmit}
               >
-                Submit
+                Submits
               </button>
             </div>
           </div>
