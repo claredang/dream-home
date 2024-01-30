@@ -19,6 +19,7 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.5.3",
     "react-masonry-css": "^1.0.16",
     "react-responsive-masonry": "^2.1.7",

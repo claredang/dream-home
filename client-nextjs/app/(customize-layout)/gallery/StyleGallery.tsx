@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { FaCheckCircle } from "react-icons/fa";
 
 interface StyleGalleryProps {
   _id: string;
@@ -65,12 +66,13 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
               }}
               // onClick={handleCloseChat}
             >
-              <Image
+              {/* <Image
                 src="check.svg"
                 alt="check-button"
                 width={16}
                 height={14}
-              />
+              /> */}
+              <FaCheckCircle color="#304561" size={20} />
             </button>
           )}
         </div>

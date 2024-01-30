@@ -23,17 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <div>
-      <Navbar />
       <main className="relative overflow-hidden">
         <ReactQueryProvider>
           {children}
           <ReactQueryDevtools />
         </ReactQueryProvider>
-        <Analytics />
-        <SpeedInsights />
-        <Chatbot />
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }
