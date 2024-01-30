@@ -42,7 +42,6 @@ module.exports = {
     const _db = client.db("homestay");
     const coll = _db.collection("style_gallery");
     const cursor = await coll.find({ style: style }).limit(6).toArray();
-    console.log("cusor: ", cursor, typeof cursor);
     return cursor;
   },
 
@@ -104,10 +103,9 @@ module.exports = {
     return result;
   },
 
-  // Helper function //
+  // ======================== HELPER FUNCTION ========================
   shuffleArray: function (array) {
-    // console.log("array: ", array);
-    const newArray = array.slice(); // Create a copy to avoid modifying the original array
+    const newArray = array.slice();
     for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];

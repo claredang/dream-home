@@ -11,15 +11,6 @@ const client = new MongoClient(Db, {
 });
 
 module.exports = {
-  connectToServer: async function (callback) {
-    client.connect();
-    // Send a ping to confirm a successful connection
-    client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
-  },
-
   getQuizTestDb: function () {
     const _db = client.db("homestay");
     const coll = _db.collection("quiz-test");
