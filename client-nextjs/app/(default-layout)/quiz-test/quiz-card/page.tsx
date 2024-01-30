@@ -71,7 +71,7 @@ export default function QuizTest() {
   const startQuiz = async () => {
     const response = await fetch(
       // `${process.env.NEXT_PUBLIC_SERVER}/quiz/start`,
-      `http://localhost:8080/quiz/start`,
+      `${process.env.NEXT_PUBLIC_SERVER}/quiz/start`,
       {
         method: "POST",
       }
@@ -93,7 +93,7 @@ export default function QuizTest() {
   const selectAnswer = async (questionId: any, answerType: string) => {
     const response = await fetch(
       // `${process.env.NEXT_PUBLIC_SERVER}/quiz/answer`,
-      `http://localhost:8080/quiz/answer`,
+      `${process.env.NEXT_PUBLIC_SERVER}/quiz/answer`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

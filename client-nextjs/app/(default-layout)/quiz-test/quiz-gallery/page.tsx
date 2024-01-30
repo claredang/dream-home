@@ -13,7 +13,7 @@ async function getStyleGallery({ pageParam }: { pageParam: number }) {
   //     `https://pokeapi.co/api/v2/ability?limit=20&offset=${pageParam}`
   //   );
   const res = await fetch(
-    `http://localhost:8080/api/style?limit=20&offset=${pageParam}`
+    `${process.env.NEXT_PUBLIC_SERVER}/api/style?limit=20&offset=${pageParam}`
   );
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -79,7 +79,7 @@ export default function Home() {
     // const result = await response.json();
 
     const response = await fetch(
-      `http://localhost:8080/explore?limit=5&offset=2`
+      `${process.env.NEXT_PUBLIC_SERVER}/explore?limit=5&offset=2`
     );
     const data = await response.json();
     console.log(data);
@@ -112,7 +112,7 @@ export default function Home() {
   const handleSubmit = async () => {
     try {
       // Your server endpoint where you want to send the data
-      const endpoint = "http://localhost:8080/gallery/result";
+      const endpoint = "${process.env.NEXT_PUBLIC_SERVER}/gallery/result";
 
       // Assuming your server expects a POST request with a JSON payload
       const response = await axios.post(endpoint, { selectedNames });

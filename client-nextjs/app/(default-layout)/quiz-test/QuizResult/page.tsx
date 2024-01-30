@@ -16,7 +16,7 @@ export default function QuizResult({ result }: QuizResultProps) {
   const getStyleImage = async (styles: string[]) => {
     const response = await fetch(
       // `${process.env.NEXT_PUBLIC_SERVER}/quiz/answer`,
-      `http://localhost:8080/style`,
+      `${process.env.NEXT_PUBLIC_SERVER}/style`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

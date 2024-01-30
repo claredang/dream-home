@@ -30,7 +30,7 @@ export default function QuizResult({ result }: QuizResultProps) {
     const fetchedDataArray: string[] = [];
     for (const style of styles) {
       const response = await fetch(
-        `http://localhost:8080/style/${style}`, // Individual style route
+        `${process.env.NEXT_PUBLIC_SERVER}/style/${style}`, // Individual style route
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
