@@ -1,4 +1,7 @@
-import { capitalizeFirstLetter } from "../../../../_utilities/sharedFunction";
+import {
+  capitalizeFirstLetter,
+  replaceUnderscoresWithSpaces,
+} from "../../../../_utilities/sharedFunction";
 
 interface QuizResultCardProps {
   cardInfo: {
@@ -13,7 +16,7 @@ export default function QuizResultCard({ cardInfo }: QuizResultCardProps) {
       <div className="flex flex-col">
         <div className="flex justify-between items-center">
           <p className="bold-18 text-black">
-            {capitalizeFirstLetter(styleKey)}
+            {capitalizeFirstLetter(replaceUnderscoresWithSpaces(styleKey))}
           </p>
           <div>✨</div>
         </div>
