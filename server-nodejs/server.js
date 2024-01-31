@@ -17,13 +17,12 @@ app.use(express.json());
 app.use(require("./routes/record"));
 app.use(require("./routes/quiz-test"));
 
-// get driver connection
 const dbo = require("./db/conn");
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
-    fileSize: 10 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+    fileSize: 10 * 1024 * 1024, // no larger than 5mb
   },
 });
 
@@ -49,22 +48,20 @@ app.post(
       next(err);
     });
     blobStream.on("finish", () => {
-      // The public URL can be used to directly access the file via HTTP.
       const publicUrl = format(
         `https://storage.googleapis.com/${bucket.name}/${blob.name}`
       );
       res.status(200).json({ publicUrl });
     });
     blobStream.end(req.file.buffer);
-    // console.log(req.file);
   }
 );
 
 app.get("/get-url", (req, res) => {
   const file = bucket.file("indochine_11.jpg");
   const config = {
-    action: "read", // giving read permission here
-    expires: "03-17-2025", // specifying the expiry date
+    action: "read",
+    expires: "03-17-2025",
   };
   file.getSignedUrl(config, (err, url) => {
     res.status(200).json({ url });
@@ -73,7 +70,7 @@ app.get("/get-url", (req, res) => {
 
 app.get("/get-files-list", async (req, res) => {
   const options = {
-    // prefix: "audio", // or anything you want!
+    // prefix: "audio", // or anything
   };
   const [files] = await bucket.getFiles(options);
   res.status(200).json({ files });
@@ -100,7 +97,6 @@ app.post("/upload", multer.array("file"), async (req, res) => {
         const publicUrl = format(
           `https://storage.googleapis.com/${bucket.name}/${blob.name}`
         );
-        // console.log("public: ", publicUrl);
         resolve({ filename: file.originalname, publicUrl });
         image_url.push(publicUrl);
       });
@@ -123,7 +119,6 @@ app.post("/upload", multer.array("file"), async (req, res) => {
 });
 
 app.listen(port, () => {
-  // perform a database connection when server starts
   dbo.connectToServer(function (err, db) {
     if (err) console.error(err);
   });

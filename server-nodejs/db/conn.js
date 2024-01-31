@@ -29,6 +29,22 @@ module.exports = {
     return cursor;
   },
 
+  getStyle: async function () {
+    const _db = client.db("homestay");
+    const coll = _db.collection("style_gallery");
+    const cursor = await coll.find({}).toArray();
+    const shuffle = this.shuffleArray(cursor);
+    return shuffle;
+    // return cursor;
+  },
+
+  getIndividualStyle: async function (style) {
+    const _db = client.db("homestay");
+    const coll = _db.collection("style_gallery");
+    const cursor = await coll.find({ style: style }).limit(6).toArray();
+    return cursor;
+  },
+
   queryDb: async function (req) {
     const _db = client.db("homestay");
     const coll = _db.collection("interiorDesign");
@@ -39,16 +55,14 @@ module.exports = {
 
   postDb: function () {
     const _db = client.db("homestay");
-    const coll = _db.collection("interiorDesign");
+    const coll = _db.collection("style_gallery");
     const docs = [
       {
-        title: "test",
-        interior_style: "test",
-        location: "test",
-        rating: "test",
-        price: "test",
+        url: "https://storage.googleapis.com/dream-home-org/midcentury-modern_1.jpg",
+        style: "midcentury_modern",
       },
     ];
+
     const cursor = coll.insertMany(docs);
     return cursor;
   },
@@ -87,5 +101,15 @@ module.exports = {
     const coll = _db.collection("interiorDesign");
     let result = await coll.updateMany({}, { $unset: { image_url: null } });
     return result;
+  },
+
+  // ======================== HELPER FUNCTION ========================
+  shuffleArray: function (array) {
+    const newArray = array.slice();
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
   },
 };

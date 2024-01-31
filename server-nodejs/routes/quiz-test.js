@@ -48,7 +48,41 @@ quizRoutes.route("/quiz/result/:sessionId").post((req, res) => {
   res.json({ result });
 });
 
-// HELPER FUNCTION:
+quizRoutes.route("/gallery/result").post((req, res) => {
+  const result = req.body;
+  console.log("result: ", result);
+  const selectedNames = result.selectedNames;
+  const frequencyMap = {};
+  selectedNames.forEach((name) => {
+    frequencyMap[name] = (frequencyMap[name] || 0) + 1;
+  });
+
+  let maxFrequency = 0;
+  for (const name in frequencyMap) {
+    if (frequencyMap[name] > maxFrequency) {
+      maxFrequency = frequencyMap[name];
+    }
+  }
+
+  const mostPreferredStyles = [];
+  for (const name in frequencyMap) {
+    if (frequencyMap[name] === maxFrequency) {
+      mostPreferredStyles.push(name);
+    }
+  }
+
+  const styleDescriptions = dbo.getStyleDescription();
+  const resultDescriptions = mostPreferredStyles.map(
+    (style) => styleDescriptions[style]
+  );
+
+  const resultFinal = mostPreferredStyles.map((style, index) => ({
+    [style]: resultDescriptions[index],
+  }));
+  res.json({ resultFinal }).status(200);
+});
+
+// ======================== HELPER FUNCTION ========================
 function generateSessionId() {
   return Math.random().toString(36).substring(2, 15);
 }
@@ -110,7 +144,7 @@ function calculateResult(sessionId) {
   const result = mostPreferredStyles.map((style, index) => ({
     [style]: resultDescriptions[index],
   }));
-  console.log("Combined Result:", result);
+
   return result;
 }
 
