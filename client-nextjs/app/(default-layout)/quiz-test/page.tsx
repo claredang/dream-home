@@ -89,8 +89,15 @@ export default function QuizTest() {
                 onClick={startQuiz}
                 full={true}
               /> */}
-              <Link href="/quiz-test/quiz-card">quiz card</Link>
-              <Link href="/gallery">quiz card</Link>
+              {/* <button className="gradient-button">
+                <Link href="/quiz-test/quiz-card">quiz card</Link>
+              </button> */}
+              <button className="font-bold p-2  text-white rounded-2xl gradient-button">
+                <Link href="/quiz-test/quiz-card">Quiz Card</Link>
+              </button>
+              <button className="font-bold p-2 text-white rounded-2xl gradient-button">
+                <Link href="/gallery">Quiz Gallery</Link>
+              </button>
             </div>
           </div>
         </div>
