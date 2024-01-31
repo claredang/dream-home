@@ -40,11 +40,9 @@ export default function QuizResult({ result }: QuizResultProps) {
         }
       );
       const data = await response.json();
-      console.log("data for style ", style, ": ", data);
       fetchedDataArray.push(data);
     }
     setFetchedData(fetchedDataArray);
-    console.log("fetch data: ", fetchedData);
   };
 
   useEffect(() => {
@@ -69,7 +67,7 @@ export default function QuizResult({ result }: QuizResultProps) {
           <Link href="/quiz-test">Do Quiz Again</Link>
         </button>
         <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
-          <Link href="/explore">explore</Link>
+          <Link href="/explore">Explore Style</Link>
         </button>
       </div>
 

@@ -19,7 +19,7 @@ export async function fetchExploreImage(page: number) {
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  console.log("data: ", data);
+  // console.log("data: ", data);
 
   return data.map((explore: ExploreProp, index: number) => (
     <ExploreCard key={explore.id} explore={explore} index={index} />

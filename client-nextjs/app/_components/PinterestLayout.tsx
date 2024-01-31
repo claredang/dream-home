@@ -14,27 +14,29 @@ function PinterestLayout({
   const imageUrls = images.flat();
 
   return (
-    <Masonry columnsCount={3} gutter="4px">
-      {imageUrls.map((image, index) => (
-        <div
-          key={index}
-          style={{
-            height: index % 2 ? "200px" : "250px",
-            margin: "1px",
-          }}
-        >
-          <img
-            src={image}
-            alt="he"
+    <div>
+      <Masonry columnsCount={3} gutter="4px">
+        {imageUrls.map((image, index) => (
+          <div
+            key={index}
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
+              height: index % 2 ? "200px" : "250px",
+              margin: "1px",
             }}
-          />
-        </div>
-      ))}
-    </Masonry>
+          >
+            <img
+              src={image}
+              alt="he"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+        ))}
+      </Masonry>
+    </div>
   );
 }
 

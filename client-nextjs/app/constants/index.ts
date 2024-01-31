@@ -15,11 +15,11 @@ export const NAV_LINKS = [
     key: "explore",
     label: "Explore",
   },
-  {
-    href: "/gallery",
-    key: "gallery",
-    label: "Gallery",
-  },
+  // {
+  //   href: "/gallery",
+  //   key: "gallery",
+  //   label: "Gallery",
+  // },
 ];
 
 // CAMP SECTION
