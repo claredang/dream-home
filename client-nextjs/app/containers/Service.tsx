@@ -16,7 +16,7 @@ const Service = () => {
                 <Button
                   type="link"
                   title={columns.button}
-                  variant="btn_black"
+                  variant="btn_white_text"
                   link={columns.href}
                   full={false}
                 />

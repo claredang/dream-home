@@ -43,7 +43,7 @@ body {
     @apply border-white bg-white px-8 py-3 text-green-50;
   }
   .btn_white_text {
-    @apply border-white bg-white px-8 py-3 text-gray-90;
+    @apply hover:border-black border-transparent border-2 hover:bg-white px-8 py-3 hover:text-gray-90 bg-black border-white text-white;
   }
   .btn_green {
     @apply border-green-50 bg-green-50 px-8 py-5 text-white;
