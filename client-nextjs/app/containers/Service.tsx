@@ -20,6 +20,9 @@ const Service = () => {
                   link={columns.href}
                   full={false}
                 />
+                <button className="font-bold p-2 rounded-2xl bg-yellow-50 text-blue-100">
+                  <Link href="/gallery">Pick Your Pics Quiz</Link>
+                </button>
               </div>
             </ul>
           </div>

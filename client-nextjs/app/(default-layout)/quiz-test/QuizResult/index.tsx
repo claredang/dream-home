@@ -20,13 +20,11 @@ interface FetchedDataItem {
 }
 
 export default function QuizResult({ result }: QuizResultProps) {
-  console.log("quiz result: ", result);
   const styles = result.map((item) => Object.keys(item)[0]);
 
   const [fetchedData, setFetchedData] = useState<string[]>([]);
 
   const getStyleImage = async (styles: string[]) => {
-    console.log("inside here !!!");
     const fetchedDataArray: string[] = [];
     for (const style of styles) {
       const response = await fetch(

@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <div className="mb-10 xs:mb-[60px]">
-      <nav className="flexBetween max-container padding-container fixed top-0 w-full bg-white z-30 py-5 shadow-md ring-1 ring-slate-900/5">
+      <nav className="flexBetween max-container padding-container fixed top-0 w-full bg-yellow-50 z-30 py-5 shadow-md ring-1 ring-slate-900/5">
         <Link href="/">DREAM HOME</Link>
 
         {/* Hamburger menu for small screens */}

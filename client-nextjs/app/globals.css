@@ -36,6 +36,9 @@ body {
 } */
 
 @layer utilities {
+  .btn-yellow {
+    @apply border-transparent border-[1px] border-slate-300  bg-yellow-50 text-blue-100 font-bold px-8 py-3 rounded-2xl hover:bg-slate-50 hover:border-yellow-200;
+  }
   .btn_black {
     @apply border-black bg-black px-2 py-2 text-white;
   }
@@ -186,6 +189,10 @@ body {
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
+  }
+
+  .yellow-cyan {
+    background-image: #fcf8a8;
   }
 
   .coastal {

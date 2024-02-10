@@ -1,10 +1,20 @@
 import { ShowcaseCard } from "./ShowcaseCard";
+import Slideshow from "../_components/ImageSlider";
 
 const Intro = () => {
   return (
     <section className="2xl:max-container relative flex flex-col pb-10 lg:mb-10 lg:pb-0 xl:mb-10">
       <div className="hide-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]">
-        <ShowcaseCard backgroundImage="bg-home-cover-1" />
+        <Slideshow
+          images={[
+            "house-1.jpg",
+            "house-2.jpg",
+            "house-3.jpg",
+            "house-4.jpg",
+            "house-7.jpg",
+            "house-8.jpg",
+          ]}
+        />
       </div>
 
       <div className="flexEnd mt-10 px-6 lg:-mt-60 lg:mr-6">
