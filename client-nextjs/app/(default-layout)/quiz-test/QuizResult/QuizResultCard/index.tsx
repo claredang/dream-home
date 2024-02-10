@@ -15,7 +15,7 @@ export default function QuizResultCard({ cardInfo }: QuizResultCardProps) {
     <div className="max-w-[300px] p-3 ">
       <div className="flex flex-col">
         <div className="flex justify-between items-center">
-          <p className="bold-18 text-black">
+          <p className="bold-18 text-blue-100">
             {capitalizeFirstLetter(replaceUnderscoresWithSpaces(styleKey))}
           </p>
           <div>✨</div>

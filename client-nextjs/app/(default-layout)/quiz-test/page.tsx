@@ -29,17 +29,11 @@ export default function QuizTest() {
             Take our interior design style quiz to discover your unique home
             style.
           </p>
-          {/* <Button
-              type="button"
-              title="Picture & Words Quiz"
-              variant="btn_black"
-              full={true}
-            /> */}
           <button className="btn-yellow">
-            <Link href="/quiz-test/quiz-card">Picture & Words Quiz</Link>
+            <Link href="/gallery">Pick Images Styles You Like</Link>
           </button>
           <button className="btn-yellow">
-            <Link href="/gallery">Pick Your Pics Quiz</Link>
+            <Link href="/quiz-test/quiz-card">Answer Questions</Link>
           </button>
         </div>
       </div>

@@ -51,8 +51,8 @@ export default function QuizResult({ result }: QuizResultProps) {
   return (
     <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
       <div className="lg:w-1/2 xs:w-full flex-col items-center justify-between p-6 ml-5">
-        <p className="bold-32 p-3 lg:mb-20 mb-15 coastal">
-          Based on our super fancy algorithm™, here is your style ✨
+        <p className="bold-32 p-3 lg:mb-20 mb-15 text-blue-100">
+          Based on our prediction, here is your style ✨
         </p>
         <div className="flex flex-wrap gap-3 lg:mb-20">
           {result.map((item, index) => (
@@ -61,10 +61,10 @@ export default function QuizResult({ result }: QuizResultProps) {
             </div>
           ))}
         </div>
-        <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
+        <button className="btn-yellow mr-5">
           <Link href="/quiz-test">Do Quiz Again</Link>
         </button>
-        <button className="font-bold p-2 m-3 text-white rounded-2xl gradient-button">
+        <button className="btn-yellow">
           <Link href="/explore">Explore Style</Link>
         </button>
       </div>
