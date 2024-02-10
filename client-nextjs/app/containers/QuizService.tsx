@@ -20,7 +20,7 @@ const QuizService = () => {
               come to life!
             </p>
             <button className="btn-yellow lg:w-1/2 sm:w-full">
-              <Link href="/gallery">Pick Your Styles Quiz</Link>
+              <Link href="/quiz-test">Pick Your Styles Quiz</Link>
             </button>
           </div>
 
@@ -92,7 +92,7 @@ const QuizService = () => {
               <Image src={`/home-cover-3.jpg`} alt="bg-cover" fill />
             </div>
           </div>
-          <div className="lg:w-1/2 w-full bg-orange-100 flexCenter flex-col hidden sm:flex justify-around gap-5">
+          <div className="lg:w-1/2 w-full bg-orange-100 flexCenter text-center flex-col hidden sm:flex justify-around gap-5">
             <p className="bold-32 text-blue-100">
               Ready to find your design style?
             </p>
