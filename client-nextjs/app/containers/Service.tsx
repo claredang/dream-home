@@ -1,5 +1,6 @@
 import Button from "../_components/Button";
 import { SERVICE_LINKS } from "@/app/constants";
+import Link from "next/link";
 
 const Service = () => {
   return (
@@ -15,10 +16,13 @@ const Service = () => {
                 <Button
                   type="link"
                   title={columns.button}
-                  variant="btn_black"
+                  variant="btn_white_text"
                   link={columns.href}
                   full={false}
                 />
+                <button className="font-bold p-2 rounded-2xl bg-yellow-50 text-blue-100">
+                  <Link href="/gallery">Pick Your Pics Quiz</Link>
+                </button>
               </div>
             </ul>
           </div>

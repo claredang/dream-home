@@ -39,3 +39,8 @@ export function styleToColor(interiorStyle: string) {
     styleToColorMap[convertToHyphen(interiorStyle)] || "badge-dark";
   return badgeColorClass;
 }
+
+export function replaceUnderscoresWithSpaces(inputString: string) {
+  // Use the replace method with a regular expression to replace underscores with spaces
+  return inputString.replace(/_/g, " ");
+}

@@ -11,8 +11,14 @@ const Footer = () => {
             <Image src="hilink-logo.svg" alt="logo" width={74} height={29} />
           </Link> */}
 
-          <Link href="/" className="mb-10">
-            Dream Home
+          <Link href="/">
+            <Image
+              src="./logo-nav-no-bg.svg"
+              alt="spinner"
+              width={80}
+              height={80}
+              className="object-contain"
+            />
           </Link>
 
           <div className="flex flex-wrap gap-10 sm:justify-between md:flex-1">

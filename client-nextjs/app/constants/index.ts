@@ -67,21 +67,21 @@ export const SERVICE_LINKS = [
   {
     title: "Discover Your Style",
     description:
-      "Whether you're a fan of modern, rustic, or industrial designs, Dream Home helps you identify your unique home style. Find the perfect house or homestay that reflects your taste.",
+      "Take our interactive quiz to uncover your unique interior design style. Answer a series of engaging questions and explore stunning images to discover the aesthetic that best reflects your personality and preferences",
     button: "Quiz Your Style",
     href: "/quiz-test",
   },
   {
-    title: "Matching Rent & Homestay to Your Style",
+    title: "Explore Your Style:",
     description:
-      "Explore the world of modern architecture with our selection of stylish and contemporary homes. Discover the perfect blend of functionality and elegance that suits your modern lifestyle.",
+      "Once you've identified your interior style, dive deeper into our curated collection of design inspirations. Explore galleries filled with captivating images, helpful tips, and expert advice tailored to your specific aesthetic. Whether you're drawn to the cozy charm of farmhouse decor or the sleek sophistication of modern minimalism, our extensive resources will fuel your creativity and empower you to transform your space.",
     button: "Explore Rent/Homestay",
     href: "/explore",
   },
   {
-    title: "Explore all over place interior design",
+    title: "Find Rent/Homestay That Match Your Style:",
     description:
-      "Escape to the charm of rustic living with our hand-picked rustic houses and homestays. Embrace the cozy and inviting atmosphere that comes with beautifully crafted wooden interiors and natural surroundings.",
+      "Ready to experience your dream interior firsthand? Discover a selection of rental properties and homestays that perfectly align with your design preferences. Browse through listings featuring beautifully decorated homes, apartments, and vacation rentals, each thoughtfully curated to reflect a variety of interior styles.",
     button: "Explore Interior Style",
     href: "/explore",
   },
@@ -89,19 +89,25 @@ export const SERVICE_LINKS = [
 
 export const EXPLORE_LINKS = [
   {
-    title: "Discover Your Dream Style",
+    title: "Discover Your Style",
     description:
-      "Find out all you need to know about our exciting service. How much does it cost? What does it entail? Let us help you explore your dream style and find the perfect home to match.",
+      "Take our interactive quiz to uncover your unique interior design style. Answer a series of engaging questions and explore stunning images to discover the aesthetic that best reflects your personality and preferences.",
+    button: "Quiz Your Style",
+    href: "/quiz-test",
   },
   {
-    title: "Experience the Next Level",
+    title: "Explore Your Style",
     description:
-      "Uncover the hidden secrets of our intermediate service. Discover how it can elevate your space to the next level of sophistication and style. Your dream home is just a step away.",
+      "Once you've identified your interior style, dive deeper into our curated collection of design inspirations. Explore galleries filled with captivating images, helpful tips, and expert advice tailored to your specific aesthetic. Whether you're drawn to the cozy charm of farmhouse decor or the sleek sophistication of modern minimalism, our extensive resources will fuel your creativity and empower you to transform your space.",
+    button: "Explore Your Styles",
+    href: "/explore",
   },
   {
-    title: "Unleash Your Imagination",
+    title: "Find Rent/Homestay That Match Your Style",
     description:
-      "Embark on an extraordinary journey with our advanced service. Let your imagination run wild as we guide you towards the most awe-inspiring homes. Elevate your living to new heights today.",
+      "Ready to experience your dream interior firsthand? Discover a selection of rental properties and homestays that perfectly align with your design preferences. Browse through listings featuring beautifully decorated homes, apartments, and vacation rentals, each thoughtfully curated to reflect a variety of interior styles.",
+    button: "Find Rent/Homestay",
+    href: "/explore",
   },
 ];
 
@@ -109,13 +115,7 @@ export const EXPLORE_LINKS = [
 export const FOOTER_LINKS = [
   {
     title: "Explore",
-    links: [
-      "Style Quiz",
-      "Help Center",
-      "Promotions",
-      "Privacy Policy",
-      "Contact Us",
-    ],
+    links: ["Quiz Your Style", "Explore Your Styles", "About Us"],
   },
   {
     title: "Our Community",

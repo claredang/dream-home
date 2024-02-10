@@ -36,6 +36,9 @@ body {
 } */
 
 @layer utilities {
+  .btn-yellow {
+    @apply border-transparent border-[1px] border-yellow-200 bg-slate-50 text-blue-100 font-bold px-8 py-3 rounded-2xl hover:bg-yellow-100 hover:border-slate-300 shadow-md;
+  }
   .btn_black {
     @apply border-black bg-black px-2 py-2 text-white;
   }
@@ -43,7 +46,7 @@ body {
     @apply border-white bg-white px-8 py-3 text-green-50;
   }
   .btn_white_text {
-    @apply border-white bg-white px-8 py-3 text-gray-90;
+    @apply hover:border-black border-transparent border-2 hover:bg-white px-8 py-3 hover:text-gray-90 bg-black border-white text-white;
   }
   .btn_green {
     @apply border-green-50 bg-green-50 px-8 py-5 text-white;
@@ -186,6 +189,10 @@ body {
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
+  }
+
+  .yellow-cyan {
+    background-image: #fcf8a8;
   }
 
   .coastal {

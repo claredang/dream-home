@@ -2,6 +2,7 @@
 import { EXPLORE_LINKS } from "@/app/constants";
 import Image from "next/image";
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface Visibility {
   [key: string]: boolean;
@@ -25,8 +26,8 @@ const Explore = () => {
             Discover your perfect home style
           </p>
           <div className="flex flex-col sm:flex-row gap-5 lg:gap-10">
-            <h2 className="flex lg:w-1/2 xs:w-full bold-40 lg:bold-64">
-              Services
+            <h2 className="flex lg:w-1/2 xs:w-full bold-40 text-blue-100">
+              How It Works
             </h2>
             <div className="flex flex-col lg:w-1/2 regular-16 text-gray-30">
               {EXPLORE_LINKS.map((columns, index) => (
@@ -35,7 +36,7 @@ const Explore = () => {
                   <div className="p-4">
                     <button
                       onClick={() => handleToggle(columns.title)}
-                      className="flex items-center p-2 rounded-full w-full"
+                      className="flex p-2 rounded-full w-full"
                     >
                       <div title={columns.title}>{columns.title}</div>
                       <div className="flex-grow" />
@@ -48,6 +49,9 @@ const Explore = () => {
                     {visibility[columns.title] && (
                       <ul className="p-2 regular-14 flex flexStart flex-col gap-4 text-gray-30">
                         <div>{columns.description}</div>
+                        {/* <button className="btn-yellow">
+                          <Link href={columns.href}>{columns.button}</Link>
+                        </button> */}
                       </ul>
                     )}
                   </div>

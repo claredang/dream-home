@@ -36,7 +36,7 @@ const Button = ({
         role="button"
       >
         {icon && <Image src={icon} alt={title} width={24} height={24} />}
-        <label className="whitespace-nowrap  cursor-pointer">{title}</label>
+        <label className="whitespace-nowrap cursor-pointer">{title}</label>
       </div>
     </Link>
   ) : (

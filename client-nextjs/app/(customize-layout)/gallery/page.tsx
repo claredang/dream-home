@@ -185,7 +185,7 @@ export default function Home() {
             </Masonry>
             <div className="bg-gray-100 bg-opacity-75 fixed bottom-0 lg:w-1/2 sm:w-full xs:w-full text-center p-4 ">
               <button
-                className="mt-auto gradient-button text-white p-3 rounded-full"
+                className="mt-auto btn-yellow"
                 style={{ backgroundColor: "" }}
                 onClick={handleSubmit}
               >

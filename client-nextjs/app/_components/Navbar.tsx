@@ -2,6 +2,7 @@
 import { NAV_LINKS } from "@/app/constants";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,15 @@ const Navbar = () => {
   return (
     <div className="mb-10 xs:mb-[60px]">
       <nav className="flexBetween max-container padding-container fixed top-0 w-full bg-white z-30 py-5 shadow-md ring-1 ring-slate-900/5">
-        <Link href="/">DREAM HOME</Link>
+        <Link href="/">
+          <Image
+            src="./logo-nav-no-bg.svg"
+            alt="spinner"
+            width={80}
+            height={80}
+            className="object-contain"
+          />
+        </Link>
 
         {/* Hamburger menu for small screens */}
         <div className="lg:hidden">
