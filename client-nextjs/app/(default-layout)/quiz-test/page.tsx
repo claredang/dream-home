@@ -14,7 +14,7 @@ export default function QuizTest() {
       <div className="flexCenter lg:max-container relative w-full lg:pb-12 pb-5">
         <div className="hide-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]">
           <Image
-            src="/home-cover-1.jpg"
+            src="/home-cover-4.jpg"
             alt="Home Cover"
             width={1440}
             height={580}
@@ -35,10 +35,10 @@ export default function QuizTest() {
               variant="btn_black"
               full={true}
             /> */}
-          <button className="font-bold p-2 rounded-2xl btn_white_text">
+          <button className="btn-yellow">
             <Link href="/quiz-test/quiz-card">Picture & Words Quiz</Link>
           </button>
-          <button className="font-bold p-2 rounded-2xl btn_white_text">
+          <button className="btn-yellow">
             <Link href="/gallery">Pick Your Pics Quiz</Link>
           </button>
         </div>
