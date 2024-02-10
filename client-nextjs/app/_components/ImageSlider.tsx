@@ -52,7 +52,7 @@ export default function Slideshow({ images }) {
         ))}
       </div>
 
-      <div className="slideshowDots text-center">
+      {/* <div className="slideshowDots text-center">
         {images.map((_, idx) => (
           <div
             key={idx}
@@ -64,7 +64,7 @@ export default function Slideshow({ images }) {
             }}
           ></div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

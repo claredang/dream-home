@@ -7,7 +7,6 @@ const QuizService = () => {
       <div className="text-gray-50">
         <div className="flex flex-col sm:flex-row lg:py-10 lg:px-5 bg-orange-100">
           <div className="lg:w-2/5 xs:w-full flex flex-col justify-around gap-5 p-6 ml-5">
-            {/* <p className="bold-32 p-3 lg:mb-20 mb-15"> */}
             <p className="bold-32 text-blue-100">
               What is my interior design style?
             </p>
@@ -74,7 +73,6 @@ const QuizService = () => {
             </div>
           </div>
           <div className="lg:w-2/5 xs:w-full flex flex-col justify-around gap-5 p-6 ml-5">
-            {/* <p className="bold-32 p-3 lg:mb-20 mb-15"> */}
             <p className="bold-32 text-blue-100">
               Identify styles that you love
             </p>
