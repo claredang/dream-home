@@ -21,9 +21,7 @@ async function getStyleGallery({ pageParam }: { pageParam: number }) {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  //   console.log("data: ", data);
   let filtered = await data.results.map((style: {}, index: number) => {
-    // console.log("style: ", style);
     let paddedIndex =
       pageParam === 0
         ? ("00" + (index + 1)).slice(-3)
@@ -35,7 +33,6 @@ async function getStyleGallery({ pageParam }: { pageParam: number }) {
       //   imageUrl: image,
     };
   });
-  console.log("filter: ", filtered);
   return filtered;
 }
 
@@ -67,7 +64,6 @@ export default function Home() {
   }, [inView, fetchNextPage, hasNextPage]);
 
   const startQuiz = async () => {
-    console.log("inside here");
     // const url = "https://interior-design.p.rapidapi.com/explore?limit=5";
     // const options = {
     //   method: "GET",
@@ -83,7 +79,6 @@ export default function Home() {
       `${process.env.NEXT_PUBLIC_SERVER}/explore?limit=5&offset=2`
     );
     const data = await response.json();
-    console.log(data);
   };
 
   // State to track selected image names
@@ -106,13 +101,11 @@ export default function Home() {
     .filter((style) => selectedIds.includes(style._id))
     .map((style) => style.style);
 
-  console.log("selected name: ", selectedNames);
   const [quizResultData, setQuizResult] = useState({
     resultFinal: null,
   });
   const handleSubmit = async () => {
     try {
-      console.log("!!! Inside here");
       // Your server endpoint where you want to send the data
       const endpoint = `${process.env.NEXT_PUBLIC_SERVER}/gallery/result`;
 

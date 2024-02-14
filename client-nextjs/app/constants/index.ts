@@ -15,11 +15,6 @@ export const NAV_LINKS = [
     key: "explore",
     label: "Explore",
   },
-  // {
-  //   href: "login",
-  //   key: "login",
-  //   label: "Login",
-  // },
 ];
 
 // CAMP SECTION
