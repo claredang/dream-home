@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NextAuthProvider } from "./providers";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
@@ -21,14 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <main className="relative overflow-hidden">
-          {children}
-          <Analytics />
-          <SpeedInsights />
-          <Chatbot />
-        </main>
-        {/* <Footer /> */}
+        <NextAuthProvider>
+          <Navbar />
+          <main className="relative overflow-hidden">
+            {children}
+            <Analytics />
+            <SpeedInsights />
+            <Chatbot />
+          </main>
+          {/* <Footer /> */}
+        </NextAuthProvider>
       </body>
     </html>
   );

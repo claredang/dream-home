@@ -16,9 +16,9 @@ export const NAV_LINKS = [
     label: "Explore",
   },
   // {
-  //   href: "/gallery",
-  //   key: "gallery",
-  //   label: "Gallery",
+  //   href: "login",
+  //   key: "login",
+  //   label: "Login",
   // },
 ];
 
