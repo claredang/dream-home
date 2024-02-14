@@ -5,7 +5,7 @@ const recordRoutes = express.Router();
 const dbo = require("../db/user");
 
 // POST
-recordRoutes.route("/design-inspiration").get(async function (req, res) {
+recordRoutes.route("/design-inspiration-user").post(async function (req, res) {
   const cursor = dbo.getUserImageSave();
   const cursor2 = dbo.getImage();
   var results = await cursor2;

@@ -1,7 +1,45 @@
+"use client";
 import { ShowcaseCard } from "./ShowcaseCard";
 import Slideshow from "../_components/ImageSlider";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const Intro = () => {
+  const [imageUrls, setImageUrls] = useState([]);
+
+  useEffect(() => {
+    // Fetch data when component mounts
+    getSave();
+  }, []);
+
+  const getSave = async () => {
+    console.log("insude here");
+    try {
+      console.log("insude here");
+      // Your server endpoint where you want to send the data
+      const endpoint = `http://localhost:8080/design-inspiration`;
+
+      // Assuming your server expects a POST request with a JSON payload
+      const response = await fetch(
+        `http://localhost:8080/design-inspiration-user`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: "kwonbetty@gmail.com",
+          }),
+        }
+      );
+      const data = await response.json();
+      setImageUrls(data);
+
+      // Handle the server response as needed
+      console.log("Server response:", imageUrls);
+    } catch (error) {
+      // Handle errors
+      console.error("Error submitting data:", error);
+    }
+  };
   return (
     <section className="2xl:max-container relative flex flex-col pb-10 lg:mb-10 lg:pb-0 xl:mb-10">
       <div className="hide-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]">
@@ -28,6 +66,17 @@ const Intro = () => {
             and preferences 🏡✨
           </p>
         </div>
+
+        <button onClick={getSave}>retrieve</button>
+        {imageUrls.map((image, index) => (
+          <Image
+            key={index}
+            src={image["url"]}
+            alt={`Image ${index}`}
+            width={300}
+            height={300}
+          />
+        ))}
       </div>
     </section>
   );

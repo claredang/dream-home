@@ -15,7 +15,7 @@ export const LoginForm = () => {
   const [error, setError] = useState(""); // State for handling errors during authentication.
 
   const searchParams = useSearchParams(); // Get query parameters from the URL.
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile"; // Define a callback URL or use a default one.
+  const callbackUrl = searchParams.get("callbackUrl") || "/explore"; // Define a callback URL or use a default one.
 
   // Handle form submission
   const onSubmit = async (e: React.FormEvent) => {
