@@ -1,8 +1,10 @@
 "use client";
 import QuizResultCard from "./QuizResultCard";
 import PinterestLayout from "@/app/_components/PinterestLayout";
+import Modal from "@/app/_components/Modal";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface ResultItem {
   [key: string]: string;
@@ -67,6 +69,16 @@ export default function QuizResult({ result }: QuizResultProps) {
         <button className="btn-yellow">
           <Link href="/explore">Explore Style</Link>
         </button>
+        <p>Want to save your result? </p>
+        <button>Login</button>
+        <Link href="?modal=true">
+          <button type="button" className="bg-blue-500 text-white p-2">
+            Open Modal
+          </button>
+        </Link>
+        <Suspense fallback={<>Loading...</>}>
+          <Modal />
+        </Suspense>
       </div>
 
       <div className="w-full sm:w-1/2">
