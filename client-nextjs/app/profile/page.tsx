@@ -1,31 +1,46 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../app/lib/auth";
 import Navbar from "../_components/Navbar";
+import { useState, useEffect } from "react";
+import Save from "./getsave";
 
 export default async function Profile() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  //   const [imageUrls, setImageUrls] = useState([]);
 
-  const getSave = () => {
-    // try {
-    //   console.log("insude here");
-    //   // Your server endpoint where you want to send the data
-    //   const endpoint = `http://localhost:8080/design-inspiration`;
-    //   // Assuming your server expects a POST request with a JSON payload
-    //   const response = await fetch(`http://localhost:8080/design-inspiration`, {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       email: "kwonbetty@gmail.com",
-    //     }),
-    //   });
-    //   const data = await response.json();
-    //   // Handle the server response as needed
-    //   console.log("Server response:", data);
-    // } catch (error) {
-    //   // Handle errors
-    //   console.error("Error submitting data:", error);
-    // }
+  //   useEffect(() => {
+  //     // Fetch data when component mounts
+  //     getSave();
+  //   }, []);
+
+  const getSave = async () => {
+    console.log("insude here", user);
+    try {
+      console.log("insude here");
+      // Your server endpoint where you want to send the data
+      const endpoint = `http://localhost:8080/design-inspiration`;
+
+      // Assuming your server expects a POST request with a JSON payload
+      const response = await fetch(
+        `http://localhost:8080/design-inspiration-user`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: "kwonbetty@gmail.com",
+          }),
+        }
+      );
+      const data = await response.json();
+      //   setImageUrls(data);
+
+      //   // Handle the server response as needed
+      //   console.log("Server response:", imageUrls);
+    } catch (error) {
+      // Handle errors
+      console.error("Error submitting data:", error);
+    }
   };
 
   return (
@@ -52,6 +67,8 @@ export default async function Profile() {
                   <p className="mb-3">Name: {user.name}</p>
                   {/* <button onClick={getSave}>retrieve</button> */}
                 </div>
+                <Save email={user} />
+                <button>hello</button>
               </div>
             )}
           </div>

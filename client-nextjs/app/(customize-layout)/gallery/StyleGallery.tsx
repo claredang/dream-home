@@ -20,6 +20,32 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   onClick,
 }) => {
   const [selected, setSelected] = useState(false);
+  const getSave = async () => {
+    console.log("insude here");
+    try {
+      console.log("insude here");
+      // Your server endpoint where you want to send the data
+
+      // Assuming your server expects a POST request with a JSON payload
+      const response = await fetch(`http://localhost:8080/design-inspiration`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "kwonbetty@gmail.com",
+          image_id: _id,
+        }),
+      });
+      const data = await response.json();
+      // setImageUrls(data);
+
+      // Handle the server response as needed
+      console.log("Server response:", data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error submitting data:", error);
+    }
+  };
+
   const handleClick = () => {
     // Call the onClick callback with the name when the image is clicked
     if (onClick) {
@@ -27,6 +53,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
       onClick(_id);
       // setSelected((prevSelected) => !prevSelected);
     }
+    getSave();
   };
 
   return (
