@@ -113,7 +113,7 @@ export const LoginForm = () => {
         </a>
 
         <a
-          className="px-7 py-2 text-gray-700 border-[1px] border-gray-300 bg-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+          className="px-7 py-2 text-gray-50 border-[1px] border-gray-300 bg-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
           onClick={() => signIn("facebook", { callbackUrl })}
           role="button"
         >
