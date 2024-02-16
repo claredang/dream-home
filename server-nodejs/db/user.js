@@ -39,7 +39,9 @@ module.exports = {
       .toArray();
     return cursor;
   },
-  addUserSave: async function (user, image_id) {
+
+  /// ========== Inspiration user_save collection ==========
+  saveToBoard: async function (user, image_id) {
     const _db = client.db("homestay");
     const coll = _db.collection("user_save");
     const entry = {
@@ -47,6 +49,18 @@ module.exports = {
       image_id: new ObjectId(image_id),
     };
     const cursor = await coll.insertOne(entry);
+    return cursor;
+  },
+
+  unsaveFromBoard: async function (user, image_id) {
+    const _db = client.db("homestay");
+    const coll = _db.collection("user_save");
+    const query = {
+      $and: [{ user_email: user }, { image_id: new ObjectId(image_id) }],
+    };
+    const cursor2 = await coll.find(query).toArray();
+    console.log("find query: ", cursor2);
+    const cursor = await coll.deleteMany(query);
     return cursor;
   },
 };

@@ -18,10 +18,17 @@ recordRoutes.route("/design-inspiration-user").post(async function (req, res) {
 
 recordRoutes.route("/design-inspiration").post(async function (req, res) {
   const { email, image_id } = req.body;
-  console.log("req:", email, image_id);
-  const cursor = dbo.addUserSave(email, image_id);
+  console.log("add to board route:", email, image_id);
+  const cursor = dbo.saveToBoard(email, image_id);
   var results = await cursor;
-  console.log("inside here");
+  res.json(results).status(200);
+});
+
+recordRoutes.route("/design-inspiration").delete(async function (req, res) {
+  const { email, image_id } = req.body;
+  console.log("delete from board route", email, image_id);
+  const cursor = dbo.unsaveFromBoard(email, image_id);
+  var results = await cursor;
   res.json(results).status(200);
 });
 
