@@ -2,6 +2,7 @@
 import Navbar from "../_components/Navbar";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import UserBoard from "./userBoard";
 
 export default function Save({ email }) {
   const [imageUrls, setImageUrls] = useState([]);
@@ -45,19 +46,7 @@ export default function Save({ email }) {
 
   return (
     <>
-      <p>hello world</p>
-      {imageUrls.map((image, index) => (
-        <div>
-          <Image
-            key={index}
-            src={image}
-            alt={`Image ${index}`}
-            width={300}
-            height={300}
-          />
-          <p>{image}</p>
-        </div>
-      ))}
+      <UserBoard images={imageUrls} isLoop={true} />
     </>
   );
 }

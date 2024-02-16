@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 const Navbar = () => {
   const { data: session } = useSession();
   const user = session?.user;
-  // const router = useRouter(); // Add this line
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -79,7 +78,7 @@ const Navbar = () => {
         </ul>
         {!user && (
           <>
-            <Link href="/login" className="text-ct-dark-600">
+            <Link href="/login" className="btn-yellow">
               Login
             </Link>
           </>
@@ -87,24 +86,19 @@ const Navbar = () => {
         {user && (
           <>
             <Link href="/profile" className="text-ct-dark-600">
-              Profile
+              MY BOARD
             </Link>
             <button
-              className="cursor-pointer"
+              className="cursor-pointer btn-yellow"
               onClick={() => {
                 signOut({ callbackUrl: "http://localhost:3000" });
               }}
-              // onClick={async () => {
-              //   await signOut();
-              //   // router.push("/"); // Redirect to homepage after sign out
-              // }}
             >
               Logout
             </button>
           </>
         )}
       </nav>
-      {/* </SessionProvider> */}
     </div>
   );
 };

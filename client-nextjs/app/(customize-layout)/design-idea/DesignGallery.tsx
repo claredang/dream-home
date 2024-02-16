@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Image from "next/image";
 import { CiBookmark } from "react-icons/ci";
+import { signOut, useSession } from "next-auth/react";
+import Modal from "@/app/_components/Modal";
+
+import Link from "next/link";
 
 interface StyleGalleryProps {
   _id: string;
@@ -22,6 +26,11 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   onClick,
 }) => {
   const [selected, setSelected] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const { data: session } = useSession();
+  const user = session?.user;
+  //   console.log("user email: ", user);
+  console.log("open modal:", showModal);
   const saveToBoard = async () => {
     try {
       const response = await fetch(`http://localhost:8080/design-inspiration`, {
@@ -59,11 +68,19 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
 
   const handleClick = () => {
     if (onClick) {
-      setSelected((prevSelected) => !prevSelected);
-      onClick(_id);
+      if (user) {
+        setSelected((prevSelected) => !prevSelected);
+        onClick(_id);
+      } else {
+        console.log("not user");
+        setShowModal(true);
+        console.log("open modal:", showModal);
+      }
     }
     if (!selected) {
-      saveToBoard();
+      if (user) {
+        saveToBoard();
+      }
     } else {
       unsaveFromBoard();
     }
@@ -98,6 +115,11 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
             </div>
           </button>
         </div>
+        {showModal && (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Modal />
+          </Suspense>
+        )}
       </div>
     </React.Fragment>
   );

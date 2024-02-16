@@ -37,7 +37,7 @@ body {
 
 @layer utilities {
   .btn-yellow {
-    @apply border-transparent border-[1px] border-yellow-200 bg-slate-50 text-blue-100 font-bold px-8 py-3 rounded-2xl hover:bg-yellow-100 hover:border-slate-300 shadow-md;
+    @apply border-transparent border-[1px] border-yellow-200 bg-slate-50 text-blue-100 font-bold px-8 py-1 rounded-2xl hover:bg-yellow-100 hover:border-slate-300 shadow-md;
   }
   .btn_black {
     @apply border-black bg-black px-2 py-2 text-white;

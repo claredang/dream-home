@@ -6,10 +6,15 @@ import Save from "./getsave";
 import Link from "next/link";
 import { Suspense } from "react";
 import Modal from "@/app/_components/Modal";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Dropdown from "../_components/Dropdown";
 
 export default async function Profile() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  //   const { data: session } = useSession();
+  //   const user = session?.user;
   //   const [imageUrls, setImageUrls] = useState([]);
 
   //   useEffect(() => {
@@ -48,41 +53,50 @@ export default async function Profile() {
 
   return (
     <>
-      <section className="bg-ct-blue-600  min-h-screen pt-20">
+      <section className="">
         {/* <Navbar /> */}
-        <div className="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
+        <div className="">
           <div>
-            <p className="mb-3 text-5xl text-center font-semibold">
-              Profile Page
-            </p>
             {!user ? (
               <div>
-                <p>Loading...</p>
-                <p>Want to save your result? </p>
+                <p>Get Inspired!</p>
+                <p>Save inspiration and products. </p>
                 <button>Login</button>
-                <Link href="?modal=true">
-                  <button type="button" className="bg-blue-500 text-white p-2">
-                    Open Modal
-                  </button>
+                <Link href="/login">
+                  {/* <button type="button" className="bg-blue-500 text-white p-2"> */}
+                  Login
+                  {/* </button> */}
                 </Link>
-                <Suspense fallback={<>Loading...</>}>
+                {/* <Suspense fallback={<>Loading...</>}>
                   <Modal />
-                </Suspense>
+                </Suspense> */}
               </div>
             ) : (
-              <div className="flex flex-col items-center gap-8">
-                <div>
+              <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12 ">
+                {/* <div className="lg:w-1/2 xs:w-full flex-col items-center justify-between p-6 ml-5 bg-yellow-100">
+                  <div className="relative h-[400px]">
+                    <Image
+                      src={`/house-3.jpg`}
+                      alt="bg-cover"
+                      fill
+                      className="rounded-xl"
+                    />
+                  </div>
+                </div> */}
+                {/* <p>hello there</p> */}
+
+                <div className="w-full sm:w-1/2">
+                  <Save email={user} />
+                </div>
+
+                {/* <div>
                   <img
                     src={user.image ? user.image : "/images/default.png"}
                     className="max-h-36"
                     alt={`profile photo of ${user.name}`}
                   />
                 </div>
-                <div className="mt-8">
-                  <p className="mb-3">Name: {user.name}</p>
-                  {/* <button onClick={getSave}>retrieve</button> */}
-                </div>
-                <Save email={user} />
+               */}
               </div>
             )}
           </div>
