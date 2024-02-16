@@ -3,6 +3,9 @@ import { authOptions } from "../../app/lib/auth";
 import Navbar from "../_components/Navbar";
 import { useState, useEffect } from "react";
 import Save from "./getsave";
+import Link from "next/link";
+import { Suspense } from "react";
+import Modal from "@/app/_components/Modal";
 
 export default async function Profile() {
   const session = await getServerSession(authOptions);
@@ -53,9 +56,21 @@ export default async function Profile() {
               Profile Page
             </p>
             {!user ? (
-              <p>Loading...</p>
+              <div>
+                <p>Loading...</p>
+                <p>Want to save your result? </p>
+                <button>Login</button>
+                <Link href="?modal=true">
+                  <button type="button" className="bg-blue-500 text-white p-2">
+                    Open Modal
+                  </button>
+                </Link>
+                <Suspense fallback={<>Loading...</>}>
+                  <Modal />
+                </Suspense>
+              </div>
             ) : (
-              <div className="flex items-center gap-8">
+              <div className="flex flex-col items-center gap-8">
                 <div>
                   <img
                     src={user.image ? user.image : "/images/default.png"}
@@ -68,7 +83,6 @@ export default async function Profile() {
                   {/* <button onClick={getSave}>retrieve</button> */}
                 </div>
                 <Save email={user} />
-                <button>hello</button>
               </div>
             )}
           </div>

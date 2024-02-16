@@ -69,16 +69,6 @@ export default function QuizResult({ result }: QuizResultProps) {
         <button className="btn-yellow">
           <Link href="/explore">Explore Style</Link>
         </button>
-        <p>Want to save your result? </p>
-        <button>Login</button>
-        <Link href="?modal=true">
-          <button type="button" className="bg-blue-500 text-white p-2">
-            Open Modal
-          </button>
-        </Link>
-        <Suspense fallback={<>Loading...</>}>
-          <Modal />
-        </Suspense>
       </div>
 
       <div className="w-full sm:w-1/2">

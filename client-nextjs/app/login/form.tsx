@@ -1,69 +1,63 @@
-"use client"; // Indicates that this module is client-side code.
+"use client";
 
-import { signIn } from "next-auth/react"; // Import the signIn function from NextAuth for authentication.
+import { signIn } from "next-auth/react"; //
 import Image from "next/image";
-import { useSearchParams, useRouter } from "next/navigation"; // Import Next.js navigation utilities.
-import { ChangeEvent, useState } from "react"; // Import React hooks for managing component state.
+import { useSearchParams, useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
 
 export const LoginForm = () => {
-  const router = useRouter(); // Initialize the Next.js router.
-  const [loading, setLoading] = useState(false); // State for managing loading state.
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
-  }); // State for form input values.
-  const [error, setError] = useState(""); // State for handling errors during authentication.
+  });
+  const [error, setError] = useState("");
 
-  const searchParams = useSearchParams(); // Get query parameters from the URL.
+  const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/profile"; // Define a callback URL or use a default one.
 
-  // Handle form submission
   const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent the default form submission behavior.
+    e.preventDefault();
     try {
-      setLoading(true); // Set loading state to true.
-      setFormValues({ email: "", password: "" }); // Clear form input values.
+      setLoading(true);
+      setFormValues({ email: "", password: "" });
 
-      // Attempt to sign in using the credentials (email and password).
       const res = await signIn("credentials", {
         redirect: false,
         email: formValues.email,
         password: formValues.password,
         callbackUrl,
       });
+      setLoading(false);
+      console.log(res);
 
-      setLoading(false); // Set loading state back to false.
-
-      console.log(res); // Log the authentication response.
       if (!res?.error) {
-        router.push(callbackUrl); // Redirect to the callback URL on successful authentication.
+        router.push(callbackUrl);
       } else {
-        setError("invalid email or password"); // Set an error message for invalid credentials.
+        setError("invalid email or password");
       }
     } catch (error: any) {
-      setLoading(false); // Set loading state back to false on error.
-      setError(error); // Set the error message for any other errors.
+      setLoading(false);
+      setError(error);
     }
   };
 
-  // Handle input field changes
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value }); // Update the form input values.
+    setFormValues({ ...formValues, [name]: value });
   };
 
-  // Define a CSS class for form inputs.
   const input_style =
     "form-control block w-full px-4 py-5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none";
 
   return (
-    <form onSubmit={onSubmit} className="bg-slate-200">
+    <form onSubmit={onSubmit} className="">
       {error && (
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
 
       <div className="">
-        {/* Email input field */}
         <div className="mb-6">
           <input
             required
@@ -76,7 +70,6 @@ export const LoginForm = () => {
           />
         </div>
 
-        {/* Password input field */}
         <div className="mb-6">
           <input
             required
@@ -99,20 +92,19 @@ export const LoginForm = () => {
           {loading ? "loading..." : "Sign In"}
         </button>
 
-        {/* OR divider */}
         <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
           <p className="text-center font-semibold mx-4 mb-0">OR</p>
         </div>
 
         {/* Sign In with Google button */}
         <a
-          className="px-7 py-2 text-white bg-red-700 font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+          className="px-7 py-2 text-gray-50 border-[1px] border-gray-300 bg-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
           onClick={() => signIn("google", { callbackUrl })}
           role="button"
         >
           <Image
             className="pr-2"
-            src="/images/google.svg"
+            src="google.svg"
             alt="google logo"
             height={32}
             width={32}
@@ -120,10 +112,8 @@ export const LoginForm = () => {
           Continue with Google
         </a>
 
-        {/* Sign In with GitHub button */}
         <a
-          className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-          style={{ backgroundColor: "#5A67D8" }}
+          className="px-7 py-2 text-gray-700 border-[1px] border-gray-300 bg-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
           onClick={() => signIn("facebook", { callbackUrl })}
           role="button"
         >
@@ -135,21 +125,6 @@ export const LoginForm = () => {
             width={32}
           />
           Continue with Facebook
-        </a>
-        <a
-          className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center"
-          style={{ backgroundColor: "#000000" }}
-          onClick={() => signIn("github", { callbackUrl })}
-          role="button"
-        >
-          <Image
-            className="pr-2"
-            src="/images/github.png"
-            alt="github logo"
-            height={32}
-            width={32}
-          />
-          Continue with GitHub
         </a>
       </div>
     </form>

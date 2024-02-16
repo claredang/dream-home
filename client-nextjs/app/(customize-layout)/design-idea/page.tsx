@@ -1,21 +1,19 @@
 "use client";
-import StyleGallery from "../gallery/StyleGallery";
+import StyleGallery from "./DesignGallery";
 import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Masonry from "react-responsive-masonry";
+import { CiBookmark } from "react-icons/ci";
+import { signOut, useSession } from "next-auth/react";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
-  //   const res = await fetch(
-  //     `https://pokeapi.co/api/v2/ability?limit=20&offset=${pageParam}`
-  //   );
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER}/api/style?limit=20&offset=${pageParam}`
   );
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
@@ -35,6 +33,8 @@ async function getStyleGallery({ pageParam }: { pageParam: number }) {
 }
 
 export default function Inspiration() {
+  const { data: session } = useSession();
+  const user = session?.user;
   const { ref, inView } = useInView();
 
   const {
@@ -81,22 +81,18 @@ export default function Inspiration() {
     .filter((style) => selectedIds.includes(style._id))
     .map((style) => style.style);
 
-  const [quizResultData, setQuizResult] = useState({
-    resultFinal: null,
-  });
-
   return (
     <main className="p-2">
-      <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
-        <div className="lg:w-1/2 md:w-1/3 xs:w-full flex-col items-center justify-between p-6 ml-5">
-          <p className="regular-40 mb-4">
-            Select the rooms that make you swoon.
-          </p>
-          <p className="regular-18">
-            Decisions are hard. Pick as many as you want!
-          </p>
-        </div>
-        <div className="w-full md:w-2/3 sm:w-1/2 relative">
+      <div className="flex flex-col lg:py-10 lg:px-12">
+        <p className="regular-32 mb-4">
+          Interior Design Ideas To Inspire Every Room In Your Home
+        </p>
+        <p className="lg:w-1/2 w-full regular-16 mb-6">
+          Browse a selection of interior design ideas and modern layouts that
+          will inspire every inch of your home - from the dining room and
+          bedroom to the patio.
+        </p>
+        <div className="w-full relative">
           <Masonry columnsCount={3} gutter="10px">
             {pokemons?.pages?.map((page) =>
               page.map(
@@ -109,20 +105,24 @@ export default function Inspiration() {
                 ) => {
                   if (page.length === index + 1) {
                     return (
-                      <StyleGallery
-                        _id={style._id}
-                        image={style.url}
-                        name={style.style}
-                        key={index}
-                        index={index}
-                        innerRef={ref}
-                        onClick={handleImageClick}
-                      />
+                      <div>
+                        <StyleGallery
+                          _id={style._id}
+                          email={user?.email}
+                          image={style.url}
+                          name={style.style}
+                          key={index}
+                          index={index}
+                          innerRef={ref}
+                          onClick={handleImageClick}
+                        />
+                      </div>
                     );
                   } else {
                     return (
                       <StyleGallery
                         _id={style._id}
+                        email={user?.email}
                         image={style.url}
                         name={style.style}
                         key={index}

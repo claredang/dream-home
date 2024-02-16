@@ -15,6 +15,11 @@ export const NAV_LINKS = [
     key: "explore",
     label: "Explore",
   },
+  {
+    href: "/design-idea",
+    key: "design-idea",
+    label: "Inspiration",
+  },
 ];
 
 // CAMP SECTION

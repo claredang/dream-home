@@ -14,7 +14,7 @@ export default function Save({ email }) {
 
   const getSave = async () => {
     try {
-      console.log("insude here");
+      console.log("inside getsave");
       // Your server endpoint where you want to send the data
       const endpoint = `http://localhost:8080/design-inspiration`;
 
