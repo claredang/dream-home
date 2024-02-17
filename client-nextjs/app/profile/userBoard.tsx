@@ -59,25 +59,18 @@ function UserBoard({ isLoop = false, images = [], getSave }: UserBoardProps) {
                 objectFit: "cover",
               }}
             />
-            {hoveredIndex === index && (
-              <div style={{ position: "absolute", top: 0, left: 0 }}>
-                <Dropdown
-                  options={[
-                    {
-                      text: "Save Image",
-                      //   onClick: () => unsaveFromBoard(_id),
-                      onClick: () => console.log("save image clicked"),
-                    },
-                    {
-                      text: "Delete Image",
-                      onClick: () => unsaveFromBoard(_id),
-                    },
-                  ]}
-                  icon={<CiBookmark />} // Provide your custom icon component here
-                  buttonText="Options" // Provide custom button text here
-                />
-              </div>
-            )}
+            {/* {hoveredIndex === index && ( */}
+            <div style={{ position: "absolute", top: 0, right: 2 }}>
+              <Dropdown
+                options={[
+                  {
+                    text: "Unsave",
+                    onClick: () => unsaveFromBoard(_id),
+                  },
+                ]}
+              />
+            </div>
+            {/* )} */}
           </div>
         ))}
       </Masonry>
