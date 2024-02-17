@@ -11,6 +11,7 @@ export default function Save({ email }) {
     // Fetch data when component mounts
     getSave();
   }, []);
+
   console.log("email: ", email.email);
 
   const getSave = async () => {
@@ -31,13 +32,19 @@ export default function Save({ email }) {
         }
       );
       const data = await response.json();
+
       const urls = data
         .filter((arr) => arr.length > 0) // Filter out empty arrays
-        .flatMap((arr) => arr.map((obj) => obj.url)); // Extract URLs
+        // .flatMap((arr) => arr.map((obj) => obj.url)); // Extract URLs
+        .flatMap((arr) =>
+          arr.map((item) => ({ url: item.url, _id: item._id }))
+        ); //
       setImageUrls(urls);
 
       // Handle the server response as needed
       console.log("Server response:", data);
+      console.log("url:", urls);
+      //   getSave();
     } catch (error) {
       // Handle errors
       console.error("Error submitting data:", error);
@@ -46,7 +53,7 @@ export default function Save({ email }) {
 
   return (
     <>
-      <UserBoard images={imageUrls} isLoop={true} />
+      <UserBoard images={imageUrls} isLoop={true} getSave={getSave} />
     </>
   );
 }

@@ -8,28 +8,29 @@ import { signOut, useSession } from "next-auth/react";
 
 interface UserBoardProps {
   isLoop?: boolean;
-  images?: string[];
+  images?: { url: string; _id: string }[];
 }
 
-function UserBoard({ isLoop = false, images = [] }: UserBoardProps) {
+function UserBoard({ isLoop = false, images = [], getSave }: UserBoardProps) {
   const imageUrls = images.flat();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { data: session } = useSession();
   const email = session?.user?.email;
 
-  const unsaveFromBoard = async () => {
+  const unsaveFromBoard = async (_id) => {
     try {
       const response = await fetch(`http://localhost:8080/design-inspiration`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email,
-          //   image_id: _id,
+          image_id: _id,
         }),
       });
       const data = await response.json();
 
       console.log("Server response:", data);
+      getSave();
     } catch (error) {
       console.error("Error submitting data:", error);
     }
@@ -38,7 +39,7 @@ function UserBoard({ isLoop = false, images = [] }: UserBoardProps) {
   return (
     <div>
       <Masonry columnsCount={3} gutter="4px">
-        {imageUrls.map((image, index) => (
+        {images.map(({ url, _id }, index) => (
           <div
             key={index}
             style={{
@@ -50,7 +51,7 @@ function UserBoard({ isLoop = false, images = [] }: UserBoardProps) {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <img
-              src={image}
+              src={url}
               alt="he"
               style={{
                 width: "100%",
@@ -64,11 +65,12 @@ function UserBoard({ isLoop = false, images = [] }: UserBoardProps) {
                   options={[
                     {
                       text: "Save Image",
-                      onClick: () => console.log("Save image clicked"),
+                      //   onClick: () => unsaveFromBoard(_id),
+                      onClick: () => console.log("save image clicked"),
                     },
                     {
                       text: "Delete Image",
-                      onClick: () => console.log("Delete image clicked"),
+                      onClick: () => unsaveFromBoard(_id),
                     },
                   ]}
                   icon={<CiBookmark />} // Provide your custom icon component here
