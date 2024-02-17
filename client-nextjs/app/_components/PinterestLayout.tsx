@@ -34,7 +34,6 @@ function PinterestLayout({
                 objectFit: "cover",
               }}
             />
-            <Dropdown />
           </div>
         ))}
       </Masonry>

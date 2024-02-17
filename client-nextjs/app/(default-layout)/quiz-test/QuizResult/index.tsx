@@ -67,7 +67,7 @@ export default function QuizResult({ result }: QuizResultProps) {
           <Link href="/quiz-test">Do Quiz Again</Link>
         </button>
         <button className="btn-yellow">
-          <Link href="/explore">Explore Style</Link>
+          <Link href="/design-idea">Explore Style</Link>
         </button>
       </div>
 

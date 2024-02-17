@@ -88,6 +88,13 @@ const Navbar = () => {
             <Link href="/profile" className="text-ct-dark-600">
               MY BOARD
             </Link>
+            {/* <div>
+              <img
+                src={user.image ? user.image : "/images/default.png"}
+                className="max-h-36"
+                alt={`profile photo of ${user.name}`}
+              />
+            </div> */}
             <button
               className="cursor-pointer btn-yellow"
               onClick={() => {

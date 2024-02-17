@@ -43,7 +43,8 @@ function UserBoard({ isLoop = false, images = [], getSave }: UserBoardProps) {
           <div
             key={index}
             style={{
-              height: index % 2 ? "200px" : "250px",
+              // width: index % 2 ? "200px" : "250px",
+              // height: index % 2 ? "200px" : "250px",
               margin: "1px",
               position: "relative",
             }}

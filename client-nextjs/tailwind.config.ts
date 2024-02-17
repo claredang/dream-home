@@ -33,6 +33,7 @@ module.exports = {
         },
         beige: {
           50: "#F3F0EB",
+          70: "#f5e8dd",
         },
       },
       backgroundImage: {
