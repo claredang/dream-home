@@ -19,8 +19,7 @@ function LoadMore() {
   useEffect(() => {
     if (inView) {
       setIsLoading(true);
-      // Add a delay of 500 milliseconds
-      const delay = 500;
+      const delay = 500; // 500 milliseconds
 
       const timeoutId = setTimeout(() => {
         fetchExploreImage(page).then((res) => {

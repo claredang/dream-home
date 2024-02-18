@@ -1,13 +1,10 @@
 "use client";
 import StyleGallery from "./DesignGallery";
-import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Masonry from "react-responsive-masonry";
-import { CiBookmark } from "react-icons/ci";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
   const res = await fetch(
@@ -61,25 +58,15 @@ export default function Inspiration() {
     }
   }, [inView, fetchNextPage, hasNextPage]);
 
-  // State to track selected image names
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  // Callback function to handle image click
   const handleImageClick = (_id: string) => {
-    // Check if the _id is already in the array
     if (selectedIds.includes(_id)) {
-      // Remove the _id from the array
       setSelectedIds((prevSelected) => prevSelected.filter((id) => id !== _id));
     } else {
-      // Add the _id to the array
       setSelectedIds((prevSelected) => [...prevSelected, _id]);
     }
   };
-  // Filter out names based on selected _ids
-  const selectedNames = pokemons?.pages
-    ?.flat()
-    .filter((style) => selectedIds.includes(style._id))
-    .map((style) => style.style);
 
   return (
     <main className="p-2">

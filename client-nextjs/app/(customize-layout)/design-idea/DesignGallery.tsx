@@ -1,10 +1,7 @@
 import React, { useState, Suspense } from "react";
-import Image from "next/image";
-import { CiBookmark } from "react-icons/ci";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Modal from "@/app/_components/Modal";
-
-import Link from "next/link";
+import { CiBookmark } from "react-icons/ci";
 
 interface StyleGalleryProps {
   _id: string;
@@ -29,8 +26,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   const [showModal, setShowModal] = useState(false);
   const { data: session } = useSession();
   const user = session?.user;
-  //   console.log("user email: ", user);
-  console.log("open modal:", showModal);
+
   const saveToBoard = async () => {
     try {
       const response = await fetch(`http://localhost:8080/design-inspiration`, {
@@ -59,7 +55,6 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
         }),
       });
       const data = await response.json();
-
       console.log("Server response:", data);
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -72,9 +67,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
         setSelected((prevSelected) => !prevSelected);
         onClick(_id);
       } else {
-        console.log("not user");
         setShowModal(true);
-        console.log("open modal:", showModal);
       }
     }
     if (!selected) {
@@ -84,6 +77,14 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
     } else {
       unsaveFromBoard();
     }
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -117,7 +118,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
         </div>
         {showModal && (
           <Suspense fallback={<div>Loading...</div>}>
-            <Modal />
+            <Modal isOpen={showModal} onClose={closeModal}></Modal>
           </Suspense>
         )}
       </div>

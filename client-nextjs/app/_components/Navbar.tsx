@@ -19,7 +19,6 @@ const Navbar = () => {
 
   return (
     <div className="mb-10 xs:mb-[60px]">
-      {/* <SessionProvider session={session}> */}
       <nav className="flexBetween max-container padding-container fixed top-0 w-full bg-white z-30 py-5 shadow-md ring-1 ring-slate-900/5">
         <Link href="/">
           <Image
@@ -47,20 +46,22 @@ const Navbar = () => {
 
           {/* Dropdown menu for small screens */}
           {isOpen && (
-            <ul className="absolute top-16 left-0 bg-slate-200 w-full text-center py-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.key}>
-                  <Link
-                    href={link.href}
-                    key={link.key}
-                    onClick={() => setIsOpen(false)}
-                    className="block py-2 text-gray-50 font-semibold transition-all hover:font-bold"
-                  >
-                    {link.label.toUpperCase()}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <ul className="absolute top-16 left-0 bg-slate-200 w-full text-center py-2">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.key}>
+                    <Link
+                      href={link.href}
+                      key={link.key}
+                      onClick={() => setIsOpen(false)}
+                      className="block py-2 text-gray-50 font-semibold transition-all hover:font-bold"
+                    >
+                      {link.label.toUpperCase()}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
 

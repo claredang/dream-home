@@ -32,6 +32,13 @@ export default async function Profile() {
                       className="text-ct-dark-600 underline"
                     >
                       Let find out Your Style!
+                    </Link>{" "}
+                    or{" "}
+                    <Link
+                      href="/design-idea"
+                      className="text-ct-dark-600 underline"
+                    >
+                      Get some inspiration
                     </Link>
                   </p>
                 </div>
