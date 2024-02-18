@@ -17,16 +17,10 @@ module.exports = {
     const coll2 = _db.collection("style_gallery");
     const cursor = await coll.find({ user_email: email }).toArray();
     let result = [];
-    console.log("cursor: ", cursor);
-    for (let doc of cursor) {
-      // Extract image_id from the current document
-      const imageId = doc.image_id;
-      console.log("image id: ", doc.image_id);
-      // Perform another query using the extracted image_id
-      const imageCursor = await coll2.find({ _id: imageId }).toArray();
 
-      // Now you can work with the results in imageCursor
-      console.log("yay: ", imageCursor);
+    for (let doc of cursor) {
+      const imageId = doc.image_id;
+      const imageCursor = await coll2.find({ _id: imageId }).toArray();
       result.push(imageCursor);
     }
     return result;
@@ -58,8 +52,6 @@ module.exports = {
     const query = {
       $and: [{ user_email: user }, { image_id: new ObjectId(image_id) }],
     };
-    const cursor2 = await coll.find(query).toArray();
-    console.log("find query: ", cursor2);
     const cursor = await coll.deleteMany(query);
     return cursor;
   },

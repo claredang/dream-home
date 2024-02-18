@@ -7,9 +7,7 @@ const dbo = require("../db/user");
 // POST
 recordRoutes.route("/design-inspiration-user").post(async function (req, res) {
   const { email } = req.body;
-  console.log("email: ", email);
   const cursor = dbo.getUserImageSave(email);
-  //   const cursor2 = dbo.getImage();
   var results = await cursor;
   res.json(results).status(200);
 });
