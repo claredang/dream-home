@@ -1,13 +1,11 @@
 "use client";
 import StyleGallery from "./StyleGallery";
-import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import QuizResult from "../../(default-layout)/quiz-test/QuizResult";
 import Masonry from "react-responsive-masonry";
-import "./styles.module.css";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
   const res = await fetch(

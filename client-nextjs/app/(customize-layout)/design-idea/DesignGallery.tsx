@@ -29,14 +29,17 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
 
   const saveToBoard = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/design-inspiration`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          image_id: _id,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            image_id: _id,
+          }),
+        }
+      );
       const data = await response.json();
       console.log("Server response:", data);
     } catch (error) {
@@ -46,14 +49,17 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
 
   const unsaveFromBoard = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/design-inspiration`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          image_id: _id,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            image_id: _id,
+          }),
+        }
+      );
       const data = await response.json();
       console.log("Server response:", data);
     } catch (error) {
@@ -88,41 +94,39 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   };
 
   return (
-    <React.Fragment>
-      <div className="" ref={innerRef} onClick={handleClick}>
-        <div
+    <div className="" ref={innerRef} onClick={handleClick}>
+      <div
+        style={{
+          position: "relative",
+          height: index % 2 ? "200px" : "250px",
+          margin: "2px",
+        }}
+      >
+        <img
+          src={image}
+          alt={name}
           style={{
-            position: "relative",
-            height: index % 2 ? "200px" : "250px",
-            margin: "2px",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
           }}
-        >
-          <img
-            src={image}
-            alt={name}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          <button className="absolute top-0 right-2 p-2 cursor-pointer">
-            <div
-              className={`w-6 h-6 rounded-full overflow-hidden flex justify-center items-center ${
-                selected ? "bg-red-300" : "bg-white"
-              }`}
-            >
-              <CiBookmark />
-            </div>
-          </button>
-        </div>
-        {showModal && (
-          <Suspense fallback={<div>Loading...</div>}>
-            <LoginModal isOpen={showModal} onClose={closeModal}></LoginModal>
-          </Suspense>
-        )}
+        />
+        <button className="absolute top-0 right-2 p-2 cursor-pointer">
+          <div
+            className={`w-6 h-6 rounded-full overflow-hidden flex justify-center items-center ${
+              selected ? "bg-red-300" : "bg-white"
+            }`}
+          >
+            <CiBookmark />
+          </div>
+        </button>
       </div>
-    </React.Fragment>
+      {showModal && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <LoginModal isOpen={showModal} onClose={closeModal}></LoginModal>
+        </Suspense>
+      )}
+    </div>
   );
 };
 

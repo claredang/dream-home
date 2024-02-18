@@ -1,9 +1,6 @@
-"use client";
 import Image from "next/image";
 
 import { MotionDiv } from "../../_components/Motion";
-
-import { CiBookmark } from "react-icons/ci";
 
 const stagger = 0.25;
 
@@ -28,32 +25,6 @@ interface Prop {
 }
 
 function ExploreCard({ explore, index }: Prop) {
-  console.log("image url: ", explore._id);
-  const getSave = async () => {
-    console.log("insude here");
-    try {
-      console.log("insude here");
-      // Your server endpoint where you want to send the data
-
-      // Assuming your server expects a POST request with a JSON payload
-      const response = await fetch(`http://localhost:8080/design-inspiration`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: "kwonbetty@gmail.com",
-          image_url: explore._id,
-        }),
-      });
-      const data = await response.json();
-      // setImageUrls(data);
-
-      // Handle the server response as needed
-      console.log("Server response:", data);
-    } catch (error) {
-      // Handle errors
-      console.error("Error submitting data:", error);
-    }
-  };
   return (
     <MotionDiv
       variants={variants}
@@ -92,9 +63,6 @@ function ExploreCard({ explore, index }: Prop) {
           <p>{explore.location}</p>
           <p className="text-black">{explore.price}</p>
         </div>
-        <button onClick={getSave}>
-          <CiBookmark />
-        </button>
       </div>
     </MotionDiv>
   );
