@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from "react";
 import { useSession } from "next-auth/react";
-import Modal from "@/app/_components/Modal";
+import LoginModal from "@/app/_components/LoginModal";
 import { CiBookmark } from "react-icons/ci";
 
 interface StyleGalleryProps {
@@ -118,7 +118,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
         </div>
         {showModal && (
           <Suspense fallback={<div>Loading...</div>}>
-            <Modal isOpen={showModal} onClose={closeModal}></Modal>
+            <LoginModal isOpen={showModal} onClose={closeModal}></LoginModal>
           </Suspense>
         )}
       </div>

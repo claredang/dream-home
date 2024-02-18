@@ -1,7 +1,7 @@
 "use client";
 import QuizResultCard from "./QuizResultCard";
 import PinterestLayout from "@/app/_components/PinterestLayout";
-import Modal from "@/app/_components/Modal";
+import Modal from "@/app/_components/LoginModal";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Suspense } from "react";

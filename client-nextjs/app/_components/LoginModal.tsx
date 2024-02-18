@@ -2,12 +2,12 @@ import { LoginForm } from "../login/form";
 import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
 
-interface ModalProps {
+interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const Modal = ({ isOpen, onClose }: ModalProps) => {
+const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -44,4 +44,4 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
   );
 };
 
-export default Modal;
+export default LoginModal;
