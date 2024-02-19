@@ -32,11 +32,7 @@ const Footer = () => {
               {FOOTER_LINKS.map((link, index) => (
                 <FooterColumn title={link.title} key={index}>
                   <ul className="regular-14 flex gap-4 text-gray-30">
-                    <Link
-                      href={link.href}
-                      key={link.key}
-                      // className="regular-16 flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold"
-                    >
+                    <Link href={link.href} key={link.key}>
                       {link.label}
                     </Link>
                   </ul>
