@@ -113,13 +113,28 @@ export const EXPLORE_LINKS = [
 
 // FOOTER SECTION
 export const FOOTER_LINKS = [
+  // {
+  //   title: "Explore",
+  //   links: ["Quiz Your Style", "Explore Your Styles", "About Us"],
+  // },
+  // {
+  //   title: "Our Community",
+  //   links: ["North America", "Europe", "Asia"],
+  // },
   {
-    title: "Explore",
-    links: ["Quiz Your Style", "Explore Your Styles", "About Us"],
+    href: "/quiz-test",
+    key: "quiz-test",
+    label: "Style Quiz",
   },
   {
-    title: "Our Community",
-    links: ["North America", "Europe", "Asia"],
+    href: "/design-idea",
+    key: "design-idea",
+    label: "Style Inspiration",
+  },
+  {
+    href: "/privacy-policy",
+    key: "privacy-policy",
+    label: "Privacy Policy",
   },
 ];
 
