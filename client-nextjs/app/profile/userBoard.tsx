@@ -19,14 +19,18 @@ function UserBoard({ isLoop = false, images = [], getSave }: UserBoardProps) {
 
   const unsaveFromBoard = async (_id) => {
     try {
-      const response = await fetch(`http://localhost:8080/design-inspiration`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          image_id: _id,
-        }),
-      });
+      //   const response = await fetch(`http://localhost:8080/design-inspiration`, {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            image_id: _id,
+          }),
+        }
+      );
       const data = await response.json();
 
       console.log("Server response:", data);
