@@ -8,21 +8,13 @@ export default function Save({ email }) {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
-    // Fetch data when component mounts
     getSave();
   }, []);
 
-  console.log("email: ", email.email);
-
   const getSave = async () => {
     try {
-      console.log("inside getsave");
-      // Your server endpoint where you want to send the data
-      const endpoint = `http://localhost:8080/design-inspiration`;
-
-      // Assuming your server expects a POST request with a JSON payload
       const response = await fetch(
-        `http://localhost:8080/design-inspiration-user`,
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -35,18 +27,13 @@ export default function Save({ email }) {
 
       const urls = data
         .filter((arr) => arr.length > 0) // Filter out empty arrays
-        // .flatMap((arr) => arr.map((obj) => obj.url)); // Extract URLs
         .flatMap((arr) =>
           arr.map((item) => ({ url: item.url, _id: item._id }))
         ); //
       setImageUrls(urls);
 
-      // Handle the server response as needed
       console.log("Server response:", data);
-      console.log("url:", urls);
-      //   getSave();
     } catch (error) {
-      // Handle errors
       console.error("Error submitting data:", error);
     }
   };

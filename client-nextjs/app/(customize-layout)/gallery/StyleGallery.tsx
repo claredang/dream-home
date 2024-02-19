@@ -39,7 +39,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
         >
           <img
             src={image}
-            alt="he"
+            alt="image options"
             style={{
               width: "100%",
               height: "100%",
@@ -47,18 +47,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
             }}
           />
           {selected && (
-            <button
-              className=""
-              style={{
-                position: "absolute", // Add absolute positioning to the button
-                top: 0,
-                right: 10,
-                border: "none",
-                borderRadius: "50%",
-                padding: "5px",
-                cursor: "pointer",
-              }}
-            >
+            <button className="absolute top-0 right-2 border-none rounded-full p-2 cursor-pointer">
               <FaCheckCircle color="#304561" size={20} />
             </button>
           )}
