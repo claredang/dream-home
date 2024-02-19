@@ -10,16 +10,16 @@ export const NAV_LINKS = [
     key: "quiz",
     label: "Quiz",
   },
-  {
-    href: "/explore",
-    key: "explore",
-    label: "Explore",
-  },
   // {
-  //   href: "/gallery",
-  //   key: "gallery",
-  //   label: "Gallery",
+  //   href: "/explore",
+  //   key: "explore",
+  //   label: "Explore",
   // },
+  {
+    href: "/design-idea",
+    key: "design-idea",
+    label: "Inspiration",
+  },
 ];
 
 // CAMP SECTION

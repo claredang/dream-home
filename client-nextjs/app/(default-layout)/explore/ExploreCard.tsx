@@ -10,7 +10,7 @@ const variants = {
 };
 
 export interface ExploreProp {
-  id: any;
+  _id: any;
   title: string;
   interior_style: string;
   location: string;

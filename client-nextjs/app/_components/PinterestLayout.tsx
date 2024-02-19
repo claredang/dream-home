@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Masonry from "react-responsive-masonry";
+import Dropdown from "./Dropdown";
 
 interface PinterestLayoutProps {
   isLoop?: boolean;

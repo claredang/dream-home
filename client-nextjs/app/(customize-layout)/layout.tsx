@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
-import "../../globals.css";
+import "../globals.css";
 import Navbar from "@/app/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import Chatbot from "@/app/containers/Chatbot";

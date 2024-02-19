@@ -1,8 +1,10 @@
 "use client";
 import QuizResultCard from "./QuizResultCard";
 import PinterestLayout from "@/app/_components/PinterestLayout";
+import Modal from "@/app/_components/LoginModal";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface ResultItem {
   [key: string]: string;
@@ -65,7 +67,7 @@ export default function QuizResult({ result }: QuizResultProps) {
           <Link href="/quiz-test">Do Quiz Again</Link>
         </button>
         <button className="btn-yellow">
-          <Link href="/explore">Explore Style</Link>
+          <Link href="/design-idea">Explore Style</Link>
         </button>
       </div>
 

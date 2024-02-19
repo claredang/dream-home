@@ -3,8 +3,14 @@ import { NAV_LINKS } from "@/app/constants";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  const user = session?.user;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -40,20 +46,22 @@ const Navbar = () => {
 
           {/* Dropdown menu for small screens */}
           {isOpen && (
-            <ul className="absolute top-16 left-0 bg-slate-200 w-full text-center py-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.key}>
-                  <Link
-                    href={link.href}
-                    key={link.key}
-                    onClick={() => setIsOpen(false)}
-                    className="block py-2 text-gray-50 font-semibold transition-all hover:font-bold"
-                  >
-                    {link.label.toUpperCase()}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <ul className="absolute top-16 left-0 bg-slate-200 w-full text-center py-2">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.key}>
+                    <Link
+                      href={link.href}
+                      key={link.key}
+                      onClick={() => setIsOpen(false)}
+                      className="block py-2 text-gray-50 font-semibold transition-all hover:font-bold"
+                    >
+                      {link.label.toUpperCase()}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
 
@@ -69,6 +77,35 @@ const Navbar = () => {
             </Link>
           ))}
         </ul>
+        {!user && (
+          <>
+            <Link href="/login" className="btn-yellow">
+              Login
+            </Link>
+          </>
+        )}
+        {user && (
+          <>
+            <Link href="/profile" className="text-ct-dark-600">
+              MY BOARD
+            </Link>
+            {/* <div>
+              <img
+                src={user.image ? user.image : "/images/default.png"}
+                className="max-h-36"
+                alt={`profile photo of ${user.name}`}
+              />
+            </div> */}
+            <button
+              className="cursor-pointer btn-yellow"
+              onClick={() => {
+                signOut({ callbackUrl: "http://localhost:3000" });
+              }}
+            >
+              Logout
+            </button>
+          </>
+        )}
       </nav>
     </div>
   );

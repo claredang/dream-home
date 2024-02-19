@@ -1,29 +1,21 @@
 "use client";
 import StyleGallery from "./StyleGallery";
-import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import QuizResult from "../../(default-layout)/quiz-test/QuizResult";
 import Masonry from "react-responsive-masonry";
-import "./styles.module.css";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
-  //   const res = await fetch(
-  //     `https://pokeapi.co/api/v2/ability?limit=20&offset=${pageParam}`
-  //   );
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER}/api/style?limit=20&offset=${pageParam}`
   );
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  //   console.log("data: ", data);
   let filtered = await data.results.map((style: {}, index: number) => {
-    // console.log("style: ", style);
     let paddedIndex =
       pageParam === 0
         ? ("00" + (index + 1)).slice(-3)
@@ -35,7 +27,6 @@ async function getStyleGallery({ pageParam }: { pageParam: number }) {
       //   imageUrl: image,
     };
   });
-  console.log("filter: ", filtered);
   return filtered;
 }
 
@@ -43,14 +34,14 @@ export default function Home() {
   const { ref, inView } = useInView();
 
   const {
-    data: pokemons,
+    data: images,
     error,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["pokemons"],
+    queryKey: ["images"],
     queryFn: getStyleGallery,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
@@ -66,64 +57,31 @@ export default function Home() {
     }
   }, [inView, fetchNextPage, hasNextPage]);
 
-  const startQuiz = async () => {
-    console.log("inside here");
-    // const url = "https://interior-design.p.rapidapi.com/explore?limit=5";
-    // const options = {
-    //   method: "GET",
-    //   headers: {
-    //     "X-RapidAPI-Key": "aefa0b0514msh3640bed410ad6ecp1e490bjsneeb4c9d8be70",
-    //     "X-RapidAPI-Host": "interior-design.p.rapidapi.com",
-    //   },
-    // };
-    // const response = await fetch(url, options);
-    // const result = await response.json();
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/explore?limit=5&offset=2`
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-
-  // State to track selected image names
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  // Callback function to handle image click
   const handleImageClick = (_id: string) => {
-    // Check if the _id is already in the array
     if (selectedIds.includes(_id)) {
-      // Remove the _id from the array
       setSelectedIds((prevSelected) => prevSelected.filter((id) => id !== _id));
     } else {
-      // Add the _id to the array
       setSelectedIds((prevSelected) => [...prevSelected, _id]);
     }
   };
-  // Filter out names based on selected _ids
-  const selectedNames = pokemons?.pages
+
+  const selectedNames = images?.pages
     ?.flat()
     .filter((style) => selectedIds.includes(style._id))
     .map((style) => style.style);
 
-  console.log("selected name: ", selectedNames);
   const [quizResultData, setQuizResult] = useState({
     resultFinal: null,
   });
   const handleSubmit = async () => {
     try {
-      console.log("!!! Inside here");
-      // Your server endpoint where you want to send the data
       const endpoint = `${process.env.NEXT_PUBLIC_SERVER}/gallery/result`;
-
-      // Assuming your server expects a POST request with a JSON payload
       const response = await axios.post(endpoint, { selectedNames });
-
-      // Handle the server response as needed
       console.log("Server response:", response.data, response.data.resultFinal);
       setQuizResult({ resultFinal: response.data.resultFinal });
     } catch (error) {
-      // Handle errors
       console.error("Error submitting data:", error);
     }
   };
@@ -146,11 +104,12 @@ export default function Home() {
           </div>
           <div className="w-full md:w-2/3 sm:w-1/2 relative">
             <Masonry columnsCount={3} gutter="10px">
-              {pokemons?.pages?.map((page) =>
+              {images?.pages?.map((page) =>
                 page.map(
                   (
                     style: {
-                      imageUrl: string;
+                      _id: any;
+                      url: string;
                       name: string;
                     },
                     index: number
