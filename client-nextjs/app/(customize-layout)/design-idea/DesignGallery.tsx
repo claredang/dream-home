@@ -2,6 +2,7 @@ import React, { useState, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import LoginModal from "@/app/_components/LoginModal";
 import { CiBookmark } from "react-icons/ci";
+import { LoginForm } from "@/app/login/form";
 
 interface StyleGalleryProps {
   _id: string;
@@ -23,24 +24,56 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   onClick,
 }) => {
   const [selected, setSelected] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [boardName, setBoardName] = useState("");
+  const [collections, setCollections] = useState([]);
   const { data: session } = useSession();
   const user = session?.user;
 
-  const saveToBoard = async () => {
+  const getSave = async () => {
+    console.log("inside here: ");
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
+        `http://localhost:8080/design-inspiration-user`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: user?.email,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      setCollections(data);
+
+      console.log("Server response:", data, collections);
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
+
+  const saveToBoard = async (boardName: string) => {
+    console.log("board collection album: ", boardName);
+
+    try {
+      const response = await fetch(
+        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        `http://localhost:8080/design-inspiration`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             email: email,
             image_id: _id,
+            collection: boardName,
           }),
         }
       );
       const data = await response.json();
+      setShowSaveModal(false);
       console.log("Server response:", data);
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -67,18 +100,29 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
     }
   };
 
+  const handleInputChange = (event) => {
+    setBoardName(event.target.value);
+  };
+
+  const saveExistingBoard = (boardName: string) => {
+    setBoardName(boardName);
+    saveToBoard(boardName);
+  };
+
   const handleClick = () => {
     if (onClick) {
       if (user) {
         setSelected((prevSelected) => !prevSelected);
         onClick(_id);
+        setShowSaveModal(true);
+        getSave();
       } else {
-        setShowModal(true);
+        setShowLoginModal(true);
       }
     }
     if (!selected) {
       if (user) {
-        saveToBoard();
+        // saveToBoard();
       }
     } else {
       unsaveFromBoard();
@@ -86,11 +130,15 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   };
 
   const openModal = () => {
-    setShowModal(true);
+    setShowLoginModal(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  const closeLoginModal = () => {
+    setShowLoginModal(false);
+  };
+
+  const closeSaveModal = () => {
+    setShowSaveModal(false);
   };
 
   return (
@@ -111,6 +159,7 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
             objectFit: "cover",
           }}
         />
+
         <button className="absolute top-0 right-2 p-2 cursor-pointer">
           <div
             className={`w-6 h-6 rounded-full overflow-hidden flex justify-center items-center ${
@@ -121,9 +170,83 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
           </div>
         </button>
       </div>
-      {showModal && (
+      {showLoginModal && (
         <Suspense fallback={<div>Loading...</div>}>
-          <LoginModal isOpen={showModal} onClose={closeModal}></LoginModal>
+          <LoginModal
+            isOpen={showLoginModal}
+            onClose={closeLoginModal}
+            imageUrl="/house-2.jpg"
+          >
+            <p className="regular-18 text-gray-50 pb-4">
+              Join Dream Home to save your inspiration!
+            </p>
+            <LoginForm />
+          </LoginModal>
+        </Suspense>
+      )}
+      {showSaveModal && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <LoginModal
+            isOpen={showSaveModal}
+            onClose={closeSaveModal}
+            imageUrl="/house-2.jpg"
+          >
+            <p className="regular-20 mb-1">Save to Board</p>
+
+            <input
+              type="text"
+              value={boardName}
+              onChange={handleInputChange}
+              placeholder="Create new board name"
+              className="mb-5 bg-gray-100 px-4 py-2 rounded-2xl opacity-50 text-gray-50"
+            />
+
+            {collections.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between mb-3"
+              >
+                <div className="flex gap-3 items-center">
+                  <img
+                    src="/house-2.jpg"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      margin: "1px",
+                    }}
+                    className="rounded-md"
+                  />
+                  <div className="flex flex-col">
+                    <label>{item.collection}</label>
+                    <label className="text-gray-50 text-sm">
+                      {item.images.length} items
+                    </label>
+                  </div>
+                </div>
+                <div className="w-6 h-6">
+                  <CiBookmark
+                    style={{ cursor: "pointer" }}
+                    className="w-6 h-6  hover:text-yellow-100"
+                    onClick={() => {
+                      saveExistingBoard(item.collection);
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+
+            <button
+              onClick={() => saveToBoard(boardName)}
+              disabled={!boardName.trim()}
+              className={
+                !boardName.trim()
+                  ? "bg-gray-300 px-4 py-2 rounded-2xl cursor-not-allowed opacity-50"
+                  : "font-bold p-2 rounded-2xl btn-yellow"
+              }
+            >
+              Create Board
+            </button>
+          </LoginModal>
         </Suspense>
       )}
     </div>

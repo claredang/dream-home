@@ -15,9 +15,9 @@ recordRoutes.route("/design-inspiration-user").post(async function (req, res) {
 // POST
 
 recordRoutes.route("/design-inspiration").post(async function (req, res) {
-  const { email, image_id } = req.body;
-  console.log("add to board route:", email, image_id);
-  const cursor = dbo.saveToBoard(email, image_id);
+  const { email, image_id, collection } = req.body;
+  console.log("add to board route:", email, image_id, collection);
+  const cursor = dbo.saveToBoard(email, image_id, collection);
   var results = await cursor;
   res.json(results).status(200);
 });
