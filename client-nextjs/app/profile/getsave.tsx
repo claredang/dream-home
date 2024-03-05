@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import UserBoard from "./userBoard";
 import Masonry from "react-responsive-masonry";
+import Dropdown from "../_components/Dropdown";
 
 export default function Save({ email }) {
   const [imageUrls, setImageUrls] = useState([]);
@@ -44,7 +45,7 @@ export default function Save({ email }) {
   };
 
   const createPlaceholders = (length) => {
-    console.log("inside here: ", length);
+    // console.log("inside here: ", length);
     const placeholders = [];
     for (let i = length; i < 6; i++) {
       placeholders.push(
@@ -64,14 +65,49 @@ export default function Save({ email }) {
     return placeholders;
   };
 
+  const deleteBoard = async (board_name: string) => {
+    console.log("name, board: ", email.email, board_name);
+    try {
+      const response = await fetch(
+        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        `http://localhost:8080/design-board`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email.email,
+            board: board_name,
+          }),
+        }
+      );
+      const data = await response.json();
+
+      console.log("Delete board Server response:", data);
+      getSave();
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
+
   return (
     <>
       {/* <UserBoard images={imageUrls} isLoop={true} getSave={getSave} /> */}
 
       <div className="flex flex-col">
         {collections.map((item, index) => (
-          <div key={index} className="flex  flex-col max-w-[300px]">
-            <p>{item.collection}</p>
+          <div key={index} className="flex flex-col max-w-[300px]">
+            <div className="flex justify-between">
+              <p>{item.collection}</p>
+
+              <Dropdown
+                options={[
+                  {
+                    text: "Unsave",
+                    onClick: () => deleteBoard(item.collection),
+                  },
+                ]}
+              />
+            </div>
             <div className="flex bg-beige-50">
               <Masonry columnsCount={3} gutter="1px">
                 {item.images.map((image, i) => (

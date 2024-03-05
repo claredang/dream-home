@@ -20,7 +20,7 @@ function UserBoard({ isLoop = false, images = [], getSave }: UserBoardProps) {
   const unsaveFromBoard = async (_id) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-board`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },

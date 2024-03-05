@@ -24,8 +24,16 @@ recordRoutes.route("/design-inspiration").post(async function (req, res) {
 
 recordRoutes.route("/design-inspiration").delete(async function (req, res) {
   const { email, image_id } = req.body;
-  console.log("delete from board route", email, image_id);
+  console.log("delete individual image from board", email, image_id);
   const cursor = dbo.unsaveFromBoard(email, image_id);
+  var results = await cursor;
+  res.json(results).status(200);
+});
+
+recordRoutes.route("/design-board").delete(async function (req, res) {
+  const { email, board } = req.body;
+  console.log("delete board", email, board);
+  const cursor = dbo.deleteBoard(email, board);
   var results = await cursor;
   res.json(results).status(200);
 });

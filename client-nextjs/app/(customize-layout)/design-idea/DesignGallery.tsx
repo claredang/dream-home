@@ -200,40 +200,41 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
               placeholder="Create new board name"
               className="mb-5 bg-gray-100 px-4 py-2 rounded-2xl opacity-50 text-gray-50"
             />
-
-            {collections.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between mb-3"
-              >
-                <div className="flex gap-3 items-center">
-                  <img
-                    src="/house-2.jpg"
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      margin: "1px",
-                    }}
-                    className="rounded-md"
-                  />
-                  <div className="flex flex-col">
-                    <label>{item.collection}</label>
-                    <label className="text-gray-50 text-sm">
-                      {item.images.length} items
-                    </label>
+            <div className="mb-5">
+              {collections.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between mb-3"
+                >
+                  <div className="flex gap-3 items-center">
+                    <img
+                      src="/house-2.jpg"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        margin: "1px",
+                      }}
+                      className="rounded-md"
+                    />
+                    <div className="flex flex-col">
+                      <label>{item.collection}</label>
+                      <label className="text-gray-50 text-sm">
+                        {item.images.length} items
+                      </label>
+                    </div>
+                  </div>
+                  <div className="w-6 h-6">
+                    <CiBookmark
+                      style={{ cursor: "pointer" }}
+                      className="w-6 h-6  hover:text-yellow-100"
+                      onClick={() => {
+                        saveExistingBoard(item.collection);
+                      }}
+                    />
                   </div>
                 </div>
-                <div className="w-6 h-6">
-                  <CiBookmark
-                    style={{ cursor: "pointer" }}
-                    className="w-6 h-6  hover:text-yellow-100"
-                    onClick={() => {
-                      saveExistingBoard(item.collection);
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
             <button
               onClick={() => saveToBoard(boardName)}

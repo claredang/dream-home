@@ -94,4 +94,12 @@ module.exports = {
     const cursor = await coll.deleteMany(query);
     return cursor;
   },
+
+  deleteBoard: async function (user, board) {
+    const _db = client.db("homestay");
+    const coll = _db.collection("user_save");
+    const query = { user_email: user, collection: board };
+    const cursor = await coll.deleteMany(query);
+    return cursor;
+  },
 };
