@@ -38,4 +38,12 @@ recordRoutes.route("/design-board").delete(async function (req, res) {
   res.json(results).status(200);
 });
 
+recordRoutes.route("/design-board-images").post(async function (req, res) {
+  const { email, board_name } = req.query;
+  console.log("add to board route test:", email, board_name);
+  const cursor = dbo.getImagesFromUserBoard(email, board_name);
+  var results = await cursor;
+  res.json(results).status(200);
+});
+
 module.exports = recordRoutes;

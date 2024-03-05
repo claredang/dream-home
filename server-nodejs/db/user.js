@@ -63,6 +63,42 @@ module.exports = {
     return result;
   },
 
+  getImagesFromUserBoard: async function (email, collection_name) {
+    const _db = client.db("homestay");
+    const coll = _db.collection("user_save");
+    console.log("query parameter:", email, collection_name);
+    const result = coll
+      .aggregate([
+        {
+          $match: {
+            user_email: email,
+            collection: collection_name,
+          },
+        },
+        {
+          $lookup: {
+            from: "style_gallery",
+            localField: "image_id",
+            foreignField: "_id",
+            as: "images",
+          },
+        },
+        {
+          $unwind: "$images",
+        },
+        {
+          $project: {
+            _id: "$images._id",
+            url: "$images.url",
+            style: "$images.style",
+          },
+        },
+      ])
+      .toArray();
+    console.log("result: ", result);
+    return result;
+  },
+
   getImage: async function () {
     const _db = client.db("homestay");
     const coll = _db.collection("style_gallery");
