@@ -44,3 +44,7 @@ export function replaceUnderscoresWithSpaces(inputString: string) {
   // Use the replace method with a regular expression to replace underscores with spaces
   return inputString.replace(/_/g, " ");
 }
+
+export function replaceBlankSpaceWithHyphen(inputString: string) {
+  return inputString.replace(/\s/g, "-");
+}

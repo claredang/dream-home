@@ -5,10 +5,13 @@ import Image from "next/image";
 import UserBoard from "./userBoard";
 import Masonry from "react-responsive-masonry";
 import Dropdown from "../_components/Dropdown";
+import { useRouter } from "next/navigation";
+import { replaceBlankSpaceWithHyphen } from "../_utilities/sharedFunction";
 
 export default function Save({ email }) {
   const [imageUrls, setImageUrls] = useState([]);
   const [collections, setCollections] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     getSave();
@@ -30,13 +33,6 @@ export default function Save({ email }) {
       );
       const data = await response.json();
       setCollections(data);
-
-      // const urls = data
-      //   .filter((arr) => arr.length > 0) // Filter out empty arrays
-      //   .flatMap((arr) =>
-      //     arr.map((item) => ({ url: item.url, _id: item._id }))
-      //   ); //
-      // setImageUrls(urls);
 
       console.log("Server response:", data, collections);
     } catch (error) {
@@ -93,22 +89,31 @@ export default function Save({ email }) {
     <>
       {/* <UserBoard images={imageUrls} isLoop={true} getSave={getSave} /> */}
 
-      <div className="flex flex-col">
+      <div className="flex bg-pink-100">
         {collections.map((item, index) => (
-          <div key={index} className="flex flex-col max-w-[300px]">
-            <div className="flex justify-between">
+          <div key={index} className="m-5">
+            <div className="flex ">
               <p>{item.collection}</p>
 
-              <Dropdown
+              {/* <Dropdown
                 options={[
                   {
                     text: "Unsave",
                     onClick: () => deleteBoard(item.collection),
                   },
                 ]}
-              />
+              /> */}
             </div>
-            <div className="flex bg-beige-50">
+            <div
+              className="flex bg-beige-50 min-w-[400px]"
+              onClick={() =>
+                router.push(
+                  `profile/board/${replaceBlankSpaceWithHyphen(
+                    item.collection
+                  )}`
+                )
+              }
+            >
               <Masonry columnsCount={3} gutter="1px">
                 {item.images.map((image, i) => (
                   <img

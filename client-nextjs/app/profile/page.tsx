@@ -43,7 +43,7 @@ export default async function Profile() {
                   </p>
                 </div>
 
-                <div className="lg:py-10 lg:px-12 ">
+                <div className="lg:py-10 lg:px-12">
                   <Save email={user} />
                 </div>
               </div>
