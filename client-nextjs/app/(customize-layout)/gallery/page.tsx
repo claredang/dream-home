@@ -101,7 +101,7 @@ export default function Home() {
         <div>
           {loading && (
             <div className="min-h-screen flex justify-center items-center">
-              <p>Calcuting your result</p>
+              <p>Calculating your result</p>
               <div className="relative">
                 <Image
                   src="/spinner-square.svg"
