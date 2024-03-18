@@ -21,8 +21,8 @@ export default function Save({ email }) {
   const getSave = async () => {
     try {
       const response = await fetch(
-        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
-        `http://localhost:8080/design-inspiration-user`,
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
+        // `http://localhost:8080/design-inspiration-user`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -41,21 +41,17 @@ export default function Save({ email }) {
   };
 
   const createPlaceholders = (length) => {
-    // console.log("inside here: ", length);
     const placeholders = [];
     for (let i = length; i < 6; i++) {
       placeholders.push(
-        // <Masonry columnsCount={3} gutter="1px">
         <div
           key={`placeholder-${i}`}
           style={{
-            width: "100px",
             height: "100px",
             margin: "1px",
           }}
           className="bg-gray-300"
         ></div>
-        // </Masonry>
       );
     }
     return placeholders;
@@ -65,8 +61,8 @@ export default function Save({ email }) {
     console.log("name, board: ", email.email, board_name);
     try {
       const response = await fetch(
-        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
-        `http://localhost:8080/design-board`,
+        `${process.env.NEXT_PUBLIC_SERVER}/design-board`,
+        // `http://localhost:8080/design-board`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -87,45 +83,61 @@ export default function Save({ email }) {
 
   return (
     <>
-      {/* <UserBoard images={imageUrls} isLoop={true} getSave={getSave} /> */}
-
-      <div className="flex bg-pink-100">
+      <div className="flex">
         {collections.map((item, index) => (
           <div key={index} className="m-5">
-            <div className="flex ">
-              <p>{item.collection}</p>
-
-              {/* <Dropdown
+            <div className="flex">
+              <p className="regular-18">{item.collection}</p>
+              <Dropdown
                 options={[
                   {
-                    text: "Unsave",
+                    text: "Delete board",
                     onClick: () => deleteBoard(item.collection),
                   },
                 ]}
-              /> */}
+              />
             </div>
             <div
               className="flex bg-beige-50 min-w-[400px]"
-              onClick={() =>
-                router.push(
-                  `profile/board/${replaceBlankSpaceWithHyphen(
-                    item.collection
-                  )}`
-                )
-              }
+              // onClick={() =>
+              //   router.push(
+              //     `profile/board/${replaceBlankSpaceWithHyphen(
+              //       item.collection
+              //     )}`
+              //   )
+              // }
             >
               <Masonry columnsCount={3} gutter="1px">
                 {item.images.map((image, i) => (
-                  <img
-                    key={i}
-                    src={image.url}
-                    alt={`Image ${i + 1}`}
+                  <div
+                    key={index}
                     style={{
-                      width: "100px",
-                      height: "100px",
+                      // width: index % 2 ? "200px" : "250px",
+                      // height: index % 2 ? "200px" : "250px",
                       margin: "1px",
+                      position: "relative",
                     }}
-                  />
+                  >
+                    <img
+                      key={i}
+                      src={image.url}
+                      alt={`Image ${i + 1}`}
+                      style={{
+                        height: "100px",
+                        margin: "1px",
+                      }}
+                    />
+                    <div style={{ position: "absolute", top: 0, right: 2 }}>
+                      <Dropdown
+                        options={[
+                          {
+                            text: "Unsave",
+                            onClick: () => unsaveFromBoard(_id),
+                          },
+                        ]}
+                      />
+                    </div>
+                  </div>
                 ))}
                 {createPlaceholders(item.images.length)}
               </Masonry>

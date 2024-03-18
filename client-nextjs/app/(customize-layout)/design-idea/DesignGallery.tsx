@@ -35,8 +35,8 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
     console.log("inside here: ");
     try {
       const response = await fetch(
-        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
-        `http://localhost:8080/design-inspiration-user`,
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
+        // `http://localhost:8080/design-inspiration-user`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -60,8 +60,8 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
 
     try {
       const response = await fetch(
-        // `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
-        `http://localhost:8080/design-inspiration`,
+        `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration`,
+        // `http://localhost:8080/design-inspiration`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

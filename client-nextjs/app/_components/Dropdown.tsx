@@ -24,7 +24,7 @@ const Dropdown = ({ options, icon, buttonText }: DropDownProps) => {
   };
 
   return (
-    <div className="w-full py-6 pb-8">
+    <div className="w-full py-6 pb-8 flex justify-end min-h-[100px]">
       <div className="relative inline-block">
         <button
           type="button"

@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
         <p className="text-gray-50 mb-7">
           It is important that you read this Privacy Policy together with any
           other privacy notice or fair processing notice we may provide on
-          specific occasions when we are collecting or processing Personal Data
+        specific occasions when we are collecting or processing Personal Data
           about you so that you are fully aware of how and why we are using your
           data. This Privacy Policy supplements the other notices and is not
           intended to override them.
