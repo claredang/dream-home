@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import QuizResult from "../../(default-layout)/quiz-test/QuizResult";
 import Masonry from "react-responsive-masonry";
+import LoadingSpinner from "../../../public/spinner-square.svg";
+import Image from "next/image";
 
 async function getStyleGallery({ pageParam }: { pageParam: number }) {
   const res = await fetch(
@@ -51,6 +53,8 @@ export default function Home() {
     },
   });
 
+  console.log("fetch next page: ", isFetchingNextPage);
+
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -75,11 +79,16 @@ export default function Home() {
   const [quizResultData, setQuizResult] = useState({
     resultFinal: null,
   });
+  const [loading, setLoading] = useState(true);
   const handleSubmit = async () => {
     try {
       const endpoint = `${process.env.NEXT_PUBLIC_SERVER}/gallery/result`;
       const response = await axios.post(endpoint, { selectedNames });
       console.log("Server response:", response.data, response.data.resultFinal);
+      setTimeout(() => {
+        // setQuizResult({ resultFinal: response.data.resultFinal });
+        setLoading(false);
+      }, 2000);
       setQuizResult({ resultFinal: response.data.resultFinal });
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -90,7 +99,21 @@ export default function Home() {
     <main className="p-2">
       {quizResultData.resultFinal ? (
         <div>
-          <QuizResult result={quizResultData.resultFinal} />
+          {loading && (
+            <div className="min-h-screen flex justify-center items-center">
+              <p>Calculating your result</p>
+              <div className="relative">
+                <Image
+                  src="/spinner-square.svg"
+                  alt="Home Cover"
+                  width={200}
+                  height={200}
+                  className="h-full w-full"
+                />
+              </div>
+            </div>
+          )}
+          {!loading && <QuizResult result={quizResultData.resultFinal} />}
         </div>
       ) : (
         <div className="flex flex-col sm:flex-row lg:py-10 lg:px-12">
@@ -103,7 +126,7 @@ export default function Home() {
             </p>
           </div>
           <div className="w-full md:w-2/3 sm:w-1/2 relative">
-            <Masonry columnsCount={3} gutter="10px">
+            <Masonry columnsCount={3} gutter="3spinnerpx">
               {images?.pages?.map((page) =>
                 page.map(
                   (

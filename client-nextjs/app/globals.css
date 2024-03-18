@@ -58,6 +58,10 @@ body {
     @apply border-gray-20 bg-green-90 px-8 py-5 text-white;
   }
 
+  .divider {
+    @apply h-[1px] bg-gray-300;
+  }
+
   .max-container {
     @apply mx-auto max-w-[1440px];
   }

@@ -15,17 +15,33 @@ recordRoutes.route("/design-inspiration-user").post(async function (req, res) {
 // POST
 
 recordRoutes.route("/design-inspiration").post(async function (req, res) {
-  const { email, image_id } = req.body;
-  console.log("add to board route:", email, image_id);
-  const cursor = dbo.saveToBoard(email, image_id);
+  const { email, image_id, collection } = req.body;
+  console.log("add to board route:", email, image_id, collection);
+  const cursor = dbo.saveToBoard(email, image_id, collection);
   var results = await cursor;
   res.json(results).status(200);
 });
 
 recordRoutes.route("/design-inspiration").delete(async function (req, res) {
   const { email, image_id } = req.body;
-  console.log("delete from board route", email, image_id);
+  console.log("delete individual image from board", email, image_id);
   const cursor = dbo.unsaveFromBoard(email, image_id);
+  var results = await cursor;
+  res.json(results).status(200);
+});
+
+recordRoutes.route("/design-board").delete(async function (req, res) {
+  const { email, board } = req.body;
+  console.log("delete board", email, board);
+  const cursor = dbo.deleteBoard(email, board);
+  var results = await cursor;
+  res.json(results).status(200);
+});
+
+recordRoutes.route("/design-board-images").post(async function (req, res) {
+  const { email, board_name } = req.query;
+  console.log("add to board route test:", email, board_name);
+  const cursor = dbo.getImagesFromUserBoard(email, board_name);
   var results = await cursor;
   res.json(results).status(200);
 });

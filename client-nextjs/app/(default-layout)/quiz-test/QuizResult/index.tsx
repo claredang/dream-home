@@ -62,6 +62,7 @@ export default function QuizResult({ result }: QuizResultProps) {
               <QuizResultCard cardInfo={item} />
             </div>
           ))}
+        
         </div>
         <button className="btn-yellow mr-5">
           <Link href="/quiz-test">Do Quiz Again</Link>
@@ -75,5 +76,7 @@ export default function QuizResult({ result }: QuizResultProps) {
         <PinterestLayout images={fetchedData} isLoop={true} />
       </div>
     </div>
+    
+
   );
 }
