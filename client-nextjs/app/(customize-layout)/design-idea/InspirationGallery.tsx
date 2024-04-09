@@ -4,7 +4,7 @@ import LoginModal from "@/app/_components/LoginModal";
 import { CiBookmark } from "react-icons/ci";
 import { LoginForm } from "@/app/login/form";
 
-interface StyleGalleryProps {
+interface InspirationGalleryProps {
   _id: string;
   email?: null | string;
   name: string;
@@ -14,7 +14,7 @@ interface StyleGalleryProps {
   index: number;
 }
 
-const StyleGallery: React.FC<StyleGalleryProps> = ({
+const InspirationGallery: React.FC<InspirationGalleryProps> = ({
   _id,
   email,
   name,
@@ -254,4 +254,4 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   );
 };
 
-export default StyleGallery;
+export default InspirationGallery;

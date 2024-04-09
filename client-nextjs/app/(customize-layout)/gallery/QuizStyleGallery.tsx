@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
-interface StyleGalleryProps {
+interface QuizStyleGalleryProps {
   _id: string;
   name: string;
   image: string;
@@ -10,7 +10,7 @@ interface StyleGalleryProps {
   index: number;
 }
 
-const StyleGallery: React.FC<StyleGalleryProps> = ({
+const QuizStyleGallery: React.FC<QuizStyleGalleryProps> = ({
   _id,
   name,
   image,
@@ -57,4 +57,4 @@ const StyleGallery: React.FC<StyleGalleryProps> = ({
   );
 };
 
-export default StyleGallery;
+export default QuizStyleGallery;

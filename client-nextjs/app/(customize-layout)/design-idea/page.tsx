@@ -1,12 +1,12 @@
 "use client";
-import StyleGallery from "./DesignGallery";
+import InspirationGallery from "./InspirationGallery";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import Masonry from "react-responsive-masonry";
 import { useSession } from "next-auth/react";
 
-async function getStyleGallery({ pageParam }: { pageParam: number }) {
+async function getInspirationGallery({ pageParam }: { pageParam: number }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER}/api/style?limit=20&offset=${pageParam}`
   );
@@ -43,7 +43,7 @@ export default function Inspiration() {
     status,
   } = useInfiniteQuery({
     queryKey: ["pokemons"],
-    queryFn: getStyleGallery,
+    queryFn: getInspirationGallery,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage =
@@ -93,7 +93,7 @@ export default function Inspiration() {
                   if (page.length === index + 1) {
                     return (
                       <div>
-                        <StyleGallery
+                        <InspirationGallery
                           _id={style._id}
                           email={user?.email}
                           image={style.url}
@@ -107,7 +107,7 @@ export default function Inspiration() {
                     );
                   } else {
                     return (
-                      <StyleGallery
+                      <InspirationGallery
                         _id={style._id}
                         email={user?.email}
                         image={style.url}
