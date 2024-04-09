@@ -1,5 +1,5 @@
 "use client";
-import StyleGallery from "./StyleGallery";
+import QuizStyleGallery from "./QuizStyleGallery";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import Masonry from "react-responsive-masonry";
 import LoadingSpinner from "../../../public/spinner-square.svg";
 import Image from "next/image";
 
-async function getStyleGallery({ pageParam }: { pageParam: number }) {
+async function getQuizQuizStyleGallery({ pageParam }: { pageParam: number }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER}/api/style?limit=20&offset=${pageParam}`
   );
@@ -44,7 +44,7 @@ export default function Home() {
     status,
   } = useInfiniteQuery({
     queryKey: ["images"],
-    queryFn: getStyleGallery,
+    queryFn: getQuizQuizStyleGallery,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage =
@@ -139,7 +139,7 @@ export default function Home() {
                   ) => {
                     if (page.length === index + 1) {
                       return (
-                        <StyleGallery
+                        <QuizStyleGallery
                           _id={style._id}
                           image={style.url}
                           name={style.style}
@@ -151,7 +151,7 @@ export default function Home() {
                       );
                     } else {
                       return (
-                        <StyleGallery
+                        <QuizStyleGallery
                           _id={style._id}
                           image={style.url}
                           name={style.style}
