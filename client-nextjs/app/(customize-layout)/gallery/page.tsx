@@ -9,7 +9,7 @@ import Masonry from "react-responsive-masonry";
 import LoadingSpinner from "../../../public/spinner-square.svg";
 import Image from "next/image";
 
-async function getQuizQuizStyleGallery({ pageParam }: { pageParam: number }) {
+async function getQuizStyleGallery({ pageParam }: { pageParam: number }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER}/api/style?limit=20&offset=${pageParam}`
   );
@@ -44,7 +44,7 @@ export default function Home() {
     status,
   } = useInfiniteQuery({
     queryKey: ["images"],
-    queryFn: getQuizQuizStyleGallery,
+    queryFn: getQuizStyleGallery,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage =
