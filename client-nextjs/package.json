@@ -15,6 +15,7 @@
     "@tanstack/react-query-devtools": "^5.17.21",
     "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.7",
+    "chromedriver": "^123.0.3",
     "framer-motion": "^10.18.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
@@ -24,7 +25,8 @@
     "react-intersection-observer": "^9.5.3",
     "react-masonry-css": "^1.0.16",
     "react-responsive-masonry": "^2.1.7",
-    "sass": "^1.70.0"
+    "sass": "^1.70.0",
+    "selenium-webdriver": "^4.19.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
