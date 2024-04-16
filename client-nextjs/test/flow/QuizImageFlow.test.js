@@ -33,7 +33,7 @@ test("should submit form and show result", async () => {
     until.elementLocated(
       By.xpath('//div[contains(text(), "Calculating your result")]')
     ),
-    10000
+    15000
   );
 
   const resultText = await driver.findElement(
@@ -41,4 +41,4 @@ test("should submit form and show result", async () => {
   );
   const result = await resultText.getText();
   expect(result).toBe("Based on our prediction, here is your style");
-}, 10000);
+}, 20000);

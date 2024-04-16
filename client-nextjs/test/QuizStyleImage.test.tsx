@@ -1,6 +1,6 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { getQuizStyleGallery } from "../app/services/QuizStyleImage.service";
+import { getQuizStyleGallery } from "../../app/services/QuizStyleImage.service";
 
 describe("Test API response", () => {
   let mock: MockAdapter; // Explicitly declare the type of `mock`
