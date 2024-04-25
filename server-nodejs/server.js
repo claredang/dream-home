@@ -120,8 +120,9 @@ app.post("/upload", multer.array("file"), async (req, res) => {
 });
 
 app.listen(port, () => {
+  const version = "1";
   dbo.connectToServer(function (err, db) {
     if (err) console.error(err);
   });
-  console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}, version ${version}`);
 });
