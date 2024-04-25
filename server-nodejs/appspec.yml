@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/dream-home/server-nodejs
+    destination: /home/ubuntu/dream-home/server-nodejs
 hooks:
   # ApplicationStop:
   # DownloadBundle:
