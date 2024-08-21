@@ -20,6 +20,11 @@ export const NAV_LINKS = [
     key: "design-idea",
     label: "Inspiration",
   },
+  {
+    href: "/image-generator",
+    key: "image-generator",
+    label: "Image Generator",
+  },
 ];
 
 // CAMP SECTION
