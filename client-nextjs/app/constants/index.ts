@@ -16,6 +16,11 @@ export const NAV_LINKS = [
   //   label: "Explore",
   // },
   {
+    href: "/image-generator",
+    key: "image-generator",
+    label: "AI Style Generator",
+  },
+  {
     href: "/design-idea",
     key: "design-idea",
     label: "Inspiration",
