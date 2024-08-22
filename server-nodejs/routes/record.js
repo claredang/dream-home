@@ -3,9 +3,11 @@ const express = require("express");
 const recordRoutes = express.Router();
 
 const dbo = require("../db/conn");
+const e = require("express");
 
 // GET: ALL
 recordRoutes.route("/explore").get(async function (req, res) {
+  console.log("Inside GET Explore");
   const cursor = dbo.getDb();
   var results = await cursor;
 
