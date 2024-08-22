@@ -121,6 +121,8 @@ app.post("/upload", multer.array("file"), async (req, res) => {
 
 app.post("/api/generate-image", async function (req, res, next) {
   console.log("inside api test");
+
+  const prompt = req.body.fullPrompt;
   const GETIMG_API_KEY =
     "key-5dAoIBteHXx5V2WMy8baoATOlDyhUzAvAU3RFcds0CrPlPg7NbNk3LDsmR51CCEQ3Olwt6YAbRDNqWbQqO6dO72er1QCVMo";
   const url = "https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image";
@@ -133,12 +135,12 @@ app.post("/api/generate-image", async function (req, res, next) {
     },
     body: JSON.stringify({
       model: "stable-diffusion-xl-v1-0",
-      prompt: "a photo of an astronaut riding a horse on mars",
+      prompt: prompt,
       negative_prompt: "Disfigured, cartoon, blurry",
-      prompt_2: "a photo of an astronaut riding a horse on mars",
+      prompt_2: prompt,
       negative_prompt_2: "Disfigured, cartoon, blurry",
-      width: 1024,
-      height: 1024,
+      width: 768,
+      height: 768,
       steps: 30,
       guidance: 7.5,
       seed: 0,
@@ -147,16 +149,6 @@ app.post("/api/generate-image", async function (req, res, next) {
       response_format: "b64",
     }),
   };
-
-  // fetch(url, options)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     const base64Image = json.image;
-  //     const buffer = Buffer.from(base64Image, "base64");
-  //     fs.writeFileSync("output.png", buffer);
-  //     console.log("Image saved as output.png");
-  //   })
-  //   .catch((err) => console.error("error:" + err));
 
   try {
     const response = await fetch(url, options);

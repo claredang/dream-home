@@ -4,10 +4,34 @@ import { useState } from "react";
 export default function ImageGenerator() {
   const [prompt, setPrompt] = useState("");
   const [image, setImage] = useState("");
+  const [roomType, setRoomType] = useState("");
+  const [styles, setStyles] = useState([]);
+
+  const roomTypes = ["Living Room", "Bedroom", "Kitchen"];
+  const styleOptions = [
+    "Bohemian",
+    "Coastal",
+    "Farmhouse",
+    "Glam",
+    "Industrial",
+    "Mid-century Modern",
+    "Minimalist",
+    "Scandinavian",
+  ];
+
+  const handleStyleToggle = (style) => {
+    if (styles.includes(style)) {
+      setStyles(styles.filter((s) => s !== style));
+    } else {
+      setStyles([...styles, style]);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const stylesString = styles.join(", ").toLowerCase();
+    const fullPrompt = `Generate the ${roomType.toLowerCase()} in ${stylesString} style(s) that is ${prompt}`;
+    console.log("full prompt: ", fullPrompt);
     const response = await fetch(
       //   `${process.env.NEXT_PUBLIC_SERVER}/design-inspiration-user`,
       `http://localhost:8080/api/generate-image`,
@@ -15,7 +39,7 @@ export default function ImageGenerator() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          prompt,
+          fullPrompt,
         }),
       }
     );
@@ -34,10 +58,20 @@ export default function ImageGenerator() {
             <p class="text-[#1b140e] text-base font-medium leading-normal pb-2">
               Room Type
             </p>
-            <select class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1b140e] focus:outline-0 focus:ring-0 border-none bg-[#f3ede7] focus:border-none h-14 bg-[image:--select-button-svg] placeholder:text-[#97704e] p-4 text-base font-normal leading-normal">
-              <option value="one"></option>
-              <option value="two">two</option>
-              <option value="three">three</option>
+            <select
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1b140e] focus:outline-0 focus:ring-0 border-none bg-[#f3ede7] focus:border-none h-14 bg-[image:--select-button-svg] placeholder:text-[#97704e] p-4 text-base font-normal leading-normal"
+              value={roomType}
+              onChange={(e) => setRoomType(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Select a room type
+              </option>
+              {roomTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
             </select>
           </label>
         </div>
@@ -45,46 +79,19 @@ export default function ImageGenerator() {
           Which style do you prefer?
         </h1>
         <div class="flex gap-3 p-3 flex-wrap pr-4">
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Bohemian
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Coastal
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Farmhouse
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Glam
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Industrial
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Mid-century Modern
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Minimalist
-            </p>
-          </div>
-          <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f3ede7] pl-4 pr-4">
-            <p class="text-[#1b140e] text-sm font-medium leading-normal">
-              Scandinavian
-            </p>
-          </div>
+          {styleOptions.map((styleOption) => (
+            <div
+              key={styleOption}
+              class={`flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl pl-4 pr-4 cursor-pointer ${
+                styles.includes(styleOption)
+                  ? "bg-[#e88630] text-white"
+                  : "bg-[#f3ede7] text-[#1b140e]"
+              }`}
+              onClick={() => handleStyleToggle(styleOption)}
+            >
+              <p class="text-sm font-medium leading-normal">{styleOption}</p>
+            </div>
+          ))}
         </div>
         <form onSubmit={handleSubmit}>
           <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
