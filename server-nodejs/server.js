@@ -119,44 +119,43 @@ app.post("/upload", multer.array("file"), async (req, res) => {
     });
 });
 
-app.post("/api/generate-image", async function (req, res, next) {
-  console.log("Inside api image generator");
-  const prompt = req.body.fullPrompt;
-  const GETIMG_API_KEY = process.env.GETIMG_API_KEY;
-  const url = "https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image";
-  const options = {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "content-type": "application/json",
-      Authorization: `Bearer ${GETIMG_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "stable-diffusion-xl-v1-0",
-      prompt: prompt,
-      negative_prompt: "Disfigured, cartoon, blurry",
-      prompt_2: prompt,
-      negative_prompt_2: "Disfigured, cartoon, blurry",
-      width: 768,
-      height: 768,
-      steps: 30,
-      guidance: 7.5,
-      seed: 0,
-      scheduler: "euler",
-      output_format: "jpeg",
-      response_format: "b64",
-    }),
-  };
+// app.post("/api/generate-image", async function (req, res, next) {
+//   console.log("Inside api image generator");
+//   const prompt = req.body.fullPrompt;
+//   const GETIMG_API_KEY = process.env.GETIMG_API_KEY;
+//   const url = "https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image";
+//   const options = {
+//     method: "POST",
+//     headers: {
+//       accept: "application/json",
+//       "content-type": "application/json",
+//       Authorization: `Bearer ${GETIMG_API_KEY}`,
+//     },
+//     body: JSON.stringify({
+//       model: "stable-diffusion-xl-v1-0",
+//       prompt: prompt,
+//       negative_prompt: "Disfigured, cartoon, blurry",
+//       prompt_2: prompt,
+//       negative_prompt_2: "Disfigured, cartoon, blurry",
+//       width: 768,
+//       height: 768,
+//       steps: 30,
+//       guidance: 7.5,
+//       seed: 0,
+//       scheduler: "euler",
+//       output_format: "jpeg",
+//       response_format: "b64",
+//     }),
+//   };
 
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    res.status(200).json({ image: data.image });
-    console.log("data return:", data.image);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to generate image" });
-  }
-});
+//   try {
+//     const response = await fetch(url, options);
+//     const data = await response.json();
+//     res.status(200).json({ image: data.image });
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to generate image" });
+//   }
+// });
 
 app.listen(port, () => {
   dbo.connectToServer(function (err, db) {
