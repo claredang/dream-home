@@ -37,8 +37,9 @@ export default function ImageGenerator() {
     const fullPrompt = `Generate the ${roomType.toLowerCase()} in ${stylesString} style(s) that is ${customize}`;
 
     try {
-      //   const response = await fetch(`http://localhost:8080/api/generate-image`, {
       const response = await fetch(
+        // `http://localhost:8080/api/generate-image`,
+        //   const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER}/api/generate-image`,
         {
           method: "POST",
