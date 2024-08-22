@@ -120,11 +120,8 @@ app.post("/upload", multer.array("file"), async (req, res) => {
 });
 
 app.post("/api/generate-image", async function (req, res, next) {
-  console.log("inside api test");
-
   const prompt = req.body.fullPrompt;
-  const GETIMG_API_KEY =
-    "key-5dAoIBteHXx5V2WMy8baoATOlDyhUzAvAU3RFcds0CrPlPg7NbNk3LDsmR51CCEQ3Olwt6YAbRDNqWbQqO6dO72er1QCVMo";
+  const GETIMG_API_KEY = process.env.GETIMG_API_KEY;
   const url = "https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image";
   const options = {
     method: "POST",
