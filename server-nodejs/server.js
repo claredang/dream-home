@@ -151,6 +151,7 @@ app.post("/api/generate-image", async function (req, res, next) {
     const response = await fetch(url, options);
     const data = await response.json();
     res.status(200).json({ image: data.image });
+    console.log("data return:", data.image);
   } catch (error) {
     res.status(500).json({ error: "Failed to generate image" });
   }
