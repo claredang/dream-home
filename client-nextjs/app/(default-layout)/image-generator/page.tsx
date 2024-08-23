@@ -36,19 +36,58 @@ export default function ImageGenerator() {
     const stylesString = styles.join(", ").toLowerCase();
     const fullPrompt = `Generate the ${roomType.toLowerCase()} in ${stylesString} style(s) that is ${customize}`;
 
+    // If want to get from server
+    // try {
+    //   const response = await fetch(
+    //     `http://localhost:8080/api/generate-image`,
+    //     // `https://54.88.198.192/api/generate-image`,
+    //     //   const response = await fetch(
+    //     // `${process.env.NEXT_PUBLIC_SERVER}/api/generate-image`,
+    //     {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({
+    //         fullPrompt,
+    //       }),
+    //     }
+    //   );
+    //   const data = await response.json();
+    //   setImage(data.image);
+    // } catch (error) {
+    //   console.error("Error fetching image:", error);
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    const prompt = fullPrompt;
+    const GETIMG_API_KEY = process.env.GETIMG_API_KEY;
+    const url = "https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image";
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization: `Bearer ${GETIMG_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "stable-diffusion-xl-v1-0",
+        prompt: prompt,
+        negative_prompt: "Disfigured, cartoon, blurry",
+        prompt_2: prompt,
+        negative_prompt_2: "Disfigured, cartoon, blurry",
+        width: 768,
+        height: 768,
+        steps: 30,
+        guidance: 7.5,
+        seed: 0,
+        scheduler: "euler",
+        output_format: "jpeg",
+        response_format: "b64",
+      }),
+    };
+
     try {
-      const response = await fetch(
-        // `http://localhost:8080/api/generate-image`,
-        //   const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER}/api/generate-image`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fullPrompt,
-          }),
-        }
-      );
+      const response = await fetch(url, options);
       const data = await response.json();
       setImage(data.image);
     } catch (error) {
